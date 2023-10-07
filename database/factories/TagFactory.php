@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Item>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
  */
-class ItemFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,6 @@ class ItemFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->sentence(50),
-            'image_path' => $this->faker->imageUrl(),
-            'item_category_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 }
