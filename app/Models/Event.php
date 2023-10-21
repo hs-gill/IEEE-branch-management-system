@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tag extends Model
+class Event extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,6 +17,6 @@ class Tag extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'name', 'description', 'image_path', 'dated_at'
     ];
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
@@ -36,6 +37,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resources([
+        'events' => EventController::class,
         'items' => ItemController::class,
         'transactions' => TransactionController::class,
     ]);
