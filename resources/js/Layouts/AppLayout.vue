@@ -64,6 +64,12 @@ const logout = () => {
                                     Items
                                 </NavLink>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('events.index')" :active="route().current('events.index')">
+                                    Events
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -96,6 +102,16 @@ const logout = () => {
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">
                                                 Create New Team
+                                            </DropdownLink>
+
+                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                                Manage Users
+                                            </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('admin.index')">
+                                                Users Settings
                                             </DropdownLink>
 
                                             <!-- Team Switcher -->
