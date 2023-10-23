@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $events = Event::all();
 
@@ -39,7 +40,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(Event $event): Response
     {
         return Inertia::render('Events/Detail', [
             'event' => $event
@@ -49,9 +50,11 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(Event $event): Response
     {
-        //
+        return Inertia::render('Events/Edit', [
+            'event' => $event
+        ]);
     }
 
     /**
