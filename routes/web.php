@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,5 +41,8 @@ Route::middleware([
         'events' => EventController::class,
         'items' => ItemController::class,
         'transactions' => TransactionController::class,
+
     ]);
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');;
 });
