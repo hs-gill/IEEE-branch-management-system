@@ -42,6 +42,7 @@ Route::middleware([
         'items' => ItemController::class,
         'transactions' => TransactionController::class,
 
+
     ]);
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');;
