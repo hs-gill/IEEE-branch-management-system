@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
 
-class EventController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        $events = Event::all();
-
-        return Inertia::render('Events/Main', [
-            'events' => $events
-        ]);
+        //
     }
 
     /**
@@ -40,27 +34,23 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event): Response
+    public function show(Role $role)
     {
-        return Inertia::render('Events/Detail', [
-            'event' => $event
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event): Response
+    public function edit(Role $role)
     {
-        return Inertia::render('Events/Edit', [
-            'event' => $event
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -68,7 +58,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Role $role)
     {
         //
     }
