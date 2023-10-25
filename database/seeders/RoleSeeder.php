@@ -27,9 +27,13 @@ class RoleSeeder extends Seeder
         ];
 
         foreach($roles as $role) {
-            \App\Models\Role::create([
-                'title' => $role,
+            $newRole = \App\Models\Role::create([
+                'name' => $role,
             ]);
+
+            $newRole->permissions()->attach(1);
+            $newRole->permissions()->attach(2);
+            $newRole->permissions()->attach(3);
         }
     }
 }

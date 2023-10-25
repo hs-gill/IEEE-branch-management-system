@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Priviledge;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
-class PriviledgeController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PriviledgeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Priviledge $priviledge)
+    public function show(Permission $permission)
     {
         //
     }
@@ -42,7 +42,7 @@ class PriviledgeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Priviledge $priviledge)
+    public function edit(Permission $permission)
     {
         //
     }
@@ -50,7 +50,7 @@ class PriviledgeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Priviledge $priviledge)
+    public function update(Request $request, Permission $permission)
     {
         //
     }
@@ -58,7 +58,7 @@ class PriviledgeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Priviledge $priviledge)
+    public function destroy(Permission $permission)
     {
         //
     }
