@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function index(): Response
     {
-        $users = User::with('role.permissions')->get();
+        $users = User::with('roles.permissions')->get();
         $roles = Role::with('permissions')->get();
 
         return Inertia::render('Admin/Users/Main', [
