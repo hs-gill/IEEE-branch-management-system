@@ -1,8 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-// import BarChart from '@/Components/Charts/BarChart.vue';
-// import PieChart from '@/Components/Charts/PieChart.vue';
 import Table from '@/Pages/Admin/Users/Table.vue';
 
 defineProps({
