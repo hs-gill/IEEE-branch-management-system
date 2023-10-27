@@ -1,12 +1,10 @@
 <script setup>
-// import Pagination from '@/Components/Pagination.vue';
+import Row from '@/Pages/Admin/Users/Row.vue';
 
 defineProps({
     users: Object,
     roles: Object
 });
-
-
 </script>
 
 <template>
@@ -20,25 +18,13 @@ defineProps({
                 <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">ID</th>
                 <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Name</th>
                 <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Role</th>
-<!--                <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Description</th>-->
-<!--                <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Category</th>-->
             </tr>
             </thead>
             <tbody>
             <tr v-for="user in users">
-                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ user.id }}</td>
-                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ user.name }}</td>
-                <td>
-                    <select>
-                        <option v-for="role in roles" @select="assignRole" :value="role.id">{{ role.title }}</option>
-                    </select>
-                </td>
-<!--                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><img :src="user.image_path" class="w-640 h-480" :alt="user.name"/></td>-->
-<!--                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ user.description }}</td>-->
-<!--                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ user.item_category.name }}</td>-->
+                <Row :user="user" :roles="roles"/>
             </tr>
             </tbody>
         </table>
-        <!--        <Pagination :items="items"/>-->
     </div>
 </template>
