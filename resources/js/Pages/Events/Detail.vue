@@ -1,7 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Link } from "@inertiajs/vue3";
+import Newsletter from "@/Pages/Events/Newsletter.vue";
 
 defineProps({
     event: Object,
@@ -38,17 +37,11 @@ defineProps({
                 </div>
             </div>
 
-            <div class="items-center mt-4">
-                <div class="flex justify-start">
-                    <Link :href="`${event.id}/edit` " class="">
-                        <PrimaryButton class="ml-4">
-                            Edit Event
-                        </PrimaryButton>
-                    </Link>
-                </div>
-            </div>
+
 
         </div>
+
+        <Newsletter/>
 
 
     </AppLayout>

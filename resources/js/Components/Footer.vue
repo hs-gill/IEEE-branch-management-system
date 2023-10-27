@@ -4,7 +4,7 @@ import {Link} from "@inertiajs/vue3";
 </script>
 
 <template>
-    <div class="mx-auto mt-10 w-full max-w-container px-4 sm:px-6 lg:px-8 border-t border-slate-900/5 py-10">
+    <div class="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8 border-t border-slate-900/5 py-10">
         <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <FooterLogo />
         </div>
