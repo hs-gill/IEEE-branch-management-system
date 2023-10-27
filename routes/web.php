@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminController;
@@ -58,6 +59,7 @@ Route::middleware([
      */
     Route::resources([
         'events' => EventController::class,
+        'feedbacks' => FeedbackController::class,
         'items' => ItemController::class,
         'transactions' => TransactionController::class,
     ]);

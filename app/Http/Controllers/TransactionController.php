@@ -33,9 +33,9 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Transaction
+    public function store(Request $request): void
     {
-        return Transaction::create([
+        Transaction::create([
             'item_id' => $request->item_id,
             'user_id' => $request->user_id,
             'rented_at' => Carbon::now()
