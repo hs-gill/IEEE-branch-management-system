@@ -31,7 +31,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                     Transactions are the lifelines of economic activity, facilitating the exchange of goods, services, and values. They vary in nature and complexity, ranging from simple everyday occurrences like buying groceries to intricate dealings in stock markets or international trade. </p>
 
                 <p class="mt-4 text-sm">
-                    <a href="https://www.investopedia.com/terms/t/transaction.asp" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
+                    <a href="https://www.investopedia.com/terms/t/transaction.asp" target="_blank" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
                         Explore the Transactions
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200">
@@ -56,7 +56,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 
                 <p class="mt-4 text-sm">
-                    <a href="https://www.merriam-webster.com/dictionary/item" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
+                    <a href="https://www.merriam-webster.com/dictionary/item" target="_blank" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
                         Start watching Items
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200">
