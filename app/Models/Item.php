@@ -14,6 +14,15 @@ class Item extends Model
     use SoftDeletes;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name', 'description', 'image_path', 'item_category_id'
+    ];
+
+    /**
      * Get the transactions that correspond to the Item.
      */
     public function transactions(): HasMany {

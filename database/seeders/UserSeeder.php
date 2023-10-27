@@ -14,11 +14,21 @@ class UserSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Harkaran',
-            'email' => 'test@example.com',
+        $newUser = \App\Models\User::create([
+            'name' => 'Ringo',
+            'email' => 'ringo@example.com',
             'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
             'current_team_id' => 1
         ]);
+        $newUser->roles()->attach(1);
+
+        $newUser = \App\Models\User::create([
+            'name' => 'Harkaran',
+            'email' => 'karan@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 1
+        ]);
+        $newUser->roles()->attach(2);
+
     }
 }

@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class EventController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        $events = Event::all();
+        $users = User::with('roles.permissions')->get();
 
-        return Inertia::render('Events/Main', [
-            'events' => $events
+        return Inertia::render('Admin/Users/Main', [
+            'users' => $users
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('Admin/Users/Create');
     }
 
     /**
@@ -40,36 +40,38 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event): Response
+    public function show(User $user): Response
     {
-        return Inertia::render('Events/Detail', [
-            'event' => $event
+        return Inertia::render('Admin/User/Detail', [
+            'user' => $user
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event): Response
+    public function edit(User $user): Response
     {
-        return Inertia::render('Events/Edit', [
-            'event' => $event
+        return Inertia::render('Admin/User/Edit', [
+            'user' => $user
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, User $user): void
     {
-        //
+        $user->update([
+            'name' => $request->name
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event): void
+    public function destroy(User $user): void
     {
-        $event->delete();
+        $user->delete();
     }
 }
