@@ -4,8 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VolunteerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -63,7 +64,8 @@ Route::middleware([
         'feedbacks' => FeedbackController::class,
         'items' => ItemController::class,
         'transactions' => TransactionController::class,
-        'users' => UserController::class
+        'users' => UserController::class,
+        'volunteers' => VolunteerController::class
     ]);
 
 
