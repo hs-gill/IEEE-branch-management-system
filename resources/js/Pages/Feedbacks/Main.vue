@@ -1,24 +1,24 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Table from '@/Pages/Admin/Users/Table.vue';
+import Table from '@/Pages/Feedbacks/Table.vue';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {Link} from "@inertiajs/vue3";
 
 defineProps({
-    users: Object,
-    roles: Object
+    feedbacks: Object,
 });
 </script>
 
 <template>
-    <AppLayout title="Items">
+    <AppLayout title="Feedback">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Admin
+                Feedback
             </h2>
         </template>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="">
-
                 <div class="mt-5 lg:mt-7 md:grid-cols-2 gap-6 lg:gap-8">
                     <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex focus:outline focus:outline-2 focus:outline-red-500">
                         <div>
@@ -31,7 +31,7 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Items Table</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Feedbacks Table</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel News is a community driven portal and newsletter aggregating all of the latest
@@ -39,16 +39,24 @@ defineProps({
                                 important news in the Laravel ecosystem, including new package releases and tutorials.
                             </p>
 
-                            <Table
-                                :users="users"
-                                :roles="roles"
-                            />
+                            <Table :feedbacks="feedbacks" />
 
                         </div>
                     </div>
                 </div>
-
             </div>
+            <div class="columns-2 items-center mt-4">
+                <div class="flex justify-start">
+                    <Link :href="route('feedbacks.create')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <PrimaryButton class="">
+                            New Feedback
+                        </PrimaryButton>
+                    </Link>
+                </div>
+            </div>
+
+
+
         </div>
     </AppLayout>
 </template>
