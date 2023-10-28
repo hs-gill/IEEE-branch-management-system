@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
@@ -53,7 +54,9 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');;
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
+    Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
 
 
     /*
@@ -63,6 +66,7 @@ Route::middleware([
         'events' => EventController::class,
         'feedbacks' => FeedbackController::class,
         'items' => ItemController::class,
+        'roles' => RoleController::class,
         'transactions' => TransactionController::class,
         'users' => UserController::class,
         'volunteers' => VolunteerController::class

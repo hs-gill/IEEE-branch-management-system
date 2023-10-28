@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $roles = Role::with('permissions')->get();
+        $permissions = Permission::all();
+
+        return Inertia::render('Admin/Roles/Main', [
+            'roles' => $roles,
+            'permissions' => $permissions
+        ]);
     }
 
     /**
@@ -20,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+//        return Inertia::render('Admin/Roles/Create');
     }
 
     /**

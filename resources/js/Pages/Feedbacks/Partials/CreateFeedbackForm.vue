@@ -23,8 +23,7 @@ const createFeedback = () => {
     form.post(route('feedbacks.store'), {
         errorBag: 'createFeedback',
         preserveScroll: true,
-        message: "success",
-        onFinish: (response) => {
+        onFinish: () => {
             form.reset();
             titleInput.value.focus();
         },
