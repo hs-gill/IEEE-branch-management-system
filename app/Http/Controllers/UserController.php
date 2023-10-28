@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,10 +15,12 @@ class UserController extends Controller
      */
     public function index(): Response
     {
-        $users = User::with('roles.permissions')->get();
+        $users = User::with('roles.permissions', 'role')->get();
+        $roles = Role::with('permissions')->get();
 
         return Inertia::render('Admin/Users/Main', [
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles
         ]);
     }
 

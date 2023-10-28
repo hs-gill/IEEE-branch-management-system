@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -74,5 +75,12 @@ class User extends Authenticatable
      */
     public function roles(): BelongsToMany {
         return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * Get the transactions that the User has made.
+     */
+    public function role(): BelongsTo {
+        return $this->belongsTo(Role::class)->latest();
     }
 }

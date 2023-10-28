@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
-use App\Models\Role;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class VolunteerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        $roles = Role::with('permissions')->get();
-        $permissions = Permission::all();
-
-        return Inertia::render('Admin/Roles/Main', [
-            'roles' => $roles,
-            'permissions' => $permissions
-        ]);
+        //
     }
 
     /**
@@ -29,21 +21,26 @@ class RoleController extends Controller
      */
     public function create()
     {
-//        return Inertia::render('Admin/Roles/Create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
-        //
+        $user = Auth::user();
+
+        Volunteer::insertOrIgnore([
+            'event_id' => $request->event['id'],
+            'user_id' => $user->id
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    public function show(Volunteer $volunteer)
     {
         //
     }
@@ -51,7 +48,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit(Volunteer $volunteer)
     {
         //
     }
@@ -59,7 +56,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Volunteer $volunteer)
     {
         //
     }
@@ -67,7 +64,7 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(Volunteer $volunteer)
     {
         //
     }

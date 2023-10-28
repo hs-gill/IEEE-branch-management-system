@@ -1,10 +1,10 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Table from '@/Pages/Admin/Users/Table.vue';
+import Table from '@/Pages/Admin/Roles/Table.vue';
 
 defineProps({
-    users: Object,
-    roles: Object
+    roles: Object,
+    permissions: Object
 });
 </script>
 
@@ -31,7 +31,7 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Users Table</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Roles Table</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel News is a community driven portal and newsletter aggregating all of the latest
@@ -40,8 +40,8 @@ defineProps({
                             </p>
 
                             <Table
-                                :users="users"
                                 :roles="roles"
+                                :permissions="permissions"
                             />
                         </div>
                     </div>
