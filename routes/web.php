@@ -66,13 +66,17 @@ Route::middleware([
         'users' => UserController::class
     ]);
 
+    Route::get('/privacy-policy', function () {
+        return Inertia::render('Pages/PrivacyPolicy/main');
+    })->name('privacy-policy');
+
 
     /*
      * In case a route doesn't exist.
      * This Route has to be at the end in order to read first the other routes.
      */
     Route::get('/{any?}', function() {
-        // TOOD: Craete an error 404 page.
+        // TOOD: Create an error 404 page.
         return Inertia::render('Dashboard');            // Insert the route of the Error page here.
     })->where('any', '.*');
 
