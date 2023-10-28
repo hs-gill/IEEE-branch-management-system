@@ -73,8 +73,12 @@ Route::middleware([
     ]);
 
     Route::get('/privacy-policy', function () {
-        return Inertia::render('Pages/PrivacyPolicy/main');
+        return Inertia::render('PrivacyPolicy/Main');
     })->name('privacy-policy');
+
+    Route::get('/contact-us', function () {
+        return Inertia::render('Contact');
+    })->name('contact-us');
 
 
     /*
