@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Permissions\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,7 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasPermissionsTrait;
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
@@ -70,17 +72,4 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    /**
-     * Get the transactions that the User has made.
-     */
-    public function roles(): BelongsToMany {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-
-    /**
-     * Get the transactions that the User has made.
-     */
-    public function role(): BelongsTo {
-        return $this->belongsTo(Role::class)->latest();
-    }
 }
