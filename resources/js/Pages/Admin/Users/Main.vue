@@ -1,8 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-// import BarChart from '@/Components/Charts/BarChart.vue';
-// import PieChart from '@/Components/Charts/PieChart.vue';
 import Table from '@/Pages/Admin/Users/Table.vue';
 
 defineProps({
@@ -34,7 +31,7 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Items Table</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Users Table</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel News is a community driven portal and newsletter aggregating all of the latest
@@ -46,7 +43,6 @@ defineProps({
                                 :users="users"
                                 :roles="roles"
                             />
-
                         </div>
                     </div>
                 </div>

@@ -33,9 +33,9 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Transaction
+    public function store(Request $request): void
     {
-        return Transaction::create([
+        Transaction::create([
             'item_id' => $request->item_id,
             'user_id' => $request->user_id,
             'rented_at' => Carbon::now()
@@ -45,9 +45,11 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction): Transaction
+    public function show(Transaction $transaction): Response
     {
-        return $transaction;
+        return Inertia::render('Transactions/Show', [
+            'transaction' => $transaction
+        ]);
     }
 
     /**
@@ -61,11 +63,9 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction): Response
+    public function update(Request $request, Transaction $transaction)
     {
-        return Inertia::render('Transactions/Show', [
-            'transaction' => $transaction
-        ]);
+        //
     }
 
     /**

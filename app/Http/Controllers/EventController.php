@@ -68,8 +68,8 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Event $event): void
     {
-        //
+        $event->delete();
     }
 }

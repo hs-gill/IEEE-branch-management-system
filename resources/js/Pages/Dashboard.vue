@@ -1,8 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {Link, router, useForm} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
 
 const rentForm = useForm({
     item_id: 1,
@@ -44,29 +43,29 @@ const submitReturn = () => {
                     <Welcome/>
                 </div>
 
-                <div class="columns-2 items-center mt-4">
-                    <div class="flex justify-start">
-                        <Link href="/transactions" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            <PrimaryButton class="" :class="{ 'opacity-25': rentForm.processing }" :disabled="rentForm.processing">
-                                Transactions
-                            </PrimaryButton>
-                        </Link>
-                    </div>
+<!--                <div class="columns-2 items-center mt-4">-->
+<!--                    <div class="flex justify-start">-->
+<!--                        <Link href="/transactions" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">-->
+<!--                            <PrimaryButton class="" :class="{ 'opacity-25': rentForm.processing }" :disabled="rentForm.processing">-->
+<!--                                Transactions-->
+<!--                            </PrimaryButton>-->
+<!--                        </Link>-->
+<!--                    </div>-->
 
-                    <div class="flex justify-end">
-                        <form @submit.prevent="submitRent">
-                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': rentForm.processing }" :disabled="rentForm.processing">
-                                Rent
-                            </PrimaryButton>
-                        </form>
+<!--                    <div class="flex justify-end">-->
+<!--                        <form @submit.prevent="submitRent">-->
+<!--                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': rentForm.processing }" :disabled="rentForm.processing">-->
+<!--                                Rent-->
+<!--                            </PrimaryButton>-->
+<!--                        </form>-->
 
-                        <form @sublit.prevent="submitReturn">
-                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': returnForm.processing }" :disabled="returnForm.processing">
-                                Return
-                            </PrimaryButton>
-                        </form>
-                    </div>
-                </div>
+<!--                        <form @sublit.prevent="submitReturn">-->
+<!--                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': returnForm.processing }" :disabled="returnForm.processing">-->
+<!--                                Return-->
+<!--                            </PrimaryButton>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </AppLayout>

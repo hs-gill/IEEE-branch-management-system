@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
             ItemCategorySeeder::class,
             ItemSeeder::class,
             TeamSeeder::class,
-            UserSeeder::class,
             TagSeeder::class,
             EventSeeder::class,
-            RoleSeeder::class
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3'
+import Newsletter from "@/Pages/Events/Newsletter.vue";
 
 defineProps({
     events: Object,
@@ -37,5 +38,7 @@ defineProps({
                 </div>
             </div>
         </div>
+
+        <Newsletter/>
     </AppLayout>
 </template>
