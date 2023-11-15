@@ -19,6 +19,7 @@ class TextbookFactory extends Factory
         return [
             'title' => $this->faker->unique()->sentence(3),
             'author' => $this->faker->name(),
+            'cover' => $this->faker->imageUrl(),
         ];
     }
 }

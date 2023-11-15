@@ -16,8 +16,8 @@ class RoleController extends Controller
      */
     public function index(): Response
     {
-        $roles = Role::with('permissions')->get();
-        $permissions = Permission::all();
+        $roles = Role::with('permissions')->orderBy('name', 'asc')->get();
+        $permissions = Permission::orderBy('name', 'asc')->get();
         return Inertia::render('Admin/Roles/Main', [
             'roles' => $roles,
             'permissions' => $permissions
