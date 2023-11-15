@@ -29,7 +29,7 @@ class AdminController extends Controller
     /**
      * Update the list of user's roles.
      */
-    public function updateRole(Request $request)
+    public function updateRole(Request $request): void
     {
         $user = User::find($request->user['id']);
         $role = Role::find($request->role['id']);
@@ -44,7 +44,7 @@ class AdminController extends Controller
     /**
      * Update the list of role's permissions.
      */
-    public function updatePermission(Request $request)
+    public function updatePermission(Request $request): void
     {
         $role = Role::find($request->role['id']);
         $permission = Permission::find($request->permission['id']);
