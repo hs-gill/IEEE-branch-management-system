@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventCollection;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,8 +18,10 @@ class EventController extends Controller
     {
         $events = Event::all();
 
+        $eventsCollection = new EventCollection($events);
+
         return Inertia::render('Events/Main', [
-            'events' => $events
+            'events' => $eventsCollection
         ]);
     }
 
@@ -42,8 +46,10 @@ class EventController extends Controller
      */
     public function show(Event $event): Response
     {
+        $eventResource = new EventResource($event);
+
         return Inertia::render('Events/Detail', [
-            'event' => $event
+            'event' => $eventResource
         ]);
     }
 
