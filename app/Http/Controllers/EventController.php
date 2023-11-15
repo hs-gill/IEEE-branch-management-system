@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\EventCollection;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,28 +18,30 @@ class EventController extends Controller
     public function index(): Response
     {
         $events = Event::all();
-
-        $eventsCollection = new EventCollection($events);
-
         return Inertia::render('Events/Main', [
-            'events' => $eventsCollection
+            'events' => new EventCollection($events)
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('Events/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $event = new Event();
+        $event->title = $request->title;
+        $event->description = $request->description;
+        $event->image_path = $request->image_path;
+        $event->save();
+        return redirect('/events');
     }
 
     /**
@@ -46,10 +49,8 @@ class EventController extends Controller
      */
     public function show(Event $event): Response
     {
-        $eventResource = new EventResource($event);
-
         return Inertia::render('Events/Detail', [
-            'event' => $eventResource
+            'event' => new EventResource($event)
         ]);
     }
 
@@ -66,9 +67,12 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Event $event): void
     {
-        //
+        if ($request->title != null) { $event->title = $request->title; }
+        if ($request->description != null) { $event->description = $request->description; }
+        if ($request->image_path != null) { $event->image_path = $request->image_path; }
+        $event->save();
     }
 
     /**

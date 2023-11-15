@@ -14,7 +14,7 @@ onMounted(() => {
 })
 
 const form = useForm({
-    event: props.event,
+    event: props.event.data,
 });
 
 const submit = () => {

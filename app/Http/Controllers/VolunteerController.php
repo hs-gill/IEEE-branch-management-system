@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Volunteer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +34,9 @@ class VolunteerController extends Controller
 
         Volunteer::insertOrIgnore([
             'event_id' => $request->event['id'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
     }
 
