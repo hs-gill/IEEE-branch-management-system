@@ -41,9 +41,9 @@ const props = defineProps({
 
             <div class="items-center mt-4">
                 <div class="flex justify-start">
-                    <Link :href="`${textbook.id}/edit` " class="">
+                    <Link :href="`${textbook.id}/edit`" class="">
                         <PrimaryButton class="ml-4">
-                            Edit Item
+                            Edit Textbook
                         </PrimaryButton>
                     </Link>
                 </div>

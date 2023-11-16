@@ -22,7 +22,6 @@ const hasRole = computed(() => {
     return bool
 })
 
-
 const form = useForm({
     role: null,
     user: props.user

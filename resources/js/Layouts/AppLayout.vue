@@ -76,7 +76,7 @@ const logout = () => {
 
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div v-if="$page.props.jetstream.hasTeamFeatures" class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
                                 <Dropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
@@ -111,22 +111,38 @@ const logout = () => {
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Manage Users
+                                                Manage Users and Roles
                                             </div>
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('users.index')">
                                                 Users Settings
                                             </DropdownLink>
 
-                                            <div class="border-t border-gray-200 dark:border-gray-600" />
-
-                                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Manage Roles
-                                            </div>
-
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('roles.index')">
                                                 Roles Settings
                                             </DropdownLink>
+
+                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                                Transactions
+                                            </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('transactions.index')">
+                                                View Transactions
+                                            </DropdownLink>
+
+                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                                Feedbacks
+                                            </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('feedbacks.index')">
+                                                Review Feedbacks
+                                            </DropdownLink>
+
+
 
                                             <!-- Team Switcher -->
 <!--                                            <template v-if="$page.props.auth.user.all_teams.length > 1">-->
