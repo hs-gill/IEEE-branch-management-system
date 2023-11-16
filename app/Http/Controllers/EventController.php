@@ -49,7 +49,7 @@ class EventController extends Controller
      */
     public function show(Event $event): Response
     {
-        return Inertia::render('Events/Detail', [
+        return Inertia::render('Events/Show', [
             'event' => new EventResource($event)
         ]);
     }

@@ -46,7 +46,7 @@ class TextbookController extends Controller
      */
     public function show(Textbook $textbook): Response
     {
-        return Inertia::render('Textbooks/Detail', [
+        return Inertia::render('Textbooks/Show', [
             'textbook' => $textbook
         ]);
     }

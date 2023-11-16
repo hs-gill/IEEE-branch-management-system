@@ -50,7 +50,7 @@ class ItemController extends Controller
      */
     public function show(Item $item): Response
     {
-        return Inertia::render('Items/Detail', [
+        return Inertia::render('Items/Show', [
             'item' => new ItemResource($item)
         ]);
     }
