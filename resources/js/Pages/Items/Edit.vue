@@ -3,9 +3,11 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     item: Object,
 });
+
+const item = props.item.data
 </script>
 
 <template>

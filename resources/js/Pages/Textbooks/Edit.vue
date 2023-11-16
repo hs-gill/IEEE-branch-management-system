@@ -4,17 +4,16 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
-    item: Object,
+    textbook: Object,
 });
 
-const item = props.item.data
 </script>
 
 <template>
     <AppLayout title="Items">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Item {{ item.title }}
+                Textbook Edition - {{ textbook.title }}
             </h2>
         </template>
 
@@ -28,9 +27,9 @@ const item = props.item.data
                                     <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
                                 </svg>
                             </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{ item.title }}</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{ textbook.title }}</h2>
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                {{ item.description }}
+                                {{ textbook.author }}
                             </p>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
@@ -42,16 +41,15 @@ const item = props.item.data
 
             <div class="items-center mt-4">
                 <div class="flex justify-start">
-                    <Link :href="`${item.id}/edit` " class="">
+                    <Link :href="`/items/${textbook.id}`" class="">
                         <PrimaryButton class="ml-4">
-                            Edit Item
+                            Save Item
                         </PrimaryButton>
                     </Link>
                 </div>
             </div>
 
         </div>
-
 
     </AppLayout>
 </template>

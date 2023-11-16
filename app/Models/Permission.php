@@ -11,9 +11,16 @@ class Permission extends Model
     use HasFactory;
 
     /**
-     * Get the transactions that the User has made.
+     * Get the roles that have the permission.
      */
-    public function permissions(): BelongsToMany {
-        return $this->belongsToMany(Permission::class)->withTimestamps();
+    public function roles(): BelongsToMany {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Get the users that have the permission.
+     */
+    public function users(): BelongsToMany {
+        return $this->belongsToMany(User::class);
     }
 }

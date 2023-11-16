@@ -35,11 +35,11 @@ class TransactionController extends Controller
      */
     public function store(Request $request): void
     {
-        Transaction::create([
-            'item_id' => $request->item_id,
-            'user_id' => $request->user_id,
-            'rented_at' => Carbon::now()
-        ]);
+        $transaction = new Transaction();
+        $transaction->item_id = $request->item_id;
+        $transaction->user_id = $request->user_id;
+        $transaction->rented_at = Carbon::now();
+        $transaction->save();
     }
 
     /**
