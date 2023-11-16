@@ -47,3 +47,4 @@ onMounted(() => {
         <Newsletter/>
     </AppLayout>
 </template>
+

@@ -4,21 +4,67 @@
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+To make it easy for you to get started with IEEE-app, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Prerequisites 
 
-## Add your files
+In order to run the project, you need to install the following tools in your environment
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- [ ] [PHP v8.2]() or superior
+- [ ] [Composer]()
+- [ ] [NodeJS v20]() or superior
+- [ ] [MySQL v8]()
+- [ ] [Docker]() (Recomendable since you dont need MySQL already insatlled in your system.)
 
+## First Steps
+
+Clone the branch you want to run in your computer. 
 ```
-cd existing_repo
-git remote add origin https://git.cs.usask.ca/rjg878/cmpt-370.git
-git branch -M main
-git push -uf origin main
+git clone -b <branch> https://git.cs.usask.ca/rjg878/cmpt-370.git
+cd cmpt-370
 ```
+
+Then install the packages for the back-end and front end:
+```
+composer install
+npm install
+```
+
+Clone the `.env.example` file in the root of the project, and name it `.env`. If you have already 
+MySQL running in your system, you have to first set the credentials for the database in that file.
+
+If you have Docker in your system, you can try the Docker alternative steps.
+
+After the creation of the file, run the command:
+```
+php artisan migrate:fresh --seed
+```
+
+This will create and populate the database. The run:
+```
+php artisan serve
+npm run dev
+```
+
+Open the web browser at [localhost:8000](http://localhost:8000). 
+You're set! 
+
+## Docker alternative
+Alternatively, if you have docker installed and running in your system, you can execute:
+```
+./vendor/bin/sail up
+```
+This command will create a MySQL and other environment tools to run the project.
+After the installation you have to run 
+```
+./vendor/bin/sail artisan migrate:fresh --seed
+```
+
+This will create and populate the database. The run:
+```
+npm run dev
+```
+
 
 ## Integrate with your tools
 
