@@ -29,6 +29,14 @@ class UserSeeder extends Seeder
             'current_team_id' => 1
         ]);
         $newUser->roles()->attach(2);
+        
+        $newUser = \App\Models\User::create([
+            'name' => 'Robin',
+            'email' => 'Robin@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 1,
+        ]);
+        $newUser->roles()->attach(1);
 
     }
 }
