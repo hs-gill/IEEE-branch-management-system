@@ -13,7 +13,7 @@ class TransactionSeeder extends Seeder
     public function run(): void
     {
         //
-        \App\Models\Transaction::factory(50)->create();
+        \App\Models\Transaction::factory(10)->create();
 
 
     }
