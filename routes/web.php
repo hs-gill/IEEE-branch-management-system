@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
@@ -67,6 +68,7 @@ Route::middleware([
         'feedbacks' => FeedbackController::class,
         'items' => ItemController::class,
         'roles' => RoleController::class,
+        'textbooks' => TextbookController::class,
         'transactions' => TransactionController::class,
         'users' => UserController::class,
         'volunteers' => VolunteerController::class

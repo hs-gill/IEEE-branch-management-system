@@ -3,13 +3,18 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import Newsletter from "@/Pages/Events/Newsletter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {router, useForm} from "@inertiajs/vue3";
+import {onMounted} from "vue";
 
 const props = defineProps({
     event: Object,
 });
 
+onMounted(() => {
+    console.log(props.event)
+})
+
 const form = useForm({
-    event: props.event,
+    event: props.event.data,
 });
 
 const submit = () => {
@@ -25,7 +30,7 @@ const submit = () => {
     <AppLayout title="Events">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Event {{ event.title }}
+                Event {{ event.data.title }}
             </h2>
         </template>
 
@@ -39,9 +44,9 @@ const submit = () => {
                                     <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
                                 </svg>
                             </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{ event.title }}</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{ event.data.title }}</h2>
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                {{ event.description }}
+                                {{ event.data.description }}
                             </p>
                         </div>
                     </div>

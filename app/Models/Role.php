@@ -11,17 +11,17 @@ class Role extends Model
     use HasFactory;
 
     /**
-     * Get the transactions that the User has made.
+     * Get the users that have the role.
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class);
     }
 
     /**
-     * Get the transactions that the User has made.
+     * Get the permissions included in the role.
      */
     public function permissions(): BelongsToMany {
-        return $this->belongsToMany(Permission::class)->withTimestamps();
+        return $this->belongsToMany(Permission::class);
     }
 }

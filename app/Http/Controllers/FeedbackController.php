@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -17,7 +18,6 @@ class FeedbackController extends Controller
     public function index(): Response
     {
         $feedbacks = Feedback::with('user')->get();
-
         return Inertia::render('Feedbacks/Main', [
             'feedbacks' => $feedbacks
         ]);
@@ -34,46 +34,55 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(Request $request): RedirectResponse
     {
-        $user = Auth::user();
 
-        Feedback::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'user_id' => $user->id
-        ]);
+        if ($user_id = Auth::user()->id) {
+            $feedback = new Feedback();
+            $feedback->title = $request->title;
+            $feedback->description = $request->description;
+            $feedback->user_id = $user_id;
+            $feedback->save();
+        }
+        return redirect('/feedbacks');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Feedback $feedback)
+    public function show(Feedback $feedback): Response
     {
-        //
+        return Inertia::render('Feedbacks/Detail', [
+            'feedback' => $feedback
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Feedback $feedback)
+    public function edit(Feedback $feedback): Response
     {
-        //
+        return Inertia::render('Feedbacks/Edit', [
+            'feedback' => $feedback
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request, Feedback $feedback): void
     {
-        //
+        if ($request->title != null) { $feedback->title = $request->title; }
+        if ($request->description != null) { $feedback->description = $request->description; }
+        if ($user_id = Auth::user()->id) { $feedback->user_id = $user_id; }
+        $feedback->save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feedback $feedback)
+    public function destroy(Feedback $feedback): void
     {
-        //
+        $feedback->delete();
     }
 }
