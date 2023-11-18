@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 

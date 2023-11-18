@@ -38,7 +38,7 @@ defineProps({
                             </p>
 
                             <div class="mt-8">
-                                <BarChart/>
+                                <BarChart :transactions="transactions"/>
                             </div>
                         </div>
 

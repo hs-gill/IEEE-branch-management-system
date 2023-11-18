@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function show(User $user): Response
     {
-        return Inertia::render('Admin/User/Detail', [
+        return Inertia::render('Admin/Users/Show', [
             'user' => $user
         ]);
     }
@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function edit(User $user): Response
     {
-        return Inertia::render('Admin/User/Edit', [
+        return Inertia::render('Admin/Users/Edit', [
             'user' => $user
         ]);
     }
