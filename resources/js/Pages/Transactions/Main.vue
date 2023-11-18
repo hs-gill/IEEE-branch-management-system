@@ -13,7 +13,7 @@ defineProps({
     <AppLayout title="Transactions">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Transactions summary
+                Transactions
             </h2>
         </template>
 
@@ -31,10 +31,13 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Transactions annual summary </h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Transactions Chart A</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                
+                                Laravel has wonderful documentation covering every aspect of the framework. Whether you
+                                are a newcomer
+                                or have prior experience with Laravel, we recommend reading our documentation from
+                                beginning to end.
                             </p>
 
                             <div class="mt-8">
@@ -44,7 +47,7 @@ defineProps({
 
                     </div>
 
-                    <!-- <div
+                    <div
                        class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex focus:outline focus:outline-2 focus:outline-red-500">
                         <div>
                             <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
@@ -69,7 +72,7 @@ defineProps({
                             </div>
                         </div>
 
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="mt-5 lg:mt-7 md:grid-cols-2 gap-6 lg:gap-8">
@@ -87,7 +90,9 @@ defineProps({
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Transactions Table</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                               
+                                Laravel News is a community driven portal and newsletter aggregating all of the latest
+                                and most
+                                important news in the Laravel ecosystem, including new package releases and tutorials.
                             </p>
 
                             <Table :transactions="transactions" />
