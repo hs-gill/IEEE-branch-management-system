@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             TextbookSeeder::class,
-            TransactionSeeder::class,
+            TransactionSeeder::class
         ]);
     }
 }
