@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,6 @@ class FeedbackController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
         if ($user_id = Auth::user()->id) {
             $feedback = new Feedback();
             $feedback->title = $request->title;
@@ -44,7 +44,9 @@ class FeedbackController extends Controller
             $feedback->user_id = $user_id;
             $feedback->save();
         }
-        return redirect('/feedbacks');
+        session()->flash('flash.banner', __('Thank you, :user! Your feedback have been successfully received for our team.', ['user' => Auth::user()->name]));
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect('/feedbacks/create');
     }
 
     /**

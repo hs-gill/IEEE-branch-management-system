@@ -30,5 +30,37 @@ class UserSeeder extends Seeder
         ]);
         $newUser->roles()->attach(2);
 
+        $newUser = \App\Models\User::create([
+            'name' => 'Ruobing',
+            'email' => 'ruobing@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 2
+        ]);
+        $newUser->roles()->attach(2);
+
+        $newUser = \App\Models\User::create([
+            'name' => 'Harpereet',
+            'email' => 'harpereet@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 2
+        ]);
+        $newUser->roles()->attach(2);
+
+        $newUser = \App\Models\User::create([
+            'name' => 'Darian',
+            'email' => 'darian@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 1
+        ]);
+        $newUser->roles()->attach(2);
+
+        $newUser = \App\Models\User::create([
+            'name' => 'Mac',
+            'email' => 'mac@example.com',
+            'password' => '$2y$10$mwB3WT2XgM/97/Iu.LRT8.Q8EgSrOb/ybQ1LM4FqZstWtCpczBjHm',
+            'current_team_id' => 2
+        ]);
+        $newUser->roles()->attach(2);
+
     }
 }

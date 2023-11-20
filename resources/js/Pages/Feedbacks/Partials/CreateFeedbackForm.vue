@@ -18,15 +18,12 @@ const form = useForm({
     description: '',
 });
 
-
 const createFeedback = () => {
     form.post(route('feedbacks.store'), {
         errorBag: 'createFeedback',
         preserveScroll: true,
-        onFinish: () => {
-            form.reset();
-            titleInput.value.focus();
-        },
+        onSuccess: () => form.reset(),
+        onFinish: () => titleInput.value.focus(),
     });
 };
 </script>

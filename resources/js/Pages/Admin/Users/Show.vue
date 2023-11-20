@@ -6,11 +6,18 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
+import UserRoleManager from "@/Pages/Admin/Users/Partials/UserRoleManager.vue";
+import {onMounted} from "vue";
 
-defineProps({
+const props = defineProps({
     confirmsTwoFactorAuthentication: Boolean,
     user: Object,
+    roles: Object
 });
+
+onMounted(() => {
+    // console.log(props.user)
+})
 </script>
 
 <template>
@@ -29,8 +36,15 @@ defineProps({
                     <SectionBorder />
                 </div>
 
+
+
                 <div v-if="$page.props.jetstream.canUpdatePassword">
-                    <UpdatePasswordForm class="mt-10 sm:mt-0" />
+                    <UserRoleManager
+                            class="mt-10 sm:mt-0"
+                            :available-roles="roles"
+                            :user-permissions="user.permissions"
+                            :user="user"
+                    />
 
                     <SectionBorder />
                 </div>
