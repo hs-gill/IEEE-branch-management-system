@@ -3,10 +3,15 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import Table from '@/Pages/Feedbacks/Table.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Link} from "@inertiajs/vue3";
+import {onMounted} from "vue";
 
-defineProps({
+const props = defineProps({
     feedbacks: Object,
 });
+
+onMounted(() => {
+    console.log(props.feedbacks);
+})
 </script>
 
 <template>
@@ -34,8 +39,7 @@ defineProps({
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Feedbacks Table</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest
-                                and most
+                                This table shows the list of feedbacks that the platform has received, ordered by date of creation.
                                 important news in the Laravel ecosystem, including new package releases and tutorials.
                             </p>
 

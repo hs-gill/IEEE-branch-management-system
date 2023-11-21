@@ -18,7 +18,7 @@ class FeedbackController extends Controller
      */
     public function index(): Response
     {
-        $feedbacks = Feedback::with('user')->get();
+        $feedbacks = Feedback::with('user')->orderBy('created_at', 'desc')->paginate(10);
         return Inertia::render('Feedbacks/Main', [
             'feedbacks' => $feedbacks
         ]);
@@ -54,7 +54,7 @@ class FeedbackController extends Controller
      */
     public function show(Feedback $feedback): Response
     {
-        return Inertia::render('Feedbacks/Detail', [
+        return Inertia::render('Feedbacks/Show', [
             'feedback' => $feedback
         ]);
     }
