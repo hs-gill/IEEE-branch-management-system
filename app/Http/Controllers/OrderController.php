@@ -14,8 +14,7 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::paginate(10);
-
+        $orders = Order::with('user')->paginate(10);
         return Inertia::render('Orders/Main', [
             'orders' => $orders
         ]);
@@ -44,7 +43,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(Order $order): Response
     {
         return Inertia::render('Orders/Show', [
             'order' => $order
@@ -62,7 +61,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $order): void
     {
         //
     }
@@ -70,7 +69,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy(Order $order): void
     {
         $order->delete();
     }

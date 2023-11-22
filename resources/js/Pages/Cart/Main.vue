@@ -8,20 +8,20 @@ const props = defineProps({
     modelValue: Boolean,
     items: Object
 });
-// const props = defineProps(['modelValue', 'products'])
+
 defineEmits(['update:modelValue']);
 
 onMounted(() => {
     console.log(props.items)
 });
 
-const form = useForm({
+const removeItemForm = useForm({
     item: null,
 });
 
 const removeFromCart = (item) => {
-    form.item = item;
-    form.put(route('cart.remove-from-cart'), {
+    removeItemForm.item = item;
+    removeItemForm.put(route('cart.remove-from-cart'), {
         errorBag: 'removeFromCart',
         preserveScroll: true,
         // onSuccess: () => form.reset(),
@@ -32,12 +32,24 @@ const removeFromCart = (item) => {
 const total = computed(() => {
     let total = 0;
     props.items.forEach(item => {
-        console.log(item.price.amount)
         total += item.price.amount
     });
     console.log(total)
     return total;
 });
+
+const checkoutForm = useForm({
+    total: total
+});
+
+const checkout = () => {
+    checkoutForm.put(route('cart.checkout'), {
+        errorBag: 'checkout',
+        preserveScroll: true,
+        // onSuccess: () => form.reset(),
+        // onFinish: () => titleInput.value.focus(),
+    });
+}
 
 </script>
 
@@ -74,7 +86,7 @@ const total = computed(() => {
                                                             <img :src="item.image_path" :alt="item.name" class="h-full w-full object-cover object-center" />
                                                         </div>
 
-                                                        <form class="ml-4 flex flex-1 flex-col">
+                                                        <div class="ml-4 flex flex-1 flex-col">
                                                             <div>
                                                                 <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white">
                                                                     <h3>
@@ -95,7 +107,7 @@ const total = computed(() => {
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -109,7 +121,10 @@ const total = computed(() => {
                                         </div>
                                         <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Shipping and taxes calculated at checkout.</p>
                                         <div class="mt-6">
-                                            <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                            <a class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                            @click="checkout">
+                                                Checkout
+                                            </a>
                                         </div>
                                         <div class="mt-6 flex justify-center text-center text-sm text-gray-500 dark:text-gray-400">
                                             <p>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,27 @@ class CartController extends Controller
         $user = Auth::user();
         $item = Item::findOrFail($request->item['id']);
         $user->items()->detach($item);
+    }
+
+    /**
+     * Add an item to the User's shopping cart.
+     */
+    public function emptyCart(): void
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        foreach ($user->items as $item) { $user->items()->detach($item); }
+    }
+
+    /**
+     * Add an item to the User's shopping cart.
+     */
+    public function checkout(Request $request)
+    {
+        Order::create([
+            'user_id' => Auth::user()->id,
+            'total' => $request->total
+        ]);
+        $this->emptyCart();
     }
 
 }

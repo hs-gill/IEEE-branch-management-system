@@ -13,6 +13,15 @@ class Order extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'total', 'user_id', 'returned_at'
+    ];
+
+    /**
      * Get the items that correspond to this order.
      */
     public function items(): BelongsToMany {
@@ -29,7 +38,7 @@ class Order extends Model
     /**
      * Get the user that correspond this Order.
      */
-    public function users(): BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }

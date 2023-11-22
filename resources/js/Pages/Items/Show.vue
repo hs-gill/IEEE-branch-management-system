@@ -1,12 +1,8 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import Cart from "@/Pages/Cart/Main.vue";
-import { StarIcon } from '@heroicons/vue/20/solid'
-import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import {Link, useForm} from "@inertiajs/vue3";
-import {onMounted, ref} from "vue";
-import FormSection from "@/Components/FormSection.vue";
+import {onMounted} from "vue";
 
 // const product = {
 //     name: 'Basic Tee 6-Pack',
@@ -84,7 +80,7 @@ const addToCart = () => {
     form.put(route('cart.add-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
-        // onSuccess: () => form.reset(),
+        onSuccess: () => true,
         // onFinish: () => titleInput.value.focus(),
     });
 };

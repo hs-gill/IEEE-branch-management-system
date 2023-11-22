@@ -22,9 +22,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             TextbookSeeder::class,
-            OrderSeeder::class,
-            TransactionSeeder::class,
-//            CartSeeder::class,
+//            OrderSeeder::class,
+//            TransactionSeeder::class,
         ]);
     }
 }
