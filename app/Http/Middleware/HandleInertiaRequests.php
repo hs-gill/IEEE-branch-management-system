@@ -35,6 +35,9 @@ class HandleInertiaRequests extends Middleware
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
+                'role' => fn () => $request->user()
+                    ? $request->user()->first()->roles
+                    : null,
             ],
         ];
     }

@@ -15,7 +15,7 @@ class TransactionController extends Controller
      */
     public function index(): Response
     {
-        $transactions = Transaction::with('user', 'item')->get();
+        $transactions = Transaction::with('user', 'item')->paginate(10);
 
         return Inertia::render('Transactions/Main', [
             'transactions' => $transactions

@@ -1,23 +1,15 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue';
-import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
-import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue';
-import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
 import UserRoleManager from "@/Pages/Admin/Users/Partials/UserRoleManager.vue";
-import {onMounted} from "vue";
 
 const props = defineProps({
     confirmsTwoFactorAuthentication: Boolean,
     user: Object,
     roles: Object
 });
-
-onMounted(() => {
-    // console.log(props.user)
-})
 </script>
 
 <template>
@@ -36,29 +28,15 @@ onMounted(() => {
                     <SectionBorder />
                 </div>
 
-
-
                 <div v-if="$page.props.jetstream.canUpdatePassword">
                     <UserRoleManager
                             class="mt-10 sm:mt-0"
                             :available-roles="roles"
-                            :user-permissions="user.permissions"
                             :user="user"
                     />
 
                     <SectionBorder />
                 </div>
-
-<!--                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">-->
-<!--                    <TwoFactorAuthenticationForm-->
-<!--                        :requires-confirmation="confirmsTwoFactorAuthentication"-->
-<!--                        class="mt-10 sm:mt-0"-->
-<!--                    />-->
-
-<!--                    <SectionBorder />-->
-<!--                </div>-->
-
-<!--                <LogoutOtherBrowserSessionsForm :sessions="sessions" class="mt-10 sm:mt-0" />-->
 
                 <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
                     <DeleteUserForm class="mt-10 sm:mt-0" />
