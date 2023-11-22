@@ -16,6 +16,7 @@ import { Bar } from 'vue-chartjs'
 
 // defineProps({
 //     chartConfig: Object,
+//     transactions: Object,
 // });
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
