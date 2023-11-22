@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\TransactionController;
@@ -49,6 +51,8 @@ Route::middleware([
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
+    Route::put('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add-to-cart');
+    Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
 
     /*
      * Generate a route for all the methods inside the Controllers for Resource Models.
@@ -57,6 +61,7 @@ Route::middleware([
         'events' => EventController::class,
         'feedbacks' => FeedbackController::class,
         'items' => ItemController::class,
+        'orders' => OrderController::class,
         'roles' => RoleController::class,
         'textbooks' => TextbookController::class,
         'transactions' => TransactionController::class,

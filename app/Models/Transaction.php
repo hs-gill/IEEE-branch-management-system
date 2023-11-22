@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
@@ -22,16 +23,9 @@ class Transaction extends Model
     ];
 
     /**
-     * Get the user that has made the transaction.
+     * Get the order that this transaction paid.
      */
-    public function user(): BelongsTo {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the item that corresponding to the transaction.
-     */
-    public function item(): BelongsTo {
-        return $this->belongsTo(Item::class);
+    public function order(): BelongsTo {
+        return $this->belongsTo(Order::class);
     }
 }

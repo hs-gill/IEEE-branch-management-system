@@ -13,6 +13,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     title: String,
+    items: Object
 });
 
 const canViewFeedbacks = false;
@@ -40,7 +41,7 @@ const logout = () => {
 
         <Banner />
 
-        <Cart v-model="open" />
+        <Cart v-model="open" :items="$page.props.items" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -116,7 +117,7 @@ const logout = () => {
 <!--                                                Create New Team-->
 <!--                                            </DropdownLink>-->
 
-                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+<!--                                            <div class="border-t border-gray-200 dark:border-gray-600" />-->
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
                                                 Manage Users and Roles
@@ -126,15 +127,19 @@ const logout = () => {
                                                 Users Settings
                                             </DropdownLink>
 
-                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.ziggy['role'][0].id === 1" :href="route('roles.index')">
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.role.id === 1" :href="route('roles.index')">
                                                 Roles Settings
                                             </DropdownLink>
 
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Transactions
+                                                Orders and Transactions
                                             </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.index')">
+                                                View Orders
+                                            </DropdownLink>
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('transactions.index')">
                                                 View Transactions

@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
  */
-class TransactionFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,10 +19,9 @@ class TransactionFactory extends Factory
     {
         return [
             //use the faker to hard code some info.
-            'order_id' => rand(1,100),
-            'amount' => rand(1*100, 100*100)/100,
-            'status' => 'completed',
-            'provider'=> $this->faker->creditCardType(),
+            'total' => rand(1*100, 100*100)/100,
+            'user_id' => rand(1,6),
+            'returned_at' => Carbon::now(),
         ];
     }
 }

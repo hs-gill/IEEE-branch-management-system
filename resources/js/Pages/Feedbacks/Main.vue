@@ -4,6 +4,7 @@ import Table from '@/Pages/Feedbacks/Table.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Link} from "@inertiajs/vue3";
 import {onMounted} from "vue";
+import Modal from "@/Components/Modal.vue";
 
 const props = defineProps({
     feedbacks: Object,
@@ -17,6 +18,33 @@ const props = defineProps({
                 Feedback
             </h2>
         </template>
+
+        <Modal
+                :show="false"
+                :max-width="maxWidth"
+                :closeable="closeable"
+                @close="close"
+        >
+            <div class="ab xh adg adt alo ari asu avd avk bbo bem bvg bzj bzu ceq" id="headlessui-dialog-panel-2" data-headlessui-state="open">
+                <div>
+                    <div class="gx lx nj rl yz ze ads aje">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="oc se axy">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                        </svg>
+                    </div>
+                    <div class="lf avl bxj">
+                        <h3 class="avy awg awp axv" id="headlessui-dialog-title-3" data-headlessui-state="open">Payment successful</h3>
+                        <div class="lb">
+                            <p class="awa axr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lj bxl">
+                    <button type="button" class="ly tn ze adu ajr arf arv awa awg bah bbn bis boy boz bpb bpk">Go back to dashboard</button>
+                </div>
+            </div>
+        </Modal>
+
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="">
@@ -48,3 +76,179 @@ const props = defineProps({
         </div>
     </AppLayout>
 </template>
+
+<style>
+@media (min-width: 640px)
+.ceq {
+    padding: 1.5rem;
+}
+@media (min-width: 640px)
+.bzu {
+    max-width: 24rem;
+}
+@media (min-width: 640px)
+.bzj {
+    width: 100%;
+}
+@media (min-width: 640px)
+.bvg {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.bem {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+.bbo {
+    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.avk {
+    text-align: left;
+}
+.avd {
+    padding-top: 1.25rem;
+}
+.asu {
+    padding-bottom: 1rem;
+}
+.ari {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.alo {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.adt {
+    border-radius: 0.5rem;
+}
+.adg {
+    overflow: hidden;
+}
+.xh {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.ab {
+    position: relative;
+}
+.aje {
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+}
+.ads {
+    border-radius: 9999px;
+}
+.ze {
+    justify-content: center;
+}
+.yz {
+    align-items: center;
+}
+.rl {
+    width: 3rem;
+}
+.nj {
+    height: 3rem;
+}
+.lx {
+    display: flex;
+}
+.gx {
+    margin-left: auto;
+    margin-right: auto;
+}
+.axy {
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+.se {
+    width: 1.5rem;
+}
+.oc {
+    height: 1.5rem;
+}
+@media (min-width: 640px)
+.bxj {
+    margin-top: 1.25rem;
+}
+.avl {
+    text-align: center;
+}
+.lf {
+    margin-top: 0.75rem;
+}
+.axv {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.awp {
+    line-height: 1.5rem;
+}
+.awg {
+    font-weight: 600;
+}
+.avy {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+.lb {
+    margin-top: 0.5rem;
+}
+.axr {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.awa {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+.bxl {
+    margin-top: 1.5rem;
+}
+.lj {
+    margin-top: 1.25rem;
+}
+.bbn {
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.bah {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.awg {
+    font-weight: 600;
+}
+.awa {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+.arv {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.arf {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+.ajr {
+    --tw-bg-opacity: 1;
+    background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+}
+.adu {
+    border-radius: 0.375rem;
+}
+.ze {
+    justify-content: center;
+}
+.tn {
+    width: 100%;
+}
+.ly {
+    display: inline-flex;
+}
+</style>

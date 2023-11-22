@@ -4,8 +4,9 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Cart from "@/Pages/Cart/Main.vue";
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import { Link } from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import {onMounted, ref} from "vue";
+import FormSection from "@/Components/FormSection.vue";
 
 // const product = {
 //     name: 'Basic Tee 6-Pack',
@@ -71,7 +72,22 @@ const props = defineProps({
 
 onMounted(() => {
     console.log(props.item);
-})
+    console.log(product);
+});
+
+const form = useForm({
+    item: null,
+});
+
+const addToCart = () => {
+    form.item = props.item.data;
+    form.put(route('cart.add-to-cart'), {
+        errorBag: 'addToCart',
+        preserveScroll: true,
+        // onSuccess: () => form.reset(),
+        // onFinish: () => titleInput.value.focus(),
+    });
+};
 
 const product = props.item.data
 </script>
@@ -104,7 +120,7 @@ const product = props.item.data
                     <!-- Options -->
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
                         <h2 class="sr-only">Product information</h2>
-                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$192</p>
+                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ product.price.amount }}</p>
 
                         <!-- Reviews -->
 <!--                        <div class="mt-6">-->
@@ -161,7 +177,11 @@ const product = props.item.data
 <!--                                </RadioGroup>-->
 <!--                            </div>-->
 
-                            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</button>
+                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        type="button"
+                                        @click="addToCart">
+                                    Add to bag
+                                </button>
                         </form>
                     </div>
 
