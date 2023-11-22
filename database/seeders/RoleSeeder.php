@@ -13,17 +13,9 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            'Chair',
-            'Vice Chair',
-            'Public Relations Director',
-            'Academic Director',
-            'Community Outreach',
-            'Social Director',
-            'McNaughton Director',
-            'Illumination Director',
-            'Finance Director',
-            'Project Club Director',
-            'Grad Banquet Director'
+            'Super Admin',
+            'Admin',
+            'Customer',
         ];
 
         foreach($roles as $role) {

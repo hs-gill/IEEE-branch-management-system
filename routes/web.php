@@ -24,15 +24,6 @@ use Inertia\Inertia;
 |
 */
 
-//Route::get('/', function () {
-//    return Inertia::render('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
-
 Route::get('/', function () {
     return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
@@ -58,7 +49,6 @@ Route::middleware([
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
-
 
     /*
      * Generate a route for all the methods inside the Controllers for Resource Models.

@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,7 +18,7 @@ class AdminController extends Controller
      */
     public function index(): Response
     {
-        $users = User::with('roles.permissions', 'role')->get();
+        $users = User::with('roles.permissions')->get();
         $roles = Role::with('permissions')->get();
 
         return Inertia::render('Admin/Users/Main', [
@@ -34,11 +35,8 @@ class AdminController extends Controller
         $user = User::find($request->user['id']);
         $role = Role::find($request->role['id']);
 
-        if ($user->roles->contains($role)) {
-            $user->roles()->detach($role);
-        } else {
-            $user->roles()->attach($role);
-        }
+        foreach ($user->roles as $r) { $user->roles()->detach($r); }
+        $user->roles()->attach($role);
     }
 
     /**

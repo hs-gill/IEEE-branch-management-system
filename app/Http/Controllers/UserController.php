@@ -45,8 +45,11 @@ class UserController extends Controller
      */
     public function show(User $user): Response
     {
+        $user = User::with('roles')->where('id', $user->id)->first();
+
         return Inertia::render('Admin/Users/Show', [
-            'user' => $user
+            'user' => $user,
+            'roles' => Role::all()
         ]);
     }
 
