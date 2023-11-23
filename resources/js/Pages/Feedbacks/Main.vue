@@ -8,10 +8,6 @@ import {onMounted} from "vue";
 const props = defineProps({
     feedbacks: Object,
 });
-
-onMounted(() => {
-    console.log(props.feedbacks);
-})
 </script>
 
 <template>
