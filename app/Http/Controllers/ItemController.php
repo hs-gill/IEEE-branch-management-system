@@ -17,7 +17,7 @@ class ItemController extends Controller
      */
     public function index(): Response
     {
-        $items = Item::with('itemCategory')->get();
+        $items = Item::with('price')->get();
         return Inertia::render('Items/Main', [
             'items' => new ItemCollection($items)
         ]);
@@ -50,6 +50,7 @@ class ItemController extends Controller
      */
     public function show(Item $item): Response
     {
+        $item = Item::with('price')->where('id', $item->id)->first();
         return Inertia::render('Items/Show', [
             'item' => new ItemResource($item)
         ]);

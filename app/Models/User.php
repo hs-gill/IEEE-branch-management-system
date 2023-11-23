@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,8 +65,15 @@ class User extends Authenticatable
     /**
      * Get the transactions that the User has made.
      */
-    public function transactions(): HasMany {
-        return $this->hasMany(Transaction::class);
+    public function orders(): HasMany {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get the products that the User has in the cart.
+     */
+    public function items(): BelongsToMany {
+        return $this->belongsToMany(Item::class, 'cart')->withTimestamps();
     }
 
 }

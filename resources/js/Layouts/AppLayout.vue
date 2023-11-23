@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -8,12 +8,16 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import Footer from '@/Components/Footer.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Cart from "@/Pages/Cart/Main.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     title: String,
 });
 
 const canViewFeedbacks = false;
+
+const open = ref(false);
 
 const showingNavigationDropdown = ref(false);
 
@@ -35,6 +39,8 @@ const logout = () => {
         <Head :title="title" />
 
         <Banner />
+
+        <Cart v-model="open" :items="$page.props.products" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -77,6 +83,8 @@ const logout = () => {
                         </div>
 
                         <div v-if="$page.props.jetstream.hasTeamFeatures" class="hidden sm:flex sm:items-center sm:ml-6">
+
+                            <!-- Admin Dropdown -->
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
                                 <Dropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
@@ -95,20 +103,20 @@ const logout = () => {
                                     <template #content>
                                         <div class="w-60">
                                             <!-- Team Management -->
-                                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Manage Team
-                                            </div>
+<!--                                            <div class="block px-4 py-2 text-xs text-gray-400">-->
+<!--                                                Manage Team-->
+<!--                                            </div>-->
 
-                                            <!-- Team Settings -->
-                                            <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
-                                                Team Settings
-                                            </DropdownLink>
+<!--                                            &lt;!&ndash; Team Settings &ndash;&gt;-->
+<!--                                            <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">-->
+<!--                                                Team Settings-->
+<!--                                            </DropdownLink>-->
 
 <!--                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">-->
 <!--                                                Create New Team-->
 <!--                                            </DropdownLink>-->
 
-                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+<!--                                            <div class="border-t border-gray-200 dark:border-gray-600" />-->
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
                                                 Manage Users and Roles
@@ -118,15 +126,19 @@ const logout = () => {
                                                 Users Settings
                                             </DropdownLink>
 
-                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('roles.index')">
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.role.id === 1" :href="route('roles.index')">
                                                 Roles Settings
                                             </DropdownLink>
 
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Transactions
+                                                Orders and Transactions
                                             </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.index')">
+                                                View Orders
+                                            </DropdownLink>
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('transactions.index')">
                                                 View Transactions
@@ -200,6 +212,10 @@ const logout = () => {
                                             Profile
                                         </DropdownLink>
 
+                                        <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.user-orders')">
+                                            My Orders
+                                        </DropdownLink>
+
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
                                             API Tokens
                                         </DropdownLink>
@@ -214,6 +230,17 @@ const logout = () => {
                                         </form>
                                     </template>
                                 </Dropdown>
+                            </div>
+
+                            <!-- Cart Button -->
+                            <div class="ml-3 relative">
+                                <SecondaryButton @click="open = true">
+                                    <div class="h-4 w-4 bg-transparent flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                        </svg>
+                                    </div>
+                                </SecondaryButton>
                             </div>
                         </div>
 

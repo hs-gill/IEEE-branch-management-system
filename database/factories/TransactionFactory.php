@@ -20,9 +20,10 @@ class TransactionFactory extends Factory
     {
         return [
             //use the faker to hard code some info.
-            'item_id'=>rand(1,50),
-            'user_id'=>rand(1,2),
-            'rented_at' => Carbon::now(),
+            'order_id' => rand(1,100),
+            'amount' => rand(1*100, 100*100)/100,
+            'status' => 'completed',
+            'provider'=> $this->faker->creditCardType(),
         ];
     }
 }

@@ -1,12 +1,16 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SearchBar from "@/Components/SearchBar.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
     items: Object,
 });
+
+onMounted(() => {
+    // console.log(props.items.data)
+})
 
 let input = ref("");
 
@@ -15,7 +19,6 @@ function filteredList() {
         item.name.toLowerCase().includes(input.value.toLowerCase())
     );
 }
-
 </script>
 
 <template>
@@ -57,7 +60,7 @@ function filteredList() {
                                         </h3>
                                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ item.description }}</p>
                                     </div>
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-200">$35</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-200">${{ item.price.amount }}</p>
                                 </div>
                             </Link>
                         </div>

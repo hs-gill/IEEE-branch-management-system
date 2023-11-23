@@ -32,8 +32,8 @@ class AdminController extends Controller
      */
     public function updateRole(Request $request): void
     {
-        $user = User::find($request->user['id']);
-        $role = Role::find($request->role['id']);
+        $user = User::findOrFail($request->user['id']);
+        $role = Role::findOrFail($request->role['id']);
 
         foreach ($user->roles as $r) { $user->roles()->detach($r); }
         $user->roles()->attach($role);
@@ -44,8 +44,8 @@ class AdminController extends Controller
      */
     public function updatePermission(Request $request): void
     {
-        $role = Role::find($request->role['id']);
-        $permission = Permission::find($request->permission['id']);
+        $role = Role::findOrFail($request->role['id']);
+        $permission = Permission::findOrFail($request->permission['id']);
 
         if ($role->permissions->contains($permission)) {
             $role->permissions()->detach($permission);
