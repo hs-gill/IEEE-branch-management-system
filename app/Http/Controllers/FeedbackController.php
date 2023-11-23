@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewInquiry;
 use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -37,13 +39,18 @@ class FeedbackController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $newFeedback = null;
         if ($user_id = Auth::user()->id) {
             $feedback = new Feedback();
             $feedback->title = $request->title;
             $feedback->description = $request->description;
             $feedback->user_id = $user_id;
             $feedback->save();
+            $newFeedback = $feedback;
         }
+
+        Mail::to($request->user())->send(new NewInquiry($newFeedback));
+
         session()->flash('flash.banner', __('Thank you, :user! Your feedback have been successfully received for our team.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
         return redirect('/feedbacks/create');
