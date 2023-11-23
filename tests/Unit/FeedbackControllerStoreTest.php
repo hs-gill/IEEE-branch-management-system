@@ -6,7 +6,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class FeedbackControllerStoreTest extends TestCase

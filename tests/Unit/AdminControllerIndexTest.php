@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\Http\Controllers\AdminController;
 use App\Models\User;
 use App\Models\Role;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class AdminControllerIndexTest extends TestCase

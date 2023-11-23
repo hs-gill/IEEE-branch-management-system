@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class FeedbackControllerShowTest extends TestCase

@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class AdminControllerUpdatePermissionTest extends TestCase

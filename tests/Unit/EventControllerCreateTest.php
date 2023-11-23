@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\EventController;
 use Mockery;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class EventControllerCreateTest extends TestCase
 {

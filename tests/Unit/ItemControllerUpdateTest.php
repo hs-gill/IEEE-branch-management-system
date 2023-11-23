@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\Http\Controllers\ItemController;
 use App\Models\Item;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class ItemControllerUpdateTest extends TestCase

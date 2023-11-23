@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\Http\Controllers\EventController;
 use App\Models\Event;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class EventControllerStoreTest extends TestCase

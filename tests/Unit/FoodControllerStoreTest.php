@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\Http\Controllers\FoodController;
 use App\Models\Food;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class FoodControllerStoreTest extends TestCase

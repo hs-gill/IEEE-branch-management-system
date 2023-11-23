@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\EventController;
 use App\Models\Event;
-use Tests\TestCase; // Use Laravel's TestCase
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\FoodController;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class FoodControllerCreateTest extends TestCase
 {

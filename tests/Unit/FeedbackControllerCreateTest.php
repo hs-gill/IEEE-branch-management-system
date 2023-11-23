@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\FeedbackController;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class FeedbackControllerCreateTest extends TestCase
 {

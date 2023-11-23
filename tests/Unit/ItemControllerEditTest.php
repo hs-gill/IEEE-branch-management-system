@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\ItemController;
 use App\Models\Item;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class ItemControllerEditTest extends TestCase

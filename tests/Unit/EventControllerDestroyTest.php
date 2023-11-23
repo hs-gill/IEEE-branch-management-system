@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\EventController;
 use App\Models\Event;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Mockery;
 
 class EventControllerDestroyTest extends TestCase
