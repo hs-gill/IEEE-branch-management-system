@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -57,13 +59,13 @@ class CartController extends Controller
     /**
      * Add an item to the User's shopping cart.
      */
-    public function checkout(Request $request)
+    public function checkout(Request $request): void
     {
-        Order::create([
-            'user_id' => Auth::user()->id,
-            'total' => $request->total
-        ]);
+        $newOrder = app('App\Http\Controllers\OrderController')->store($request);
         $this->emptyCart();
+
+        session()->flash('flash.banner', __('Thank you, :user! Your order has been created successfully.', ['user' => Auth::user()->name]));
+        session()->flash('flash.bannerStyle', 'success');
     }
 
 }

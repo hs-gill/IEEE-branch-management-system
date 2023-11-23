@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,7 +19,10 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::with('user')->paginate(10);
+        $orders = Order::with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return Inertia::render('Orders/Main', [
             'orders' => $orders
         ]);
@@ -33,11 +41,16 @@ class OrderController extends Controller
      */
     public function store(Request $request): void
     {
-        $order = new Order();
-        $order->total = $request->total;
-        $order->user_id = $request->user_id;
-        $order->returned_at = $request->returned_at;
-        $order->save();
+        $newOrder = null;
+        if ($user_id = Auth::user()->id) {
+            $newOrder = new Order();
+            $newOrder->total = $request->total;
+            $newOrder->user_id = $user_id;
+            $newOrder->returned_at = $request->returned_at;
+            $newOrder->save();
+        }
+
+        Mail::to($request->user())->send(new NewOrder($newOrder));
     }
 
     /**
@@ -72,5 +85,20 @@ class OrderController extends Controller
     public function destroy(Order $order): void
     {
         $order->delete();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function userOrders(): Response
+    {
+        $orders = Order::with('user')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Orders/UserOrders', [
+            'orders' => $orders
+        ]);
     }
 }

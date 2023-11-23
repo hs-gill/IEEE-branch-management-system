@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -35,11 +36,13 @@ class TransactionController extends Controller
      */
     public function store(Request $request): void
     {
-        $transaction = new Transaction();
-        $transaction->item_id = $request->item_id;
-        $transaction->user_id = $request->user_id;
-        $transaction->rented_at = Carbon::now();
-        $transaction->save();
+        $nweTransaction = null;
+        if ($user_id = Auth::user()->id) {
+            $nweTransaction = new Transaction();
+            $nweTransaction->order_id = $request->item_id;
+            $nweTransaction->user_id = $user_id;
+            $nweTransaction->save();
+        }
     }
 
     /**

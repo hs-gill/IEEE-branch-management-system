@@ -212,6 +212,10 @@ const logout = () => {
                                             Profile
                                         </DropdownLink>
 
+                                        <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.user-orders')">
+                                            My Orders
+                                        </DropdownLink>
+
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
                                             API Tokens
                                         </DropdownLink>

@@ -20,7 +20,10 @@ class FeedbackController extends Controller
      */
     public function index(): Response
     {
-        $feedbacks = Feedback::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $feedbacks = Feedback::with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return Inertia::render('Feedbacks/Main', [
             'feedbacks' => $feedbacks
         ]);
@@ -41,12 +44,11 @@ class FeedbackController extends Controller
     {
         $newFeedback = null;
         if ($user_id = Auth::user()->id) {
-            $feedback = new Feedback();
-            $feedback->title = $request->title;
-            $feedback->description = $request->description;
-            $feedback->user_id = $user_id;
-            $feedback->save();
-            $newFeedback = $feedback;
+            $newFeedback = new Feedback();
+            $newFeedback->title = $request->title;
+            $newFeedback->description = $request->description;
+            $newFeedback->user_id = $user_id;
+            $newFeedback->save();
         }
 
         Mail::to($request->user())->send(new NewInquiry($newFeedback));

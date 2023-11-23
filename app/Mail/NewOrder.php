@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewInquiry extends Mailable
+class NewOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,8 +28,8 @@ class NewInquiry extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('admin@ieee.com', 'IEEE Platform'),
-            subject: 'New Inquiry',
+            from: new Address('info@ieee.com', 'IEEE Platform'),
+            subject: 'New Order',
         );
     }
 
@@ -39,7 +39,7 @@ class NewInquiry extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.customer-inquiry',
+            view: 'emails.new-order',
         );
     }
 

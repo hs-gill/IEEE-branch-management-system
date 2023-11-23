@@ -53,7 +53,8 @@ Route::middleware([
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
     Route::put('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add-to-cart');
     Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
-    Route::put('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
 
     /*
      * Generate a route for all the methods inside the Controllers for Resource Models.

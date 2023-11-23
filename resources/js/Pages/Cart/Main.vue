@@ -45,15 +45,13 @@ const checkoutForm = useForm({
 
 const checkout = () => {
     checkoutForm.total = total;
-    checkoutForm.put(route('cart.checkout'), {
+    checkoutForm.post(route('cart.checkout'), {
         errorBag: 'checkout',
         preserveScroll: true,
-        // onSuccess: () => form.reset(),
+        onSuccess: () => checkoutForm.reset(),
         // onFinish: () => titleInput.value.focus(),
     });
 }
-
-
 
 </script>
 
