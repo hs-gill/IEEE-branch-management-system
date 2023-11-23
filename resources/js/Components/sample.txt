@@ -1,0 +1,53 @@
+<script setup>
+import HeroLogo from "@/Components/HeroLogo.vue";
+</script>
+
+<template>
+    <div>
+        <section class="bg-white dark:bg-gray-900">
+
+            <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+                <h1 class="mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect ">Welcome back to our Club!</h1>
+                <p class="mb-10 pt-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Whether it's a textbook rental, a study/snack space, or a night out at the Hose & Hydrant, we're here to help you succeed throughout your EE and CME degree.</p>
+                <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                    <HeroLogo/>
+                </div>
+
+
+
+            </div>
+        </section>
+    </div>
+</template>
+
+<style scoped>
+.typing-container {
+    display: inline-block; /* Or inline-flex */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: .15em solid white; /* The typewriter cursor */
+    white-space: nowrap;
+    letter-spacing: .15em;
+    animation:
+        typing 3.5s steps(45, end) forwards,
+        blink-caret 1s 3.5s forwards; /* Increased total duration for a smoother fade-out */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    0%, 50% { border-color: transparent; }
+    50.1%, 80% { border-color: white; } /* Cursor visible for a longer period */
+    100% { border-color: transparent; } /* Gradual fade-out towards the end */
+}
+</style>
