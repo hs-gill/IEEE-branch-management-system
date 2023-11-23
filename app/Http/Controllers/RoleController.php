@@ -48,9 +48,12 @@ class RoleController extends Controller
      */
     public function show(Role $role): Response
     {
-        return Inertia::render('Admin/Roles/Detail', [
-            'role' => $role
+        $role=Role::with('permissions')->where('id',$role->id)->first();
+        return Inertia::render('Admin/Roles/Show', [
+            'role' => $role,
+            'permissions'=> Permission::all()
         ]);
+
     }
 
     /**
