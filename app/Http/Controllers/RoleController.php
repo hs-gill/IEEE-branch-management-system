@@ -53,6 +53,7 @@ class RoleController extends Controller
             'role' => $role,
             'permissions' => Permission::all()
         ]);
+
     }
 
     /**
