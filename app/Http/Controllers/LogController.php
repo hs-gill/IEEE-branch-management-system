@@ -12,7 +12,8 @@ class LogController extends Controller
      */
     public function index()
     {
-        //
+        $logs = Log::all();
+        return view('logs.index', ['logs' => $logs]);
     }
 
     /**
@@ -20,7 +21,7 @@ class LogController extends Controller
      */
     public function create()
     {
-        //
+        return view('logs.create');
     }
 
     /**
@@ -28,7 +29,12 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $log = new Log();
+        $log->title = $request->title; // Assuming the Log model has a 'title' field
+        $log->content = $request->content; // Assuming there is a 'content' field
+        $log->save();
+
+        return redirect()->route('logs.index');
     }
 
     /**
@@ -36,7 +42,7 @@ class LogController extends Controller
      */
     public function show(Log $log)
     {
-        //
+        return view('logs.show', ['log' => $log]);
     }
 
     /**
@@ -44,7 +50,7 @@ class LogController extends Controller
      */
     public function edit(Log $log)
     {
-        //
+        return view('logs.edit', ['log' => $log]);
     }
 
     /**
@@ -52,7 +58,11 @@ class LogController extends Controller
      */
     public function update(Request $request, Log $log)
     {
-        //
+        $log->title = $request->title;
+        $log->content = $request->content;
+        $log->save();
+
+        return redirect()->route('logs.show', $log);
     }
 
     /**
@@ -60,6 +70,7 @@ class LogController extends Controller
      */
     public function destroy(Log $log)
     {
-        //
+        $log->delete();
+        return redirect()->route('logs.index');
     }
 }
