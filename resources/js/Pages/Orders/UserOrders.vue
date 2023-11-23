@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import BarChart from '@/Pages/Transactions/Charts/BarChart.vue';
 import PieChart from '@/Pages/Transactions/Charts/PieChart.vue';
 import Table from '@/Pages/Orders/Table.vue';
+import UserOrdersTable from "@/Pages/Orders/UserOrdersTable.vue";
 
 defineProps({
     orders: Object,
@@ -91,7 +92,7 @@ defineProps({
                                 important news in the Laravel ecosystem, including new package releases and tutorials.
                             </p>
 
-                            <Table :orders="orders" />
+                            <UserOrdersTable :orders="orders" />
 
                         </div>
                     </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
@@ -62,6 +63,7 @@ Route::middleware([
     Route::resources([
         'events' => EventController::class,
         'feedbacks' => FeedbackController::class,
+        'inquiries' => InquiryController::class,
         'items' => ItemController::class,
         'orders' => OrderController::class,
         'roles' => RoleController::class,

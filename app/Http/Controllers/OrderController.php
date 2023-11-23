@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::with('user')
+        $orders = Order::with('user', 'items')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -49,7 +49,7 @@ class OrderController extends Controller
             $newOrder->save();
         }
 
-        foreach ($request->item as $item) {
+        foreach ($request->items as $item) {
             $i = Item::findOrFail($item['id']);
             $newOrder->items()->attach($i);
         }
@@ -62,6 +62,9 @@ class OrderController extends Controller
      */
     public function show(Order $order): Response
     {
+        $order = Order::with('user', 'items')
+            ->where('user_id', Auth::user()->id)
+            ->get();
         return Inertia::render('Orders/Show', [
             'order' => $order
         ]);

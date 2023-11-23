@@ -11,10 +11,6 @@ const props = defineProps({
 
 defineEmits(['update:modelValue']);
 
-onMounted(() => {
-    console.log(props.items.data)
-});
-
 const removeItemForm = useForm({
     item: null,
 });
@@ -32,15 +28,14 @@ const removeFromCart = (item) => {
 const total = computed(() => {
     let total = 0;
     props.items.forEach(item => {
-        console.log(item.price)
         total += item.price.amount
     });
-    console.log(total)
     return total;
 });
 
 const checkoutForm = useForm({
-    total: Number
+    total: Number,
+    items: props.items
 });
 
 const checkout = () => {
