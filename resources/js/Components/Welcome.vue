@@ -1,98 +1,86 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import HeroLogo from "@/Components/HeroLogo.vue";
 </script>
 
 <template>
     <div>
-        <div class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
-            <ApplicationLogo class="block h-16 w-auto" />
+        <section class="bg-white dark:bg-gray-900">
+            <div class="py-8 px-4 mx-auto justify-center max-w-screen-xl text-center lg:py-16 lg:px-12">
+                    <div class="text-center pt-12">
+                        Copy code
+                        <!-- Heading for larger screens like laptops -->
+                        <h1 class="hidden sm:block mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
+                            Welcome back to our Club!
+                        </h1>
 
-            <h1 class="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
-                Welcome to IEEE uSask Branch application!
-            </h1>
-
-            <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-                The IEEE University of Saskatchewan (uSask) branch likely facilitates student engagement in electrical and electronics engineering fields, promoting technical knowledge and professional development through workshops, seminars, and networking events, aligning with IEEE's global mission to foster technological innovation.
-            </p>
-        </div>
-
-        <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
-            <div>
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-gray-400">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                    </svg>
-                    <h2 class="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-                        <a href="https://laravel.com/docs">Transaction</a>
-                    </h2>
+                        <!-- Heading for smaller screens like mobile devices -->
+                        <h1 class="block sm:hidden mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
+                            Welcome back!
+                        </h1>
+                        <p class="mb-10 pt-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+                            Whether it's a textbook rental, a study/snack space, or a night out at the Hose & Hydrant, we're here to help you succeed throughout your EE and CME degree.
+                        </p>
+                    </div>
                 </div>
 
-                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Transactions are the lifelines of economic activity, facilitating the exchange of goods, services, and values. They vary in nature and complexity, ranging from simple everyday occurrences like buying groceries to intricate dealings in stock markets or international trade. </p>
+                    <div class="pt-24 flex flex-col  lg:mb-16 sm:flex-row sm:justify-center sm:space-y-0">
+                        <div class="hidden md:block md:max-w-0 lg:max-w-sm">
+                        <HeroLogo/>
+                        </div>
+                    </div>
 
-                <p class="mt-4 text-sm">
-                    <a href="https://www.investopedia.com/terms/t/transaction.asp" target="_blank" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
-                        Explore the Transactions
-
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200">
-                            <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
+                <div class="lg:pt-12 px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+                    <span class="font-semibold text-gray-400 uppercase">Join our Discord Server</span>
+                </div>
+                <div class="pt-8 relative flex justify-center items-center mt-8 text-gray-500 sm:justify-between w-full h-full">
+                    <a href="https://discord.gg/yEeFaEDNGF" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:text-gray-800 dark:hover:text-gray-400">
+                        <svg width="5em" height="5em" viewBox="-25.6 -25.6 307.20 307.20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000" stroke="#000000" stroke-width="0.00256" transform="rotate(0)">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier"> <g>
+                                <path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" fill="currentcolor" fill-rule="nonzero"> </path>
+                            </g>
+                            </g>
                         </svg>
                     </a>
-                </p>
-            </div>
-
-            <div>
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-gray-400">
-                        <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                    </svg>
-                    <h2 class="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-                        <a href="https://laracasts.com">Items</a>
-                    </h2>
                 </div>
 
-                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Items such as books, food, and drinks enrich our lives in diverse ways, acting as bridges to knowledge, culture, and sustenance. Books unlock worlds of imagination and knowledge, allowing us to travel through time and space, exploring different ideas and perspectives. </p>
 
 
-                <p class="mt-4 text-sm">
-                    <a href="https://www.merriam-webster.com/dictionary/item" target="_blank" class="inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300">
-                        Start watching Items
+        </section>
 
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200">
-                            <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </p>
-            </div>
-
-            <div>
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-gray-400">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                    </svg>
-                    <h2 class="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-                        <a href="https://tailwindcss.com/">Members</a>
-                    </h2>
-                </div>
-
-                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Members of IEEE student branches are typically students and faculty members from the university’s electrical and electronics engineering department or related fields. These members collaborate in organizing and participating in various technical, professional development, and networking activities to foster a vibrant community.                </p>
-            </div>
-
-            <div>
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-gray-400">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                    </svg>
-                    <h2 class="ml-3 text-xl font-semibold text-gray-900 dark:text-white">
-                        Rent/Return
-                    </h2>
-                </div>
-
-                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    IEEE branches, especially those associated with universities, often have access to various resources such as technical books, journals, and sometimes even hardware or software for projects and research. Members of the IEEE student branch can borrow or rent these resources for academic or project purposes.                 </p>
-            </div>
-        </div>
     </div>
+
 </template>
+
+<style scoped>
+.typing-container {
+    display: inline-block; /* Or inline-flex */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: .15em solid white; /* The typewriter cursor */
+    white-space: nowrap;
+    letter-spacing: .15em;
+    animation:
+        typing 3.5s steps(45, end) forwards,
+        blink-caret 1s 3.5s forwards; /* Increased total duration for a smoother fade-out */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    0%, 50% { border-color: transparent; }
+    50.1%, 80% { border-color: white; } /* Cursor visible for a longer period */
+    100% { border-color: transparent; } /* Gradual fade-out towards the end */
+}
+</style>

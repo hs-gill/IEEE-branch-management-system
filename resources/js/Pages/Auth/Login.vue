@@ -94,3 +94,40 @@ const submit = () => {
         </form>
     </AuthenticationCard>
 </template>
+
+
+
+
+
+<style scoped>
+.typing-container {
+    display: inline-block; /* Or inline-flex */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: .15em solid white; /* The typewriter cursor */
+    white-space: nowrap;
+    letter-spacing: .15em;
+    animation:
+        typing 3.5s steps(45, end) forwards,
+        blink-caret 1s 3.5s forwards; /* Increased total duration for a smoother fade-out */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    0%, 50% { border-color: transparent; }
+    50.1%, 80% { border-color: white; } /* Cursor visible for a longer period */
+    100% { border-color: transparent; } /* Gradual fade-out towards the end */
+}
+</style>
+
