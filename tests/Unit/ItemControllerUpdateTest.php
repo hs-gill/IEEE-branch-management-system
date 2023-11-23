@@ -27,7 +27,6 @@ class ItemControllerUpdateTest extends TestCase
 
         $controller->update($request, $mockItem);
 
-        // Assertions can be added if there are specific things to assert
     }
 
     protected function tearDown(): void

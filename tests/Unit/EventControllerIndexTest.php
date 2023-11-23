@@ -10,7 +10,7 @@ use Mockery;
 
 class EventControllerIndexTest extends TestCase
 {
-    use RefreshDatabase; // Optional, if you need to interact with the database
+    use RefreshDatabase;
 
     public function testIndex()
     {
