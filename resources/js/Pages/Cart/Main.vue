@@ -40,10 +40,11 @@ const total = computed(() => {
 });
 
 const checkoutForm = useForm({
-    total: total
+    total: Number
 });
 
 const checkout = () => {
+    checkoutForm.total = total;
     checkoutForm.put(route('cart.checkout'), {
         errorBag: 'checkout',
         preserveScroll: true,

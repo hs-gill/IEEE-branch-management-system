@@ -102,13 +102,13 @@ const addToCart = () => {
                 <!-- Product info -->
                 <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
 
-                    <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                    <div class="lg:col-span-2 lg:border-r lg:border-gray-200 dark:lg:border-gray-800 lg:pr-8">
                         <div class="lg:col-span-2 pb-6">
                             <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
                                 <img :src="product.image_path" :alt="product.name" class="h-full w-full object-cover object-center" />
                             </div>
                         </div>
-                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-3xl">{{ product.name }}</h1>
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">{{ product.name }}</h1>
                     </div>
 
                     <!-- Options -->
@@ -128,7 +128,7 @@ const addToCart = () => {
 <!--                            </div>-->
 <!--                        </div>-->
 
-                        <form class="mt-10">
+                        <div class="mt-10">
 <!--                            &lt;!&ndash; Colors &ndash;&gt;-->
 <!--                            <div>-->
 <!--                                <h3 class="text-sm font-medium text-gray-900">Color</h3>-->
@@ -176,16 +176,16 @@ const addToCart = () => {
                                         @click="addToCart">
                                     Add to bag
                                 </button>
-                        </form>
+                        </div>
                     </div>
 
-                    <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+                    <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 dark:lg:border-gray-800 lg:pb-16 lg:pr-8 lg:pt-6">
                         <!-- Description and details -->
                         <div>
                             <h3 class="sr-only">Description</h3>
 
                             <div class="space-y-6">
-                                <p class="text-base text-gray-900 dark:text-gray-200">{{ product.description }}</p>
+                                <p class="text-base text-gray-900 dark:text-gray-300">{{ product.description }}</p>
                             </div>
                         </div>
 
