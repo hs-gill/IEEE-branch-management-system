@@ -3,22 +3,26 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\EventController;
-use Mockery;
 use Tests\TestCase;
 
 class EventControllerCreateTest extends TestCase
 {
     public function testCreate()
     {
-        $controller = new EventController();
+        // Simulate a GET request to the route that uses EventController@create
+        // Replace 'your-route' with the actual route
+        $response = $this->get('/your-route');
 
-        $response = $controller->create();
-
-        $this->assertEquals('Events/Create', $response->name);
+        // Use assertInertia to check the Inertia response
+        $response->assertInertia(function ($page) {
+            $page->component('Events/Create');
+        });
     }
+
     protected function tearDown(): void
     {
-        Mockery::close();
+        // Close Mockery
+        // Mockery::close(); // Uncomment this if you're using Mockery
         parent::tearDown();
     }
 }

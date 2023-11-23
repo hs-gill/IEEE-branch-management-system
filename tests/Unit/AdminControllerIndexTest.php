@@ -5,31 +5,39 @@ namespace Tests\Unit;
 use App\Http\Controllers\AdminController;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Mockery;
 
 class AdminControllerIndexTest extends TestCase
 {
+    use RefreshDatabase; // Use RefreshDatabase trait to reset the database after testing
+
     public function testIndex()
     {
-        $mockedUsers = Mockery::mock('Illuminate\Database\Eloquent\Collection');
-        User::shouldReceive('with')->with('roles.permissions')->andReturnSelf();
-        User::shouldReceive('get')->andReturn($mockedUsers);
+        // Create sample data using Laravel's factory methods
+        $users = User::factory()->count(10)->create(); // Adjust the number as needed
+        $roles = Role::factory()->count(5)->create();  // Adjust the number as needed
 
-        $mockedRoles = Mockery::mock('Illuminate\Database\Eloquent\Collection');
-        Role::shouldReceive('with')->with('permissions')->andReturnSelf();
-        Role::shouldReceive('get')->andReturn($mockedRoles);
+        // Associate roles with users if necessary
+        // ...
 
         $controller = new AdminController();
 
         $response = $controller->index();
 
+        // Assert that the correct view is returned
         $this->assertEquals('Admin/Users/Main', $response->name);
+
+        // You can also add more assertions to check if the data is passed correctly
+        // ...
     }
 
-    protected function tearDown(): void
+
+protected function tearDown(): void
     {
+        // Close Mockery
         Mockery::close();
         parent::tearDown();
     }
 }
+

@@ -13,16 +13,23 @@ class AdminControllerUpdatePermissionTest extends TestCase
 {
     public function testUpdatePermission()
     {
+        // Create an instance of Role
         $mockRole = Mockery::mock(Role::class);
-        Role::shouldReceive('find')->with(any())->andReturn($mockRole);
+
+        // Mock the methods on the instance, replace any() with specific values
+        $mockRole->shouldReceive('find')->with(1)->andReturn($mockRole);
         $mockRole->shouldReceive('permissions')->andReturnSelf();
         $mockRole->shouldReceive('contains')->once()->andReturn(true);
         $mockRole->shouldReceive('detach')->once();
         $mockRole->shouldReceive('attach')->never();
 
+        // Create an instance of Permission
         $mockPermission = Mockery::mock(Permission::class);
-        Permission::shouldReceive('find')->with(any())->andReturn($mockPermission);
 
+        // Mock the methods on the instance, replace any() with specific values
+        $mockPermission->shouldReceive('find')->with(1)->andReturn($mockPermission);
+
+        // Create an instance of AdminController
         $controller = new AdminController();
 
         $request = new Request([

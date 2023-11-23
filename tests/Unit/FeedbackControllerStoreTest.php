@@ -4,20 +4,20 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Mockery;
 
 class FeedbackControllerStoreTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testStore()
     {
-        Auth::shouldReceive('user')->andReturn((object) ['id' => 1]);
-
-        $mockFeedback = Mockery::mock(Feedback::class)->makePartial();
-        Feedback::shouldReceive('new')->andReturn($mockFeedback);
-        $mockFeedback->shouldReceive('save')->once();
+        // Create a user instance for Auth
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
         $controller = new FeedbackController();
 
@@ -28,10 +28,20 @@ class FeedbackControllerStoreTest extends TestCase
 
         $response = $controller->store($request);
 
+        // Assert a new Feedback record was created
+        $this->assertDatabaseHas('feedbacks', [
+            'title' => 'Test Feedback',
+            'description' => 'Test Description',
+            'user_id' => $user->id
+        ]);
+
+        // Assert the response
         $this->assertEquals('/feedbacks/create', $response->getTargetUrl());
     }
 
-    protected function tearDown(): void
+
+
+protected function tearDown(): void
     {
         Mockery::close();
         parent::tearDown();
