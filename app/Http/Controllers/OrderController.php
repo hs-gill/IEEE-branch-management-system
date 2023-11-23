@@ -99,7 +99,7 @@ class OrderController extends Controller
      */
     public function userOrders(): Response
     {
-        $orders = Order::with('user')
+        $orders = Order::with('user', 'items')
             ->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
