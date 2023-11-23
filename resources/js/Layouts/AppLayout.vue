@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref} from 'vue';
+import {ref} from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -13,7 +13,6 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     title: String,
-    items: Object
 });
 
 const canViewFeedbacks = false;
@@ -41,7 +40,7 @@ const logout = () => {
 
         <Banner />
 
-        <Cart v-model="open" :items="$page.props.items" />
+        <Cart v-model="open" :items="$page.props.products" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">

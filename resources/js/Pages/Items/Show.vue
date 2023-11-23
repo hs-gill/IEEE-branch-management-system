@@ -67,16 +67,17 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    console.log(props.item);
-    console.log(product);
+    // console.log(props.item);
+    // console.log(product);
 });
 
+const product = props.item.data
+
 const form = useForm({
-    item: null,
+    item: product,
 });
 
 const addToCart = () => {
-    form.item = props.item.data;
     form.put(route('cart.add-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
@@ -85,7 +86,6 @@ const addToCart = () => {
     });
 };
 
-const product = props.item.data
 </script>
 
 <template>
@@ -95,8 +95,6 @@ const product = props.item.data
                 Item {{ product.name }}
             </h2>
         </template>
-
-
 
         <div class="">
             <div class="pt-6">

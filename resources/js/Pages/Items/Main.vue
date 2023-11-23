@@ -1,12 +1,16 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SearchBar from "@/Components/SearchBar.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
     items: Object,
 });
+
+onMounted(() => {
+    // console.log(props.items.data)
+})
 
 let input = ref("");
 
@@ -15,7 +19,6 @@ function filteredList() {
         item.name.toLowerCase().includes(input.value.toLowerCase())
     );
 }
-
 </script>
 
 <template>

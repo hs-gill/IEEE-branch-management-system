@@ -17,7 +17,7 @@ class ItemController extends Controller
      */
     public function index(): Response
     {
-        $items = Item::with('itemCategory')->get();
+        $items = Item::with('price')->get();
         return Inertia::render('Items/Main', [
             'items' => new ItemCollection($items)
         ]);

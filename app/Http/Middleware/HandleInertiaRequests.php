@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'role' => fn () => $request->user()
                 ? $request->user()->first()->roles->first() : null,
-            'items' => fn () => $items
+            'products' => fn () => $items
         ]);
     }
 }

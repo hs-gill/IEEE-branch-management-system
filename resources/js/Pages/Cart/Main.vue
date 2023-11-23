@@ -12,7 +12,7 @@ const props = defineProps({
 defineEmits(['update:modelValue']);
 
 onMounted(() => {
-    console.log(props.items)
+    console.log(props.items.data)
 });
 
 const removeItemForm = useForm({
@@ -32,6 +32,7 @@ const removeFromCart = (item) => {
 const total = computed(() => {
     let total = 0;
     props.items.forEach(item => {
+        console.log(item.price)
         total += item.price.amount
     });
     console.log(total)
@@ -50,6 +51,8 @@ const checkout = () => {
         // onFinish: () => titleInput.value.focus(),
     });
 }
+
+
 
 </script>
 
@@ -121,10 +124,12 @@ const checkout = () => {
                                         </div>
                                         <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Shipping and taxes calculated at checkout.</p>
                                         <div class="mt-6">
-                                            <a class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                                            @click="checkout">
+                                            <button class="flex items-center justify-center rounded-md border border-transparent w-full px-6 py-3 text-base font-medium  shadow-sm "
+                                                :class="items.length === 0 ? 'text-gray-500 bg-indigo-600/50' : 'text-white bg-indigo-600 hover:bg-indigo-700'"
+                                                    :disabled="items.length === 0"
+                                               @click="checkout">
                                                 Checkout
-                                            </a>
+                                            </button>
                                         </div>
                                         <div class="mt-6 flex justify-center text-center text-sm text-gray-500 dark:text-gray-400">
                                             <p>
