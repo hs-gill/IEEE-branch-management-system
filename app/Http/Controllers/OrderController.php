@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewOrder;
+use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -48,6 +49,11 @@ class OrderController extends Controller
             $newOrder->user_id = $user_id;
             $newOrder->returned_at = $request->returned_at;
             $newOrder->save();
+        }
+
+        foreach ($request->item as $item) {
+            $i = Item::findOrFail($item['id']);
+            $newOrder->items()->attach($i);
         }
 
         Mail::to($request->user())->send(new NewOrder($newOrder));
