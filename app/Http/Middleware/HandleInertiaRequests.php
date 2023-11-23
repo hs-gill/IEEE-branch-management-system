@@ -45,9 +45,9 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'role' => fn () => $request->user()
+            'currentUserRole' => fn () => $request->user()
                 ? $request->user()->first()->roles->first() : null,
-            'products' => fn () => $items
+            'cartProducts' => fn () => $items
         ]);
     }
 }

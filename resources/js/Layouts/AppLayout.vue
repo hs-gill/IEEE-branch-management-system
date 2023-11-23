@@ -11,7 +11,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Cart from "@/Pages/Cart/Main.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
-defineProps({
+const props = defineProps({
     title: String,
 });
 
@@ -40,7 +40,7 @@ const logout = () => {
 
         <Banner />
 
-        <Cart v-model="open" :items="$page.props.products" />
+        <Cart v-model="open" :items="$page.props.cartProducts" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -126,7 +126,7 @@ const logout = () => {
                                                 Users Settings
                                             </DropdownLink>
 
-                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.role.id === 1" :href="route('roles.index')">
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">
                                                 Roles Settings
                                             </DropdownLink>
 
