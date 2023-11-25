@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Mail\NewOrder;
 use App\Models\Item;
 use App\Models\Order;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OrderController extends Controller
 {
@@ -107,5 +110,13 @@ class OrderController extends Controller
         return Inertia::render('Orders/UserOrders', [
             'orders' => $orders
         ]);
+    }
+
+    /**
+     * Export all orders.
+     */
+    public function export(): BinaryFileResponse
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }
