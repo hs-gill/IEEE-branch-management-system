@@ -17,7 +17,11 @@ class ItemController extends Controller
      */
     public function index(): Response
     {
-        $items = Item::with('itemCategory', 'itemState', 'itemType', 'price')->get();
+        $items = Item::with('itemCategory', 'itemState', 'itemType', 'price')
+            ->whereHas('itemState', function($q) {
+                $q->where('id', '!=', 3);
+            })
+            ->get();
         return Inertia::render('Items/Main', [
             'items' => new ItemCollection($items)
         ]);

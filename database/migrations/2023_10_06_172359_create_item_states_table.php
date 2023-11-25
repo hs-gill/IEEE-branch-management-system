@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('item_states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('badge_color_light');
+            $table->string('badge_color_dark');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    console.log(props.items);
+    console.log(props.items.data);
 })
 </script>
 
@@ -33,19 +33,25 @@ onMounted(() => {
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ item.name }}</td>
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><img :src="item.image_path" class="w-640 h-480" :alt="item.name"/></td>
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ item.description }}</td>
-                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                    {{ item.item_category.name }}
+                <td class="border border-slate-300 dark:border-slate-700 p-4">
+                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class=" item.item_category.badge_color ">
+                        {{ item.item_category.name }}
+                    </span>
                 </td>
-                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                    {{ item.item_type.name }}
+                <td class="border border-slate-300 dark:border-slate-700 p-4">
+                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class=" item.item_type.badge_color ">
+                        {{ item.item_type.name }}
+                    </span>
                 </td>
-                <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-
-                    {{ item.item_state.name }}
+                <td class="border border-slate-300 dark:border-slate-700 p-4">
+                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class=" item.item_state.badge_color ">
+                        {{ item.item_state.name }}
+                    </span>
                 </td>
             </tr>
             </tbody>
         </table>
         <Pagination :data="items"/>
     </div>
+
 </template>
