@@ -114,7 +114,7 @@ const createInquiry = () => {
                     <button class="block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
-                        @click="createInquiry">
+                            @click="createInquiry">
                         Let's talk
                     </button>
                 </div>

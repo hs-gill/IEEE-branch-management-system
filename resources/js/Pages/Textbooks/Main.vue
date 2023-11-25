@@ -11,7 +11,7 @@ const props = defineProps({
 let input = ref("");
 
 function filteredList() {
-    return props.textbooks.filter((textbook) =>
+    return props.textbooks.data.filter((textbook) =>
         textbook.title.toLowerCase().includes(input.value.toLowerCase()) || textbook.author.toLowerCase().includes(input.value.toLowerCase())
     );
 }

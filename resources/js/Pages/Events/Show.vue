@@ -75,7 +75,6 @@ const submit = () => {
                                 </PrimaryButton>
                             </form>
 
-                            <a href="#" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
                         </div>
                     </div>
                     <div class="relative mt-16 h-80 lg:mt-8">

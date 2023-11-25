@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TextbookCollection;
+use App\Http\Resources\TextbookResource;
 use App\Models\Textbook;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class TextbookController extends Controller
     {
         $textbooks = Textbook::all();
         return Inertia::render('Textbooks/Main', [
-            'textbooks' => $textbooks
+            'textbooks' => new TextbookCollection($textbooks)
         ]);
     }
 
@@ -47,7 +49,7 @@ class TextbookController extends Controller
     public function show(Textbook $textbook): Response
     {
         return Inertia::render('Textbooks/Show', [
-            'textbook' => $textbook
+            'textbook' => new TextbookResource($textbook)
         ]);
     }
 
