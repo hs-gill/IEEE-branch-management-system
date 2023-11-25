@@ -56,6 +56,7 @@ Route::middleware([
     Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
+    Route::get('/items/inventory', [ItemController::class, 'inventory'])->name('items.inventory');
     Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
 
     /*

@@ -25,7 +25,7 @@ onMounted(() => {
             <div class="mt-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     <Link v-for="event in events.data" :key="event.id" :href="`events/${event.id}`">
-                            <img :src="event.image_path" alt="" class="scale-100 motion-safe:hover:scale-[1.1] transition-all">
+                            <img :src="event.image_path" alt="" class="scale-100">
 <!--                            <div class="absolute inset-0 -z-10 bg-gradient-to-t to-60% from-gray-900 to-transparent"></div>-->
 <!--                            <div class="absolute inset-0 -z-10 rounded-2xl ring-0 ring-inset"></div>-->
 <!--                            <div class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">-->

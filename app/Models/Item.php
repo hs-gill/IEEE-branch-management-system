@@ -53,6 +53,20 @@ class Item extends Model
     }
 
     /**
+     * Get the state of the item.
+     */
+    public function itemState(): BelongsTo {
+        return $this->belongsTo(ItemState::class);
+    }
+
+    /**
+     * Get the type that correspond to the item.
+     */
+    public function itemType(): BelongsTo {
+        return $this->belongsTo(ItemType::class);
+    }
+
+    /**
      * Get the users that has this Item in the cart.
      */
     public function users(): BelongsToMany {

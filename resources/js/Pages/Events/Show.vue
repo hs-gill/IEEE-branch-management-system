@@ -32,13 +32,13 @@ const submit = () => {
     <AppLayout title="Events">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Event {{ event.title }}
+                Event - {{ event.title }}
             </h2>
         </template>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <div class="mt-4">
-                <img :src="event.image_path" alt="" class="rounded-lg">
+            <div class="mt-4 flex flex-col items-center">
+                <img :src="event.image_path" alt="" class="rounded-lg w-3/4 ">
             </div>
 
             <div class="mt-4">

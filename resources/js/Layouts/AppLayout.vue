@@ -128,6 +128,20 @@ const logout = () => {
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
+                                                Inventory
+                                            </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('items.inventory')">
+                                                Items Inventory
+                                            </DropdownLink>
+
+<!--                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">-->
+<!--                                                Roles Settings-->
+<!--                                            </DropdownLink>-->
+
+                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
                                                 Orders and Transactions
                                             </div>
 

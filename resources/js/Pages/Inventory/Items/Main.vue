@@ -1,17 +1,17 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Table from '@/Pages/Feedbacks/Table.vue';
+import Table from '@/Pages/Inventory/Items/Table.vue';
 
 const props = defineProps({
-    feedbacks: Object,
+    items: Object,
 });
 </script>
 
 <template>
-    <AppLayout title="Feedback">
+    <AppLayout title="Items Inventory">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Feedback
+                Inventory - Items
             </h2>
         </template>
 
@@ -29,14 +29,14 @@ const props = defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Feedbacks Table</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Items Inventory</h2>
 
                             <p class="mt-4 mb-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                This table shows the list of feedbacks that the platform has received, ordered by date of creation.
-                                important news in the Laravel ecosystem, including new package releases and tutorials.
+                                This table shows the list of items that the platform has for sell or rent, ordered by name.
+
                             </p>
 
-                            <Table :feedbacks="feedbacks" />
+                            <Table :items="items" />
 
                         </div>
                     </div>

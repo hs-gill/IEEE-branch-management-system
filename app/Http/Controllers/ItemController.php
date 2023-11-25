@@ -17,7 +17,7 @@ class ItemController extends Controller
      */
     public function index(): Response
     {
-        $items = Item::with('price')->get();
+        $items = Item::with('itemCategory', 'itemState', 'itemType', 'price')->get();
         return Inertia::render('Items/Main', [
             'items' => new ItemCollection($items)
         ]);
@@ -50,7 +50,7 @@ class ItemController extends Controller
      */
     public function show(Item $item): Response
     {
-        $item = Item::with('price')->where('id', $item->id)->first();
+        $item = Item::with('itemCategory', 'itemState', 'itemType', 'price')->where('id', $item->id)->first();
         return Inertia::render('Items/Show', [
             'item' => new ItemResource($item)
         ]);
@@ -84,5 +84,16 @@ class ItemController extends Controller
     public function destroy(Item $item): void
     {
         $item->delete();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function inventory(): Response
+    {
+        $items = Item::with('itemCategory', 'itemState', 'itemType', 'price')->paginate(20);
+        return Inertia::render('Inventory/Items/Main', [
+            'items' => $items
+        ]);
     }
 }
