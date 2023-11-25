@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Table from '@/Pages/Orders/Table.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {Link, useForm} from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 
 defineProps({
     orders: Object,
@@ -12,13 +12,13 @@ const form = useForm({
     processing: false,
 });
 
-const exportForm = (response) => {
+const exportForm = () => {
     form.processing = true;
     form.get(route('orders.export'), {
         errorBag: 'exportForm',
         preserveScroll: true,
         responseType: 'arraybuffer',
-        onSuccess: (response) => {
+        onSuccess: () => {
             let fileLink = document.createElement('a');
             fileLink.href = '/orders/export';
             fileLink.download = 'Orders.xlsx';
@@ -30,7 +30,7 @@ const exportForm = (response) => {
 </script>
 
 <template>
-    <AppLayout title="Transactions">
+    <AppLayout title="Orders">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Orders
