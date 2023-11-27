@@ -22,7 +22,7 @@ class ItemFactory extends Factory
             'image_path' => $this->faker->imageUrl(),
             'item_type_id' => $this->faker->numberBetween(1, 2),
             'item_category_id' => $this->faker->numberBetween(1, 3),
-            'item_state_id' => $this->faker->biasedNumberBetween(1, 4)
+            'item_state_id' => max(1, rand(-10, 4))
         ];
     }
 }

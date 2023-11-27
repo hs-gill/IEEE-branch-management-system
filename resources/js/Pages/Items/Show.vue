@@ -19,7 +19,7 @@ const form = useForm({
 });
 
 const addToCart = () => {
-    form.put(route('cart.add-to-cart'), {
+    form.put(route('cart.add-item-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),

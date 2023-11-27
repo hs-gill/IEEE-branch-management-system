@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Item;
+use App\Models\Textbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
@@ -40,6 +41,13 @@ class HandleInertiaRequests extends Middleware
                 })->get();
         }
 
+        $textbooks = null;
+        if ($user = $request->user()) {
+            $textbooks = Textbook::whereHas('users', function($q) use($user) {
+                    $q->where('user_id', $user->first()->id);
+                })->get();
+        }
+
         return array_merge(parent::share($request), [
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
@@ -47,7 +55,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'currentUserRole' => fn () => $request->user()
                 ? $request->user()->first()->roles->first() : null,
-            'cartProducts' => fn () => $items
+            'cartProducts' => fn () => $items,
+            'cartTextbooks' => fn () => $textbooks
         ]);
     }
 }

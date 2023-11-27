@@ -15,11 +15,11 @@ const closeCart = () => open.value = false;
 const book = props.textbook.data
 
 const form = useForm({
-    item: book,
+    textbook: book,
 });
 
 const addToCart = () => {
-    form.put(route('cart.add-to-cart'), {
+    form.put(route('cart.add-textbook-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),

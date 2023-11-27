@@ -6,7 +6,8 @@ import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
     open: Boolean,
-    items: Object
+    items: Object,
+    textbooks: Object
 });
 
 onMounted(() => {
@@ -16,14 +17,28 @@ onMounted(() => {
 const emit = defineEmits(['closeCart']);
 const closeCart = () => emit('closeCart');
 
+// Items
 const removeItemForm = useForm({
     item: null,
 });
 
-const removeFromCart = (item) => {
+const removeItemFromCart = (item) => {
     removeItemForm.item = item;
-    removeItemForm.put(route('cart.remove-from-cart'), {
-        errorBag: 'removeFromCart',
+    removeItemForm.put(route('cart.remove-item-from-cart'), {
+        errorBag: 'removeItemFromCart',
+        preserveScroll: true
+    });
+};
+
+// Textbooks
+const removeTextbookForm = useForm({
+    textbook: null,
+});
+
+const removeTextbookFromCart = (book) => {
+    removeTextbookForm.item = book;
+    removeTextbookForm.put(route('cart.remove-textbook-from-cart'), {
+        errorBag: 'removeTextbookFromCart',
         preserveScroll: true
     });
 };
@@ -33,12 +48,16 @@ const total = computed(() => {
     props.items.forEach(item => {
         total += item.price.amount
     });
+    props.textbooks.forEach(book => {
+        total += book.price
+    });
     return total;
 });
 
 const checkoutForm = useForm({
     total: Number,
-    items: props.items
+    items: props.items,
+    textbooks: props.textbooks
 });
 
 const checkout = () => {
@@ -49,30 +68,10 @@ const checkout = () => {
         onSuccess: () => checkoutForm.reset(),
     });
 }
-const productsB = [
-    {
-        id: 1,
-        name: 'Throwback Hip Bag',
-        href: '#',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    },
-    {
-        id: 2,
-        name: 'Medium Stuff Satchel',
-        href: '#',
-        color: 'Blue',
-        price: '$32.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-        imageAlt:
-            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-]
+
+const isCartEmpty = computed(() => {
+    return props.items.length === 0 && props.textbooks.length === 0
+})
 
 const quantity = (item) => {
     let i = 0;
@@ -123,9 +122,9 @@ const quantity = (item) => {
                                                                     <h3>
                                                                         <a :href="item.href">{{ item.name }}</a>
                                                                     </h3>
-                                                                    <p class="ml-4">{{ item.price.amount }}</p>
+                                                                    <p class="ml-4">{{ item.price.amount.toFixed(2) }}</p>
                                                                 </div>
-                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ item.color }}</p>
+                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"> </p>
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
                                                                 <p class="text-gray-500 dark:text-gray-400">Qty {{ quantity(item) }}</p>
@@ -133,7 +132,36 @@ const quantity = (item) => {
                                                                 <div class="flex">
                                                                     <button type="button"
                                                                             class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400"
-                                                                            @click="removeFromCart(item)">
+                                                                            @click="removeItemFromCart(item)">
+                                                                        Remove
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li v-for="book in textbooks" :key="item" class="flex py-6">
+                                                        <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
+                                                            <img :src="book.cover" :alt="book.title" class="h-full w-full object-cover object-center" />
+                                                        </div>
+
+                                                        <div class="ml-4 flex flex-1 flex-col">
+                                                            <div>
+                                                                <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white">
+                                                                    <h3>
+                                                                        <a :href="book.href">{{ book.title }}</a>
+                                                                    </h3>
+                                                                    <p class="ml-4">{{ book.price.toFixed(2) }}</p>
+                                                                </div>
+<!--                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ book.author }}</p>-->
+                                                            </div>
+                                                            <div class="flex flex-1 items-end justify-between text-sm">
+                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ book.author }}</p>
+<!--                                                                <p class="text-gray-500 dark:text-gray-400"></p>-->
+                                                                <div class="flex">
+                                                                    <button type="button"
+                                                                            class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400"
+                                                                            @click="removeTextbookFromCart(book)">
                                                                         Remove
                                                                     </button>
                                                                 </div>
@@ -148,13 +176,13 @@ const quantity = (item) => {
                                     <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-6 sm:px-6">
                                         <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white">
                                             <p>Subtotal</p>
-                                            <p>$ {{ total }}</p>
+                                            <p>$ {{ total.toFixed(2) }}</p>
                                         </div>
                                         <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Shipping and taxes calculated at checkout.</p>
                                         <div class="mt-6">
                                             <button class="flex items-center justify-center rounded-md border border-transparent w-full px-6 py-3 text-base font-medium  shadow-sm "
-                                                :class="items.length === 0 ? 'text-gray-500 bg-indigo-600/50' : 'text-white bg-indigo-600 hover:bg-indigo-700'"
-                                                    :disabled="items.length === 0"
+                                                :class="isCartEmpty ? 'text-gray-500 bg-indigo-600/50' : 'text-white bg-indigo-600 hover:bg-indigo-700'"
+                                                    :disabled="isCartEmpty"
                                                @click="checkout">
                                                 Checkout
                                             </button>

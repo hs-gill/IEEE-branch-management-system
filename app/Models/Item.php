@@ -70,6 +70,6 @@ class Item extends Model
      * Get the users that has this Item in the cart.
      */
     public function users(): BelongsToMany {
-        return $this->belongsToMany(User::class, 'cart')->withTimestamps();
+        return $this->belongsToMany(User::class, 'cart_item')->withTimestamps();
     }
 }

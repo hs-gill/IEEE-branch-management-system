@@ -2,33 +2,53 @@
 import Pagination from "@/Components/Pagination.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {useForm} from "@inertiajs/vue3";
+import {onMounted} from "vue";
 
-defineProps({
+const props = defineProps({
     orders: Object,
 });
+
+onMounted(() => {
+    console.log(props.orders)
+})
 
 const emit = defineEmits(['openCart']);
 
 const reorder = (order) => {
     order.items.forEach(item => {
-        addToCart(item)
+        addItemToCart(item)
     })
+    order.textbooks.forEach(textbook => {
+        addTextbookToCart(textbook)
+    })
+    emit('openCart')
 }
 
-const form = useForm({
+const addItemForm = useForm({
     item: null,
 });
 
-const addToCart = (item) => {
-    form.item = item
-    form.put(route('cart.add-to-cart'), {
-        errorBag: 'addToCart',
-        preserveScroll: true,
-        onSuccess: () => true,
-        // onFinish: () => titleInput.value.focus(),
+const addItemToCart = (item) => {
+    addItemForm.item = item
+    addItemForm.put(route('cart.add-item-to-cart'), {
+      errorBag: 'addItemToCart',
+      preserveScroll: true,
     });
-    emit('openCart')
+}
+
+const addTextbookForm = useForm({
+    textbook: null,
+});
+
+const addTextbookToCart = (textbook) => {
+    addTextbookForm.textbook = textbook
+    addTextbookForm.put(route('cart.add-textbook-to-cart'), {
+        errorBag: 'addTextbookToCart',
+        preserveScroll: true,
+  });
 };
+
+
 
 </script>
 

@@ -63,8 +63,10 @@ Route::middleware([
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
 
     // Cart
-    Route::put('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add-to-cart');
-    Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
+    Route::put('/add-item-to-cart', [CartController::class, 'addItemToCart'])->name('cart.add-item-to-cart');
+    Route::put('/remove-item-from-cart', [CartController::class, 'removeItemFromCart'])->name('cart.remove-item-from-cart');
+    Route::put('/add-textbook-to-cart', [CartController::class, 'addTextbookToCart'])->name('cart.add-textbook-to-cart');
+    Route::put('/remove-textbook-from-cart', [CartController::class, 'removeTextbookFromCart'])->name('cart.remove-textbook-from-cart');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     // Orders

@@ -6,6 +6,7 @@ use App\Exports\OrdersExport;
 use App\Mail\NewOrder;
 use App\Models\Item;
 use App\Models\Order;
+use App\Models\Textbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +22,7 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::with('user', 'items')
+        $orders = Order::with('items', 'textbooks', 'user')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -57,6 +58,11 @@ class OrderController extends Controller
             $newOrder->items()->attach($i);
         }
 
+        foreach ($request->textbooks as $textbook) {
+            $book = Textbook::findOrFail($textbook['id']);
+            $newOrder->textbooks()->attach($book);
+        }
+
         Mail::to($request->user())->send(new NewOrder($newOrder));
     }
 
@@ -65,7 +71,7 @@ class OrderController extends Controller
      */
     public function show(Order $order): Response
     {
-        $order = Order::with('user', 'items')
+        $order = Order::with('items', 'textbooks', 'user')
             ->where('user_id', Auth::user()->id)
             ->get();
         return Inertia::render('Orders/Show', [
@@ -102,7 +108,7 @@ class OrderController extends Controller
      */
     public function userOrders(): Response
     {
-        $orders = Order::with('user', 'items')
+        $orders = Order::with('items', 'textbooks', 'user')
             ->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);

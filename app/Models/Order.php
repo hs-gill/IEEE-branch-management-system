@@ -29,6 +29,13 @@ class Order extends Model
     }
 
     /**
+     * Get the items that correspond to this order.
+     */
+    public function textbooks(): BelongsToMany {
+        return $this->belongsToMany(Textbook::class)->withTimestamps();
+    }
+
+    /**
      * Get the transactions that paid far this order.
      */
     public function transactions(): HasMany {
