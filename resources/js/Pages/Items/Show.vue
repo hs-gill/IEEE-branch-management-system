@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Link, useForm} from "@inertiajs/vue3";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
     item: Object,
@@ -14,12 +14,16 @@ const closeCart = () => open.value = false;
 
 const product = props.item.data
 
-const form = useForm({
+const addItemForm = useForm({
     item: product,
 });
 
+const isAvailable = computed(() => {
+    return product.item_state_id === 1
+})
+
 const addToCart = () => {
-    form.put(route('cart.add-item-to-cart'), {
+  addItemForm.put(route('cart.add-item-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),
@@ -53,8 +57,12 @@ const addToCart = () => {
                     <!-- Options -->
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
                         <h2 class="sr-only">Product information</h2>
-                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ product.price.amount }}</p>
 
+
+                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ product.price.amount.toFixed(2) }}</p>
+                        <span class="mt-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="product.item_state.badge_color">
+                            {{ product.item_state.name }}
+                        </span>
                         <!-- Reviews -->
 <!--                        <div class="mt-6">-->
 <!--                            <h3 class="sr-only">Reviews</h3>-->
@@ -110,9 +118,11 @@ const addToCart = () => {
 <!--                                </RadioGroup>-->
 <!--                            </div>-->
 
-                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        :class="isAvailable ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-400 bg-indigo-600/50'"
                                         type="button"
-                                        @click="addToCart">
+                                        @click="addToCart"
+                                        :disabled="!isAvailable">
                                     Add to bag
                                 </button>
                         </div>

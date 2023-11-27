@@ -73,14 +73,14 @@ class User extends Authenticatable
      * Get the products that the User has in the cart.
      */
     public function items(): BelongsToMany {
-        return $this->belongsToMany(Item::class, 'cart_item')->withTimestamps();
+        return $this->belongsToMany(Item::class, 'cart_item');
     }
 
     /**
      * Get the products that the User has in the cart.
      */
     public function textbooks(): BelongsToMany {
-        return $this->belongsToMany(Textbook::class, 'cart_textbook')->withTimestamps();
+        return $this->belongsToMany(Textbook::class, 'cart_textbook');
     }
 
 }

@@ -8,18 +8,16 @@ const props = defineProps({
     orders: Object,
 });
 
-onMounted(() => {
-    console.log(props.orders)
-})
-
 const emit = defineEmits(['openCart']);
 
 const reorder = (order) => {
     order.items.forEach(item => {
-        addItemToCart(item)
+        addItemForm.item = item
+        addItemToCart()
     })
     order.textbooks.forEach(textbook => {
-        addTextbookToCart(textbook)
+        addTextbookForm.textbook = textbook
+        addTextbookToCart()
     })
     emit('openCart')
 }
@@ -28,11 +26,11 @@ const addItemForm = useForm({
     item: null,
 });
 
-const addItemToCart = (item) => {
-    addItemForm.item = item
+const addItemToCart = async () => {
+    console.log(addItemForm.item)
     addItemForm.put(route('cart.add-item-to-cart'), {
-      errorBag: 'addItemToCart',
-      preserveScroll: true,
+        errorBag: 'addItemToCart',
+        preserveScroll: true,
     });
 }
 
@@ -40,12 +38,12 @@ const addTextbookForm = useForm({
     textbook: null,
 });
 
-const addTextbookToCart = (textbook) => {
-    addTextbookForm.textbook = textbook
+const addTextbookToCart = async () =>  {
+    console.log(addTextbookForm.textbook)
     addTextbookForm.put(route('cart.add-textbook-to-cart'), {
         errorBag: 'addTextbookToCart',
         preserveScroll: true,
-  });
+    });
 };
 
 

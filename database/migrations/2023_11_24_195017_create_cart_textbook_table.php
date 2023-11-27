@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cart_textbook', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('textbook_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+            $table->primary(['textbook_id','user_id']);
+            $table->unique(['textbook_id','user_id']);
         });
     }
 

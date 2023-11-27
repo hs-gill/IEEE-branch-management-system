@@ -64,11 +64,11 @@ function filteredList() {
                                                 {{ item.name }}
                                             </h3>
                                             <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="item.item_state.badge_color">
-                                            {{ item.item_state.name }}
-                                        </span>
+                                                {{ item.item_state.name }}
+                                            </span>
                                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ item.description }}</p>
                                         </div>
-                                        <p class="text-sm font-medium text-gray-900 dark:text-gray-200">${{ item.price.amount }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-gray-200">${{ item.price.amount.toFixed(2) }}</p>
                                     </div>
                                 </Link>
                             </div>

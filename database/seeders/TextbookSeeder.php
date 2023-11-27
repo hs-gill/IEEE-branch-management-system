@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Textbook;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class TextbookSeeder extends Seeder
                     'title' => trim($data[0]),
                     'author' => trim($data[1]),
                     'cover' => trim($data[2]),
+                    'textbook_state_id' => max(1, rand(-10, 2))
                 ]);
             }
         }

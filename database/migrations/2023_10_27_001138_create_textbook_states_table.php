@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('textbooks', function (Blueprint $table) {
+        Schema::create('textbook_states', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->string('cover')->nullable();
-            $table->float('price')->default(2.00);
-            $table->foreignId('textbook_state_id')->constrained();
+            $table->string('name');
+            $table->string('badge_color');
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('textbooks');
+        Schema::dropIfExists('textbook_states');
     }
 };

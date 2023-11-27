@@ -17,7 +17,7 @@ class TextbookController extends Controller
      */
     public function index(): Response
     {
-        $textbooks = Textbook::all();
+        $textbooks = Textbook::with('textbookState')->get();
         return Inertia::render('Textbooks/Main', [
             'textbooks' => new TextbookCollection($textbooks)
         ]);
@@ -48,6 +48,7 @@ class TextbookController extends Controller
      */
     public function show(Textbook $textbook): Response
     {
+        $textbook = Textbook::with('textbookState', 'users')->find($textbook->id);
         return Inertia::render('Textbooks/Show', [
             'textbook' => new TextbookResource($textbook)
         ]);
@@ -66,11 +67,12 @@ class TextbookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Textbook $textbook): void
+    public function update(Request $request, Textbook $textbook): RedirectResponse
     {
         if ($request->title != null) { $textbook->title = $request->title; }
         if ($request->author != null) { $textbook->author = $request->author; }
         $textbook->save();
+        return redirect()->back();
     }
 
     /**

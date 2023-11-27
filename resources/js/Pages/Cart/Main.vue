@@ -1,7 +1,7 @@
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import {computed, onMounted} from "vue";
+import {computed, onMounted, watch} from "vue";
 import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -9,10 +9,6 @@ const props = defineProps({
     items: Object,
     textbooks: Object
 });
-
-onMounted(() => {
-    console.log(props.items);
-})
 
 const emit = defineEmits(['closeCart']);
 const closeCart = () => emit('closeCart');
@@ -36,14 +32,14 @@ const removeTextbookForm = useForm({
 });
 
 const removeTextbookFromCart = (book) => {
-    removeTextbookForm.item = book;
+    removeTextbookForm.textbook = book;
     removeTextbookForm.put(route('cart.remove-textbook-from-cart'), {
         errorBag: 'removeTextbookFromCart',
         preserveScroll: true
     });
 };
 
-const total = computed(() => {
+ const total = computed(() => {
     let total = 0;
     props.items.forEach(item => {
         total += item.price.amount
@@ -54,10 +50,20 @@ const total = computed(() => {
     return total;
 });
 
+let cartItems = props.items
+watch(props.items, (newValue, oldValue) => {
+    cartItems = newValue
+})
+
+let cartTextbooks = props.textbooks
+watch(props.textbooks, (newValue, oldValue) => {
+  cartTextbooks = newValue
+})
+
 const checkoutForm = useForm({
     total: Number,
-    items: props.items,
-    textbooks: props.textbooks
+    items: cartItems,
+    textbooks: cartTextbooks
 });
 
 const checkout = () => {

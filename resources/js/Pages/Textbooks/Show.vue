@@ -2,27 +2,38 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Link, useForm} from "@inertiajs/vue3";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const props = defineProps({
     textbook: Object,
 });
 
+onMounted(() =>{
+    console.log(props.textbook)
+})
+
 const open = ref(false);
 const openCart = () => open.value = true;
 const closeCart = () => open.value = false;
 
-const book = props.textbook.data
+const book = props.textbook.data;
 
-const form = useForm({
+const addTextbookForm = useForm({
     textbook: book,
 });
 
+let disable = ref(false);
+
+const isDisabled = computed(() => {
+    return book.users.length !== 0 || disable.value === true
+});
+
 const addToCart = () => {
-    form.put(route('cart.add-textbook-to-cart'), {
+    addTextbookForm.put(route('cart.add-textbook-to-cart'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),
+        onFinish: () => disable.value = true
     });
 };
 </script>
@@ -54,7 +65,9 @@ const addToCart = () => {
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
                         <h2 class="sr-only">Product information</h2>
                         <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ book.price }}</p>
-
+                        <span class="mt-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="book.textbook_state.badge_color">
+                            {{ book.textbook_state.name }}
+                        </span>
                         <!-- Reviews -->
                         <!--                        <div class="mt-6">-->
                         <!--                            <h3 class="sr-only">Reviews</h3>-->
@@ -110,9 +123,11 @@ const addToCart = () => {
                             <!--                                </RadioGroup>-->
                             <!--                            </div>-->
 
-                            <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-400 bg-indigo-600/50'"
                                     type="button"
-                                    @click="addToCart">
+                                    @click="addToCart"
+                                    :disabled="isDisabled">
                                 Add to bag
                             </button>
                         </div>

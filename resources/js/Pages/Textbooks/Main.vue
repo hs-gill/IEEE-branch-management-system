@@ -19,7 +19,7 @@ function filteredList() {
 </script>
 
 <template>
-    <AppLayout title="Items">
+    <AppLayout title="Textbooks">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Textbooks
@@ -38,15 +38,19 @@ function filteredList() {
                                     v-model="input"
                                     type="text"
                                     class="block w-full mt-1"
-                                    placeholder="Search items..."
+                                    placeholder="Search textbooks..."
                                     autofocus
                                 />
                             </div>
 
                             <div  class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                                <Link v-for="textbook in filteredList()" :key="textbook.id" :href="`textbooks/${textbook.id}`" class="group relative">
-                                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                        <img :src="textbook.cover" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                                <Link v-for="textbook in filteredList()" :key="textbook.id" :href="textbook.textbook_state.id === 1 ? `textbooks/${textbook.id}` : ''" class="group relative">
+                                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none lg:h-80"
+                                         :class="textbook.textbook_state.id === 1 ? 'group-hover:opacity-75' : ''">
+                                        <img :src="textbook.cover"
+                                             alt="Front of men&#039;s Basic Tee in black."
+                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                             :class="textbook.textbook_state.id !== 1 ? 'opacity-20 dark:opacity-20 bg-gray-400/50 dark:bg-gray-900/50' : ''">
                                     </div>
                                     <div class="mt-4 flex justify-between">
                                         <div>
@@ -54,6 +58,9 @@ function filteredList() {
                                                 <span aria-hidden="true" class="absolute inset-0"></span>
                                                 {{ textbook.title }}
                                             </h3>
+                                            <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="textbook.textbook_state.badge_color">
+                                                {{ textbook.textbook_state.name }}
+                                            </span>
                                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ textbook.author }}</p>
                                         </div>
                                         <p class="text-sm font-medium text-gray-900 dark:text-gray-200">${{ textbook.price }}</p>
