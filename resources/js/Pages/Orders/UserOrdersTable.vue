@@ -7,6 +7,8 @@ defineProps({
     orders: Object,
 });
 
+const emit = defineEmits(['openCart']);
+
 const reorder = (order) => {
     order.items.forEach(item => {
         addToCart(item)
@@ -25,6 +27,7 @@ const addToCart = (item) => {
         onSuccess: () => true,
         // onFinish: () => titleInput.value.focus(),
     });
+    emit('openCart')
 };
 
 </script>

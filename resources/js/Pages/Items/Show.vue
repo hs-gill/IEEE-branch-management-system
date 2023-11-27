@@ -31,7 +31,7 @@ const addToCart = () => {
 </script>
 
 <template>
-    <AppLayout title="Items" :open="open" @openCart="openCart" @closeCart="closeCart">
+    <AppLayout title="Items" :toOpen="open" @openCart="openCart" @closeCart="closeCart">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Item {{ product.name }}

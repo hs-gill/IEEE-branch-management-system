@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from 'vue';
+import {reactive, ref, watch} from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -13,16 +13,23 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 const props = defineProps({
     title: String,
-    open: Boolean
+    toOpen: Boolean
 });
 
 const canViewFeedbacks = false;
 
 const emit = defineEmits(['openCart', 'closeCart']);
-const openCart = () => {
-    emit('openCart');
+const open = ref(false);
+const openCart = () => open.value = true;
+const closeCart = () => {
+    open.value = false;
+    emit('closeCart');
 }
-const closeCart = () =>emit('closeCart');
+
+watch(() => props.toOpen, (value) => {
+    console.log(open)
+    open.value = value
+})
 
 const showingNavigationDropdown = ref(false);
 

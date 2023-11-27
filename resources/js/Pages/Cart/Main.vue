@@ -1,7 +1,7 @@
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
