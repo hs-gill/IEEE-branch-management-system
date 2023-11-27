@@ -16,7 +16,7 @@ export default {
         extend: {
             fontFamily: {
                 // sans: ['Titillium Web', ...defaultTheme.fontFamily.serif],
-                // sans: ['Lato', ...defaultTheme.fontFamily.sans], // custom font
+                sans: ['Lato', ...defaultTheme.fontFamily.sans], // custom font
             },
         },
     },

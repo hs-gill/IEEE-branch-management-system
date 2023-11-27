@@ -49,12 +49,25 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/privacy-policy', function () {
+        return Inertia::render('PrivacyPolicy/Main');
+    })->name('privacy-policy');
+
+    Route::get('/contact-us', function () {
+        return Inertia::render('Contact');
+    })->name('contact-us');
+
+    // Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
+
+    // Cart
     Route::put('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add-to-cart');
     Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+    // Orders
     Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
     Route::get('/items/inventory', [ItemController::class, 'inventory'])->name('items.inventory');
     Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
@@ -74,15 +87,6 @@ Route::middleware([
         'users' => UserController::class,
         'volunteers' => VolunteerController::class
     ]);
-
-    Route::get('/privacy-policy', function () {
-        return Inertia::render('PrivacyPolicy/Main');
-    })->name('privacy-policy');
-
-    Route::get('/contact-us', function () {
-        return Inertia::render('Contact');
-    })->name('contact-us');
-
 
     /*
      * In case a route doesn't exist.

@@ -7,12 +7,12 @@ import HeroLogo from "@/Components/HeroLogo.vue";
         <div class="py-6 px-4 mx-auto justify-center max-w-screen-xl text-center lg:py-16 lg:px-12">
             <div class="text-center pt-8">
                 <!-- Heading for larger screens like laptops -->
-                <h1 class="hidden sm:block mb-5 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl lg:text-6xl dark:text-white typing-effect">
+                <h1 class="typing-container hidden sm:block mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
                     Welcome back to our Club!
                 </h1>
 
                 <!-- Heading for smaller screens like mobile devices -->
-                <h1 class="block sm:hidden mb-5 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
+                <h1 class="block sm:hidden mb-5 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
                     Welcome back!
                 </h1>
                 <p class="mb-10 pt-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
@@ -28,10 +28,10 @@ import HeroLogo from "@/Components/HeroLogo.vue";
         </div>
 
         <div class="lg:pt-12 px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
-            <span class="font-semibold text-indigo-500 uppercase">Join our Discord Server</span>
+            <span class="font-semibold text-indigo-600 dark:text-gray-100 uppercase">Join our Discord Server</span>
         </div>
-        <div class="pt-8 relative flex justify-center items-center mt-8 text-indigo-500 dark:text-indigo-700 sm:justify-between w-full h-full">
-            <a href="https://discord.gg/yEeFaEDNGF" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:text-indigo-800 dark:hover:text-indigo-800">
+        <div class="pt-8 relative flex justify-center items-center mt-8 text-indigo-600 dark:text-gray-100 sm:justify-between w-full h-full">
+            <a href="https://discord.gg/yEeFaEDNGF" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:text-indigo-700 dark:hover:text-indigo-700">
                 <svg width="5em" height="5em" viewBox="-25.6 -25.6 307.20 307.20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000" stroke="#000000" stroke-width="0.00256" transform="rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -48,7 +48,7 @@ import HeroLogo from "@/Components/HeroLogo.vue";
 
 <style scoped>
 .typing-container {
-    display: inline-block; /* Or inline-flex */
+  display: inline-block; /* Or inline-flex */
 }
 
 @keyframes typing {
@@ -60,15 +60,10 @@ import HeroLogo from "@/Components/HeroLogo.vue";
     overflow: hidden;
     border-right: .15em solid white; /* The typewriter cursor */
     white-space: nowrap;
-    letter-spacing: .15em;
+    letter-spacing: .08em;
     animation:
         typing 3.5s steps(45, end) forwards,
         blink-caret 1s 3.5s forwards; /* Increased total duration for a smoother fade-out */
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
 }
 
 @keyframes blink-caret {

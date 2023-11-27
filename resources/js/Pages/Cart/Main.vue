@@ -5,11 +5,12 @@ import {computed, onMounted} from "vue";
 import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
-    modelValue: Boolean,
+    open: Boolean,
     items: Object
 });
 
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['closeCart']);
+const closeCart = () => emit('closeCart');
 
 const removeItemForm = useForm({
     item: null,
@@ -51,8 +52,8 @@ const checkout = () => {
 </script>
 
 <template>
-    <TransitionRoot as="template" :show="modelValue">
-        <Dialog as="div" class="relative z-10" @close="$emit('update:modelValue', false)">
+    <TransitionRoot as="template" :show="open">
+        <Dialog as="div" class="relative z-10" @close="closeCart">
             <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 dark:bg-gray-800 dark:bg-opacity-75 transition-opacity" />
             </TransitionChild>
@@ -67,7 +68,7 @@ const checkout = () => {
                                         <div class="flex items-start justify-between">
                                             <DialogTitle class="text-lg font-medium text-gray-900 dark:text-white">Shopping cart</DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
-                                                <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="$emit('update:modelValue', false)">
+                                                <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="closeCart">
                                                     <span class="absolute -inset-0.5" />
                                                     <span class="sr-only">Close panel</span>
                                                     <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -128,7 +129,7 @@ const checkout = () => {
                                         <div class="mt-6 flex justify-center text-center text-sm text-gray-500 dark:text-gray-400">
                                             <p>
                                                 or
-                                                <button type="button" class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400" @click="$emit('update:modelValue', false)">
+                                                <button type="button" class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400" @click="closeCart">
                                                     Continue Shopping
                                                     <span aria-hidden="true"> &rarr;</span>
                                                 </button>
