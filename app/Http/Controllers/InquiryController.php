@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Mail\NewInquiry;
 use App\Models\Inquiry;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class InquiryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        return Inertia::render('Contact');
     }
 
     /**
@@ -29,7 +32,7 @@ class InquiryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(Request $request): RedirectResponse
     {
         $newInquiry = new Inquiry();
         $newInquiry->name = $request->name;
@@ -41,6 +44,8 @@ class InquiryController extends Controller
 
         session()->flash('flash.banner', __('Thank you, :user! Our team have successfully received your inquiry.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
+
+        return redirect('/contact-us');
     }
 
     /**

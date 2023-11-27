@@ -1,13 +1,17 @@
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
     open: Boolean,
     items: Object
 });
+
+onMounted(() => {
+    console.log(props.items);
+})
 
 const emit = defineEmits(['closeCart']);
 const closeCart = () => emit('closeCart');
@@ -20,9 +24,7 @@ const removeFromCart = (item) => {
     removeItemForm.item = item;
     removeItemForm.put(route('cart.remove-from-cart'), {
         errorBag: 'removeFromCart',
-        preserveScroll: true,
-        // onSuccess: () => form.reset(),
-        // onFinish: () => titleInput.value.focus(),
+        preserveScroll: true
     });
 };
 
@@ -45,9 +47,40 @@ const checkout = () => {
         errorBag: 'checkout',
         preserveScroll: true,
         onSuccess: () => checkoutForm.reset(),
-        // onFinish: () => titleInput.value.focus(),
     });
 }
+const productsB = [
+    {
+        id: 1,
+        name: 'Throwback Hip Bag',
+        href: '#',
+        color: 'Salmon',
+        price: '$90.00',
+        quantity: 1,
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+    },
+    {
+        id: 2,
+        name: 'Medium Stuff Satchel',
+        href: '#',
+        color: 'Blue',
+        price: '$32.00',
+        quantity: 1,
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+        imageAlt:
+            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+    },
+    // More products...
+]
+
+const quantity = (item) => {
+    let i = 0;
+    props.items.forEach(element => {
+        if (element === item) i+=1;
+    })
+    return i;
+};
 
 </script>
 
@@ -92,10 +125,10 @@ const checkout = () => {
                                                                     </h3>
                                                                     <p class="ml-4">{{ item.price.amount }}</p>
                                                                 </div>
-                                                                <!--                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ item.color }}</p>-->
+                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ item.color }}</p>
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
-                                                                <p class="text-gray-500 dark:text-gray-400">Qty {{ item.quantity }}</p>
+                                                                <p class="text-gray-500 dark:text-gray-400">Qty {{ quantity(item) }}</p>
 
                                                                 <div class="flex">
                                                                     <button type="button"

@@ -6,6 +6,7 @@ use App\Mail\NewOrder;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +21,7 @@ class CartController extends Controller
     public function index(): Response
     {
         $products = Item::with('users')
-            ->where('user_id', Auth::user()->id)->first()->get();
+            ->where('user_id', Auth::user()->id)->get();
 
         return Inertia::render('../Layouts/AppLayout', [
             'products' => $products,
@@ -59,13 +60,15 @@ class CartController extends Controller
     /**
      * Add an item to the User's shopping cart.
      */
-    public function checkout(Request $request): void
+    public function checkout(Request $request): RedirectResponse
     {
         $newOrder = app('App\Http\Controllers\OrderController')->store($request);
         $this->emptyCart();
 
         session()->flash('flash.banner', __('Thank you, :user! Your order has been created successfully.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
+
+        return redirect()->back();
     }
 
 }

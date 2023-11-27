@@ -12,6 +12,20 @@ class TextbookSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Textbook::factory(100)->create();
+//        \App\Models\Textbook::factory(100)->create();
+
+        $csvFile = database_path('seeders/seeds').'/textbooks.csv';
+
+        if (($file = fopen($csvFile, "r")) !== FALSE) {
+            while (!feof($file)) {
+                $data = explode(';', str_replace('"','',fgets($file)));
+
+                \App\Models\Textbook::create([
+                    'title' => trim($data[0]),
+                    'author' => trim($data[1]),
+                    'cover' => trim($data[2]),
+                ]);
+            }
+        }
     }
 }

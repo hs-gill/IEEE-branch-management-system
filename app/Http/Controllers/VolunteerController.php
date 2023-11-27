@@ -34,7 +34,7 @@ class VolunteerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(Request $request): RedirectResponse
     {
         if ($user_id = Auth::user()->id) {
             $volunteer = new Volunteer();
@@ -45,6 +45,8 @@ class VolunteerController extends Controller
 
         session()->flash('flash.banner', __('Thank you, :user! Your have been successfully registered as volunteer. Une of our tem members will contact you soon.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
+
+        return redirect()->back();
     }
 
     /**
