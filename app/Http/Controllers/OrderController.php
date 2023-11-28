@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::with('items', 'textbooks', 'user')
+        $orders = Order::with('items.price', 'textbooks', 'user')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -54,12 +54,12 @@ class OrderController extends Controller
         }
 
         foreach ($request->items as $item) {
-            $i = Item::findOrFail($item['id']);
+            $i = Item::findOrFail($item['item_id']);
             $newOrder->items()->attach($i);
         }
 
         foreach ($request->textbooks as $textbook) {
-            $book = Textbook::findOrFail($textbook['id']);
+            $book = Textbook::findOrFail($textbook['textbook_id']);
             $newOrder->textbooks()->attach($book);
         }
 
@@ -71,7 +71,7 @@ class OrderController extends Controller
      */
     public function show(Order $order): Response
     {
-        $order = Order::with('items', 'textbooks', 'user')
+        $order = Order::with('items.price', 'textbooks', 'user')
             ->where('user_id', Auth::user()->id)
             ->get();
         return Inertia::render('Orders/Show', [
@@ -108,7 +108,7 @@ class OrderController extends Controller
      */
     public function userOrders(): Response
     {
-        $orders = Order::with('items', 'textbooks', 'user')
+        $orders = Order::with('items.price', 'textbooks', 'user')
             ->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);

@@ -11,7 +11,7 @@ const props = defineProps({
 const emit = defineEmits(['openCart']);
 
 const reorder = (order) => {
-    console.log(order.items[0])
+    console.log(order.items)
     order.items.forEach(item => {
         addItemForm.item = item
         addItemToCart()
