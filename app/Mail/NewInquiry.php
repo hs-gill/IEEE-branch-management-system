@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Inquiry;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,12 +15,14 @@ class NewInquiry extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public Inquiry $inquiry;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($inquiry)
     {
-        //
+        $this->inquiry = $inquiry;
     }
 
     /**
@@ -39,7 +42,7 @@ class NewInquiry extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.customer-inquiry',
+            markdown: 'emails.customer-inquiry',
         );
     }
 

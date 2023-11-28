@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue';
+import {reactive, ref, watch} from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -13,11 +13,23 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 const props = defineProps({
     title: String,
+    toOpen: Boolean
 });
 
 const canViewFeedbacks = false;
 
+const emit = defineEmits(['openCart', 'closeCart']);
 const open = ref(false);
+const openCart = () => open.value = true;
+const closeCart = () => {
+    open.value = false;
+    emit('closeCart');
+}
+
+watch(() => props.toOpen, (value) => {
+    console.log(open)
+    open.value = value
+})
 
 const showingNavigationDropdown = ref(false);
 
@@ -40,7 +52,7 @@ const logout = () => {
 
         <Banner />
 
-        <Cart v-model="open" :items="$page.props.cartProducts" />
+        <Cart @closeCart="closeCart" :open="open" :cartItems="$page.props.cartProducts" :cartTextbooks="$page.props.cartTextbooks" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -56,11 +68,6 @@ const logout = () => {
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('items.index')" :active="route().current('items.index')">
@@ -70,7 +77,7 @@ const logout = () => {
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('textbooks.index')" :active="route().current('textbooks.index')">
-                                    Textboooks
+                                    Textbooks
                                 </NavLink>
                             </div>
 
@@ -129,6 +136,20 @@ const logout = () => {
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">
                                                 Roles Settings
                                             </DropdownLink>
+
+                                            <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                                Inventory
+                                            </div>
+
+                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('items.inventory')">
+                                                Items Inventory
+                                            </DropdownLink>
+
+<!--                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">-->
+<!--                                                Roles Settings-->
+<!--                                            </DropdownLink>-->
 
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
@@ -234,7 +255,7 @@ const logout = () => {
 
                             <!-- Cart Button -->
                             <div class="ml-3 relative">
-                                <SecondaryButton @click="open = true">
+                                <SecondaryButton @click="openCart">
                                     <div class="h-4 w-4 bg-transparent flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />

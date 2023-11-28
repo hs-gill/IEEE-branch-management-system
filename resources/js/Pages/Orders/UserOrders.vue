@@ -3,14 +3,19 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import BarChart from '@/Pages/Transactions/Charts/BarChart.vue';
 import PieChart from '@/Pages/Transactions/Charts/PieChart.vue';
 import Table from '@/Pages/Orders/Table.vue';
+import UserOrdersTable from "@/Pages/Orders/UserOrdersTable.vue";
+import {ref} from "vue";
 
 defineProps({
     orders: Object,
 });
+const open = ref(false);
+const openCart = () => open.value = true;
+const closeCart = () => open.value = false;
 </script>
 
 <template>
-    <AppLayout title="Transactions">
+    <AppLayout title="Transactions" :toOpen="open" @openCart="openCart" @closeCart="closeCart">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Orders
@@ -91,7 +96,7 @@ defineProps({
                                 important news in the Laravel ecosystem, including new package releases and tutorials.
                             </p>
 
-                            <Table :orders="orders" />
+                            <UserOrdersTable :orders="orders" @openCart="openCart" />
 
                         </div>
                     </div>

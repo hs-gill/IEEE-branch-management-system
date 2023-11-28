@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\CartTextbookController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
@@ -48,29 +51,6 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
-    Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
-    Route::put('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add-to-cart');
-    Route::put('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove-from-cart');
-    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-    Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
-
-    /*
-     * Generate a route for all the methods inside the Controllers for Resource Models.
-     */
-    Route::resources([
-        'events' => EventController::class,
-        'feedbacks' => FeedbackController::class,
-        'items' => ItemController::class,
-        'orders' => OrderController::class,
-        'roles' => RoleController::class,
-        'textbooks' => TextbookController::class,
-        'transactions' => TransactionController::class,
-        'users' => UserController::class,
-        'volunteers' => VolunteerController::class
-    ]);
-
     Route::get('/privacy-policy', function () {
         return Inertia::render('PrivacyPolicy/Main');
     })->name('privacy-policy');
@@ -79,6 +59,40 @@ Route::middleware([
         return Inertia::render('Contact');
     })->name('contact-us');
 
+    // Admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::put('/role-user', [AdminController::class, 'updateRole'])->name('role-user.update');
+    Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
+
+    // Cart
+//    Route::put('/add-item-to-cart', [CartController::class, 'addItemToCart'])->name('cart.add-item-to-cart');
+//    Route::put('/remove-item-from-cart', [CartController::class, 'removeItemFromCart'])->name('cart.remove-item-from-cart');
+//    Route::put('/add-textbook-to-cart', [CartController::class, 'addTextbookToCart'])->name('cart.add-textbook-to-cart');
+//    Route::put('/remove-textbook-from-cart', [CartController::class, 'removeTextbookFromCart'])->name('cart.remove-textbook-from-cart');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+    // Orders
+    Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
+    Route::get('/items/inventory', [ItemController::class, 'inventory'])->name('items.inventory');
+    Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
+
+    /*
+     * Generate a route for all the methods inside the Controllers for Resource Models.
+     */
+    Route::resources([
+        'cartItems' => CartItemController::class,
+        'cartTextbooks' => CartTextbookController::class,
+        'events' => EventController::class,
+        'feedbacks' => FeedbackController::class,
+        'inquiries' => InquiryController::class,
+        'items' => ItemController::class,
+        'orders' => OrderController::class,
+        'roles' => RoleController::class,
+        'textbooks' => TextbookController::class,
+        'transactions' => TransactionController::class,
+        'users' => UserController::class,
+        'volunteers' => VolunteerController::class
+    ]);
 
     /*
      * In case a route doesn't exist.

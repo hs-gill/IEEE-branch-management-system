@@ -2,7 +2,7 @@
     <Bar :data="data" :options="options" />
 </template>
 
-<script lang="ts">
+<script lang="ts" >
 import {
     Chart as ChartJS,
     Title,
@@ -23,6 +23,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default {
     name: 'BarChart',
+    props: ['transactions'],
     components: {
         Bar
     },

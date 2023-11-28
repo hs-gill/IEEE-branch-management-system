@@ -39,7 +39,7 @@ defineProps({
                     <Link v-for="link in data.links"
                           preserve-scroll
                           preserve-state
-                          :href="link.url"
+                          :href="link.url ?? 'null'"
                           class="relative inline-flex items-center px-4 py-2 text-sm font-semibold"
                           :class="link.active ? 'z-10 bg-indigo-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' : 'text-slate-900 dark:text-slate-200 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 hover:dark:bg-indigo-600 focus:z-20 focus:outline-offset-0'"
                           v-html="link.label"/>

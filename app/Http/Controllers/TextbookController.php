@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TextbookCollection;
+use App\Http\Resources\TextbookResource;
 use App\Models\Textbook;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,9 +17,9 @@ class TextbookController extends Controller
      */
     public function index(): Response
     {
-        $textbooks = Textbook::all();
+        $textbooks = Textbook::with('textbookState', 'cartTextbooks')->get();
         return Inertia::render('Textbooks/Main', [
-            'textbooks' => $textbooks
+            'textbooks' => new TextbookCollection($textbooks)
         ]);
     }
 
@@ -46,8 +48,9 @@ class TextbookController extends Controller
      */
     public function show(Textbook $textbook): Response
     {
+        $textbook = Textbook::with('textbookState', 'cartTextbooks')->find($textbook->id);
         return Inertia::render('Textbooks/Show', [
-            'textbook' => $textbook
+            'textbook' => new TextbookResource($textbook)
         ]);
     }
 
@@ -64,11 +67,12 @@ class TextbookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Textbook $textbook): void
+    public function update(Request $request, Textbook $textbook): RedirectResponse
     {
         if ($request->title != null) { $textbook->title = $request->title; }
         if ($request->author != null) { $textbook->author = $request->author; }
         $textbook->save();
+        return redirect()->back();
     }
 
     /**

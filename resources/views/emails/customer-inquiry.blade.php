@@ -1,23 +1,20 @@
-{{--@component('mail::message')--}}
-{{ 'You have been invited to join the team!' }}
+@component('mail::message')
+## New Inquiry!
+<br>
 
-{{--@if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::registration()))--}}
-{{--{{ __('If you do not have an account, you may create one by clicking the button below. After creating an account, you may click the invitation acceptance button in this email to accept the team invitation:') }}--}}
+{{ 'You have received a new inquiry.' }}
+<br>
 
-{{--@component('mail::button', ['url' => route('register')])--}}
-{{--{{ __('Create Account') }}--}}
-{{--@endcomponent--}}
-
-{{--{{ __('If you already have an account, you may accept this invitation by clicking the button below:') }}--}}
-
-{{--@else--}}
-{{--{{ __('You may accept this invitation by clicking the button below:') }}--}}
-{{--@endif--}}
+{{ __('From:') }}
+{{ __($inquiry->name) }}<br>
+Email: [{{ $inquiry->email }}](mailto:{{ $inquiry->email }})<br>
 
 
-{{--@component('mail::button', ['url' => $acceptUrl])--}}
-{{--{{ __('Accept Invitation') }}--}}
-{{--@endcomponent--}}
+{{ __('Message:') }}<br>
+{{ __($inquiry->message) }}
+<br>
+<br>
+<br>
 
-{{--{{ __('If you did not expect to receive an invitation to this team, you may discard this email.') }}--}}
-{{--@endcomponent--}}
+{{ __('If you did not expect to receive an invitation to this team, you may discard this email.') }}
+@endcomponent

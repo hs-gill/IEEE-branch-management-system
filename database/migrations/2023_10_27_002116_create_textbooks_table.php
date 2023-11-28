@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('cover')->nullable();
+            $table->float('price')->default(2.00);
+            $table->foreignId('textbook_state_id')->constrained();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

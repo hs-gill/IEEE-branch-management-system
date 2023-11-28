@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('item_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->string('badge_color');
             $table->timestamps();
         });
     }

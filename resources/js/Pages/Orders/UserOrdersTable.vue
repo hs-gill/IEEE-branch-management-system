@@ -1,14 +1,54 @@
 <script setup>
 import Pagination from "@/Components/Pagination.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {useForm} from "@inertiajs/vue3";
+import {onMounted} from "vue";
 
-defineProps({
+const props = defineProps({
     orders: Object,
 });
 
+const emit = defineEmits(['openCart']);
+
 const reorder = (order) => {
-    console.log(order)
+    console.log(order.items)
+    order.items.forEach(item => {
+        addItemForm.item = item
+        addItemToCart()
+    })
+    order.textbooks.forEach(textbook => {
+        addTextbookForm.textbook = textbook
+        addTextbookToCart()
+    })
+    emit('openCart')
 }
+
+const addItemForm = useForm({
+    item: null,
+});
+
+const addItemToCart = () => {
+    console.log(addItemForm.item)
+    addItemForm.post(route('cartItems.store'), {
+        errorBag: 'addItemToCart',
+        preserveScroll: true,
+    });
+}
+
+const addTextbookForm = useForm({
+    textbook: null,
+});
+
+const addTextbookToCart = () =>  {
+    console.log(addTextbookForm.textbook)
+    addTextbookForm.post(route('cartTextbooks.store'), {
+        errorBag: 'addTextbookToCart',
+        preserveScroll: true,
+    });
+};
+
+
+
 </script>
 
 <template>
@@ -40,11 +80,11 @@ const reorder = (order) => {
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ order.created_at }}</td>
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{ order.returned_at }}</td>
                 <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                    <button @click="reorder(order)" class="group relative">
-                        <PrimaryButton class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                            Order again
-                        </PrimaryButton>
-                    </button>
+                    <PrimaryButton
+                            @click="reorder(order)"
+                            class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        Order again
+                    </PrimaryButton>
                 </td>
             </tr>
             </tbody>

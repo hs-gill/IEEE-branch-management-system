@@ -2,94 +2,37 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Link, useForm} from "@inertiajs/vue3";
-import {onMounted} from "vue";
-
-// const product = {
-//     name: 'Basic Tee 6-Pack',
-//     price: '$192',
-//     href: '#',
-//     breadcrumbs: [
-//         { id: 1, name: 'Men', href: '#' },
-//         { id: 2, name: 'Clothing', href: '#' },
-//     ],
-//     images: [
-//         {
-//             src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-//             alt: 'Two each of gray, white, and black shirts laying flat.',
-//         },
-//         {
-//             src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-//             alt: 'Model wearing plain black basic tee.',
-//         },
-//         {
-//             src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-//             alt: 'Model wearing plain gray basic tee.',
-//         },
-//         {
-//             src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-//             alt: 'Model wearing plain white basic tee.',
-//         },
-//     ],
-//     colors: [
-//         { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-//         { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-//         { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-//     ],
-//     sizes: [
-//         { name: 'XXS', inStock: false },
-//         { name: 'XS', inStock: true },
-//         { name: 'S', inStock: true },
-//         { name: 'M', inStock: true },
-//         { name: 'L', inStock: true },
-//         { name: 'XL', inStock: true },
-//         { name: '2XL', inStock: true },
-//         { name: '3XL', inStock: true },
-//     ],
-//     description:
-//         'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-//     highlights: [
-//         'Hand cut and sewn locally',
-//         'Dyed with our proprietary colors',
-//         'Pre-washed & pre-shrunk',
-//         'Ultra-soft 100% cotton',
-//     ],
-//     details:
-//         'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-// }
-// const reviews = { href: '#', average: 4, totalCount: 117 }
-//
-// const selectedColor = ref(product.colors[0])
-// const selectedSize = ref(product.sizes[2])
-
+import {computed, ref} from "vue";
 
 const props = defineProps({
     item: Object,
 });
 
-onMounted(() => {
-    // console.log(props.item);
-    // console.log(product);
-});
+const open = ref(false);
+const openCart = () => open.value = true;
+const closeCart = () => open.value = false;
 
 const product = props.item.data
 
-const form = useForm({
+const addItemForm = useForm({
     item: product,
 });
 
+const isDisabled = computed(() => {
+    return product.item_state_id !== 1 || (props.item.data.cart_items.length > 0 && props.item.data.item_type_id === 1)
+})
+
 const addToCart = () => {
-    form.put(route('cart.add-to-cart'), {
+  addItemForm.post(route('cartItems.store'), {
         errorBag: 'addToCart',
         preserveScroll: true,
-        onSuccess: () => true,
-        // onFinish: () => titleInput.value.focus(),
+        onSuccess: () => openCart(),
     });
 };
-
 </script>
 
 <template>
-    <AppLayout title="Items">
+    <AppLayout title="Items" :toOpen="open" @openCart="openCart" @closeCart="closeCart">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Item {{ product.name }}
@@ -114,8 +57,12 @@ const addToCart = () => {
                     <!-- Options -->
                     <div class="mt-4 lg:row-span-3 lg:mt-0">
                         <h2 class="sr-only">Product information</h2>
-                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ product.price.amount }}</p>
 
+
+                        <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-200">$ {{ product.price.amount.toFixed(2) }}</p>
+                        <span class="mt-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="product.item_state.badge_color">
+                            {{ product.item_state.name }}
+                        </span>
                         <!-- Reviews -->
 <!--                        <div class="mt-6">-->
 <!--                            <h3 class="sr-only">Reviews</h3>-->
@@ -171,15 +118,17 @@ const addToCart = () => {
 <!--                                </RadioGroup>-->
 <!--                            </div>-->
 
-                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-100 dark:text-gray-500 bg-indigo-600/30'"
                                         type="button"
-                                        @click="addToCart">
+                                        @click="addToCart"
+                                        :disabled="isDisabled">
                                     Add to bag
                                 </button>
                         </div>
                     </div>
 
-                    <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 dark:lg:border-gray-800 lg:pb-16 lg:pr-8 lg:pt-6">
+                    <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 dark:lg:border-gray-800 lg:pb-4 lg:pr-8 lg:pt-4">
                         <!-- Description and details -->
                         <div>
                             <h3 class="sr-only">Description</h3>
@@ -209,48 +158,20 @@ const addToCart = () => {
 <!--                            </div>-->
 <!--                        </div>-->
                     </div>
+
+
+
+                    <div v-if="props.item.can.update" class="items-center mt-4">
+                        <div class="flex justify-start">
+                            <Link :href="`${product.id}/edit` " class="">
+                                <PrimaryButton class="ml-4">
+                                    Edit Product
+                                </PrimaryButton>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
-<!--            <div class="mt-4">-->
-<!--                <div class="">-->
-<!--                    <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">-->
-<!--                        <div>-->
-<!--                            <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">-->
-<!--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">-->
-<!--                                    <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />-->
-<!--                                </svg>-->
-<!--                            </div>-->
-<!--                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{ item.title }}</h2>-->
-<!--                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">-->
-<!--                                {{ item.description }}-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">-->
-<!--                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />-->
-<!--                        </svg>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <div v-if="props.item.can.update" class="items-center mt-4">
-                <div class="flex justify-start">
-                    <Link :href="`${product.id}/edit` " class="">
-                        <PrimaryButton class="ml-4">
-                            Edit Product
-                        </PrimaryButton>
-                    </Link>
-                </div>
-            </div>
-
         </div>
 
 

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Mail\NewOrder;
 use App\Models\Item;
 use App\Models\Order;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Textbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OrderController extends Controller
 {
@@ -20,7 +22,7 @@ class OrderController extends Controller
      */
     public function index(): Response
     {
-        $orders = Order::with('user')
+        $orders = Order::with('items.price', 'textbooks', 'user')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -51,9 +53,14 @@ class OrderController extends Controller
             $newOrder->save();
         }
 
-        foreach ($request->item as $item) {
-            $i = Item::findOrFail($item['id']);
+        foreach ($request->items as $item) {
+            $i = Item::findOrFail($item['item_id']);
             $newOrder->items()->attach($i);
+        }
+
+        foreach ($request->textbooks as $textbook) {
+            $book = Textbook::findOrFail($textbook['textbook_id']);
+            $newOrder->textbooks()->attach($book);
         }
 
         Mail::to($request->user())->send(new NewOrder($newOrder));
@@ -64,6 +71,9 @@ class OrderController extends Controller
      */
     public function show(Order $order): Response
     {
+        $order = Order::with('items.price', 'textbooks', 'user')
+            ->where('user_id', Auth::user()->id)
+            ->get();
         return Inertia::render('Orders/Show', [
             'order' => $order
         ]);
@@ -98,7 +108,7 @@ class OrderController extends Controller
      */
     public function userOrders(): Response
     {
-        $orders = Order::with('user')
+        $orders = Order::with('items.price', 'textbooks', 'user')
             ->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -106,5 +116,13 @@ class OrderController extends Controller
         return Inertia::render('Orders/UserOrders', [
             'orders' => $orders
         ]);
+    }
+
+    /**
+     * Export all orders.
+     */
+    public function export(): BinaryFileResponse
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }
