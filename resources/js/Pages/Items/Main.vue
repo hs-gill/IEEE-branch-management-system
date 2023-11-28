@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SearchBar from "@/Components/SearchBar.vue";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -9,23 +9,28 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    // console.log(props.items.data)
+    console.log(rentItems)
 })
 
 const selectedTab = ref(1)
 
 let input = ref("");
 
-function filteredList() {
-    const filtered = props.items.data.filter((item) =>
-            item.name.toLowerCase().includes(input.value.toLowerCase()) ||
-                    item.item_category.name.toLowerCase().includes(input.value.toLowerCase()) ||
-                    item.item_state.name.toLowerCase().includes(input.value.toLowerCase()));
+const rentItems = props.items.data.filter((item) => item.item_type_id === 1);
 
+const buyItems = props.items.data.filter((item) => item.item_type_id === 2);
+
+function filteredList() {
     if (selectedTab.value === 1) {
-        return filtered.filter((item) => item.item_type_id === 1);
+        return rentItems.filter((item) =>
+                item.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                item.item_category.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                item.item_state.name.toLowerCase().includes(input.value.toLowerCase()));
     } else {
-        return filtered.filter((item) => item.item_type_id === 2);
+        return buyItems.filter((item) =>
+                item.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                item.item_category.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                item.item_state.name.toLowerCase().includes(input.value.toLowerCase()));
     }
 }
 </script>
@@ -73,12 +78,12 @@ function filteredList() {
 
                             <div class="p-2">
                                 <SearchBar
-                                    id="name"
-                                    v-model="input"
-                                    type="text"
-                                    class="block w-full mt-1"
-                                    placeholder="Search items..."
-                                    autofocus
+                                        id="name"
+                                        v-model="input"
+                                        type="text"
+                                        class="block w-full mt-1"
+                                        placeholder="Search items..."
+                                        autofocus
                                 />
                             </div>
                             <div  class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">

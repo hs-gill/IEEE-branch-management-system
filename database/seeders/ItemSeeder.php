@@ -43,8 +43,8 @@ class ItemSeeder extends Seeder
                     'name' => trim($data[0]),
                     'description' => '',
                     'image_path' => trim($data[1]),
-                    'item_type_id' => 1,
-                    'item_category_id' => 3,
+                    'item_type_id' => 2,
+                    'item_category_id' => 1,
                     'item_state_id' => 1
                 ]);
             }

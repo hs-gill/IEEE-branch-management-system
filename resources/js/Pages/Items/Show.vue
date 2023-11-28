@@ -18,8 +18,8 @@ const addItemForm = useForm({
     item: product,
 });
 
-const isAvailable = computed(() => {
-    return product.item_state_id === 1
+const isDisabled = computed(() => {
+    return product.item_state_id !== 1 || (props.item.data.cart_items.length > 0 && props.item.data.item_type_id === 1)
 })
 
 const addToCart = () => {
@@ -119,10 +119,10 @@ const addToCart = () => {
 <!--                            </div>-->
 
                                 <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        :class="isAvailable ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-400 bg-indigo-600/50'"
+                                        :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-100 dark:text-gray-500 bg-indigo-600/30'"
                                         type="button"
                                         @click="addToCart"
-                                        :disabled="!isAvailable">
+                                        :disabled="isDisabled">
                                     Add to bag
                                 </button>
                         </div>
