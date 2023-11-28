@@ -8,32 +8,30 @@ const props = defineProps({
     textbook: Object,
 });
 
+const book = props.textbook.data;
+
 onMounted(() =>{
-    console.log(props.textbook)
+    console.log(book)
+    // if (book.cart_textbooks.length > 0) { disable.value = true };
 })
 
 const open = ref(false);
 const openCart = () => open.value = true;
 const closeCart = () => open.value = false;
 
-const book = props.textbook.data;
-
 const addTextbookForm = useForm({
     textbook: book,
 });
 
-let disable = ref(false);
-
 const isDisabled = computed(() => {
-    return book.users.length !== 0 || disable.value === true
+    return props.textbook.data.cart_textbooks.length > 0
 });
 
 const addToCart = () => {
-    addTextbookForm.put(route('cart.add-textbook-to-cart'), {
+    addTextbookForm.post(route('cartTextbooks.store'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),
-        onFinish: () => disable.value = true
     });
 };
 </script>
@@ -124,7 +122,7 @@ const addToCart = () => {
                             <!--                            </div>-->
 
                             <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                    :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-400 bg-indigo-600/50'"
+                                    :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-100 dark:text-gray-500 bg-indigo-600/30'"
                                     type="button"
                                     @click="addToCart"
                                     :disabled="isDisabled">

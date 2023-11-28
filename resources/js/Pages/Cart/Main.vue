@@ -2,88 +2,91 @@
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import {computed, onMounted, watch} from "vue";
-import {useForm} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
     open: Boolean,
-    items: Object,
-    textbooks: Object
+    cartItems: Object,
+    cartTextbooks: Object
 });
 
 const emit = defineEmits(['closeCart']);
 const closeCart = () => emit('closeCart');
 
-// Items
-const removeItemForm = useForm({
-    item: null,
-});
-
 const removeItemFromCart = (item) => {
-    removeItemForm.item = item;
-    removeItemForm.put(route('cart.remove-item-from-cart'), {
+    router.delete(route('cartItems.destroy', item.id), {
         errorBag: 'removeItemFromCart',
-        preserveScroll: true
+        preserveScroll: true,
     });
 };
 
-// Textbooks
-const removeTextbookForm = useForm({
-    textbook: null,
-});
-
 const removeTextbookFromCart = (book) => {
-    removeTextbookForm.textbook = book;
-    removeTextbookForm.put(route('cart.remove-textbook-from-cart'), {
+    router.delete(route('cartTextbooks.destroy', book.id), {
         errorBag: 'removeTextbookFromCart',
-        preserveScroll: true
+        preserveScroll: true,
     });
 };
 
  const total = computed(() => {
     let total = 0;
-    props.items.forEach(item => {
-        total += item.price.amount
+    props.cartItems.forEach(cartItem => {
+        total += cartItem.item.price.amount
     });
-    props.textbooks.forEach(book => {
-        total += book.price
+    props.cartTextbooks.forEach(cartTextbook => {
+        total += cartTextbook.textbook.price
     });
     return total;
 });
 
-let cartItems = props.items
-watch(props.items, (newValue, oldValue) => {
-    cartItems = newValue
-})
 
-let cartTextbooks = props.textbooks
-watch(props.textbooks, (newValue, oldValue) => {
-  cartTextbooks = newValue
-})
+const cartItems = computed(() => {
+    return props.cartItems;
+});
+
+const cartTextbooks = computed(() => {
+    return props.cartTextbooks;
+});
+
+const cartItemsFiltered = computed(() => {
+    return props.cartItems.reduce((acc, current) => {
+        const x = acc.find(item => item.item_id === current.item_id);
+        if (!x) {
+            return acc.concat([current]);
+        } else {
+            return acc;
+        }
+    }, []);
+});
 
 const checkoutForm = useForm({
     total: Number,
-    items: cartItems,
-    textbooks: cartTextbooks
+    items: Array,
+    textbooks: Array
 });
 
 const checkout = () => {
     checkoutForm.total = total;
+    checkoutForm.items = cartItems
+    checkoutForm.textbooks = cartTextbooks
     checkoutForm.post(route('cart.checkout'), {
         errorBag: 'checkout',
         preserveScroll: true,
         onSuccess: () => checkoutForm.reset(),
+        onFinish: () => closeCart()
     });
 }
 
 const isCartEmpty = computed(() => {
-    return props.items.length === 0 && props.textbooks.length === 0
+    return props.cartItems.length === 0 && props.cartTextbooks.length === 0
 })
 
-const quantity = (item) => {
+const quantity = (cartItem) => {
     let i = 0;
-    props.items.forEach(element => {
-        if (element === item) i+=1;
-    })
+    props.cartItems.forEach(element => {
+        if (element.item_id === cartItem.item_id) {
+            i = i + 1;
+        }
+    });
     return i;
 };
 
@@ -117,28 +120,27 @@ const quantity = (item) => {
                                         <div class="mt-8">
                                             <div class="flow-root">
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200 dark:divide-gray-700">
-                                                    <li v-for="item in items" :key="item" class="flex py-6">
+                                                    <li v-for="cartItem in cartItemsFiltered" :key="item" class="flex py-6">
                                                         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
-                                                            <img :src="item.image_path" :alt="item.name" class="h-full w-full object-cover object-center" />
+                                                            <img :src="cartItem.item.image_path" :alt="cartItem.item.name" class="h-full w-full object-cover object-center" />
                                                         </div>
-
                                                         <div class="ml-4 flex flex-1 flex-col">
                                                             <div>
                                                                 <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white">
                                                                     <h3>
-                                                                        <a :href="item.href">{{ item.name }}</a>
+                                                                        <a :href="cartItem.item.href">{{ cartItem.item.name }}</a>
                                                                     </h3>
-                                                                    <p class="ml-4">{{ item.price.amount.toFixed(2) }}</p>
+                                                                    <p class="ml-4">{{ cartItem.item.price.amount.toFixed(2) }}</p>
                                                                 </div>
                                                                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"> </p>
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
-                                                                <p class="text-gray-500 dark:text-gray-400">Qty {{ quantity(item) }}</p>
+                                                                <p class="text-gray-500 dark:text-gray-400">Qty {{ quantity(cartItem) }}</p>
 
                                                                 <div class="flex">
                                                                     <button type="button"
                                                                             class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400"
-                                                                            @click="removeItemFromCart(item)">
+                                                                            @click="removeItemFromCart(cartItem)">
                                                                         Remove
                                                                     </button>
                                                                 </div>
@@ -146,28 +148,27 @@ const quantity = (item) => {
                                                         </div>
                                                     </li>
 
-                                                    <li v-for="book in textbooks" :key="item" class="flex py-6">
+                                                    <li v-for="cartTextbook in cartTextbooks" :key="cartTextbook.textbook" class="flex py-6">
                                                         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
-                                                            <img :src="book.cover" :alt="book.title" class="h-full w-full object-cover object-center" />
+                                                            <img :src="cartTextbook.textbook.cover" :alt="cartTextbook.textbook.title" class="h-full w-full object-cover object-center" />
                                                         </div>
 
                                                         <div class="ml-4 flex flex-1 flex-col">
                                                             <div>
                                                                 <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white">
                                                                     <h3>
-                                                                        <a :href="book.href">{{ book.title }}</a>
+                                                                        <a :href="cartTextbook.textbook.href">{{ cartTextbook.textbook.title }}</a>
                                                                     </h3>
-                                                                    <p class="ml-4">{{ book.price.toFixed(2) }}</p>
+                                                                    <p class="ml-4">{{ cartTextbook.textbook.price.toFixed(2) }}</p>
                                                                 </div>
-<!--                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ book.author }}</p>-->
                                                             </div>
                                                             <div class="flex flex-1 items-end justify-between text-sm">
-                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ book.author }}</p>
+                                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ cartTextbook.textbook.author }}</p>
 <!--                                                                <p class="text-gray-500 dark:text-gray-400"></p>-->
                                                                 <div class="flex">
                                                                     <button type="button"
                                                                             class="font-medium text-indigo-600 dark:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-400"
-                                                                            @click="removeTextbookFromCart(book)">
+                                                                            @click="removeTextbookFromCart(cartTextbook)">
                                                                         Remove
                                                                     </button>
                                                                 </div>

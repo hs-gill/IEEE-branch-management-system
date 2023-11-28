@@ -52,7 +52,7 @@ const logout = () => {
 
         <Banner />
 
-        <Cart @closeCart="closeCart" :open="open" :items="$page.props.cartProducts" :textbooks="$page.props.cartTextbooks" />
+        <Cart @closeCart="closeCart" :open="open" :cartItems="$page.props.cartProducts" :cartTextbooks="$page.props.cartTextbooks" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">

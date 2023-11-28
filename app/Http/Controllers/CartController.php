@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewOrder;
+use App\Models\CartItem;
+use App\Models\CartTextbook;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Textbook;
@@ -19,58 +21,9 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        $products = Item::with('users')
-            ->where('user_id', Auth::user()->id)->get();
-
-        return Inertia::render('../Layouts/AppLayout', [
-            'products' => $products,
-        ]);
-    }
-
-    /**
-     * Add an item to the User's shopping cart.
-     */
-    public function addItemToCart(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-        $item = Item::findOrFail($request->item['id']);
-        $item->users()->attach($user);
-        return redirect('/items/'.$request->item['id']);
-    }
-
-    /**
-     * Add an item to the User's shopping cart.
-     */
-    public function removeItemFromCart(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-        $item = Item::findOrFail($request->item['id']);
-        $user->items()->detach($item);
-        return redirect()->back();
-    }
-
-    /**
-     * Add an item to the User's shopping cart.
-     */
-    public function addTextbookToCart(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-        $textbook = Textbook::findOrFail($request->textbook['id']);
-        $textbook->users()->attach($user);
-        return redirect('/textbooks/'.$request->textbook['id']);
-    }
-
-    /**
-     * Add an item to the User's shopping cart.
-     */
-    public function removeTextbookFromCart(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-        $textbook = Textbook::findOrFail($request->textbook['id']);
-        $user->textbooks()->detach($textbook);
-        return redirect()->back();
+        //
     }
 
     /**
@@ -79,8 +32,16 @@ class CartController extends Controller
     public function emptyCart(): RedirectResponse
     {
         $user = User::findOrFail(Auth::user()->id);
-        foreach ($user->items as $item) { $user->items()->detach($item); }
-        foreach ($user->textbooks as $textbook) { $user->textbooks()->detach($textbook); }
+        $cartItems = CartItem::where('user_id', $user->id)->get();
+        foreach ($cartItems as $cartItem) {
+            $cartItem->delete();
+        }
+
+        $cartTextbooks = CartTextbook::where('user_id', $user->id)->get();
+        foreach ($cartTextbooks as $cartTextbook) {
+            $cartTextbook->delete();
+        }
+
         return redirect()->back();
     }
 

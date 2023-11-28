@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\CartItem;
+use App\Models\CartTextbook;
 use App\Models\Item;
 use App\Models\Textbook;
 use Illuminate\Http\Request;
@@ -33,19 +35,14 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $items = null;
-        if ($user = $request->user()) {
-            $items = Item::with('price')
-                ->whereHas('users', function($q) use($user) {
-                    $q->where('user_id', $user->first()->id);
-                })->get();
+        $cartItems = null;
+        if ($user = Auth::user()) {
+            $cartItems = CartItem::with('item.price')->where('user_id', $user->id)->get();
         }
 
-        $textbooks = null;
-        if ($user = $request->user()) {
-            $textbooks = Textbook::whereHas('users', function($q) use($user) {
-                    $q->where('user_id', $user->first()->id);
-                })->get();
+        $cartTextbooks = null;
+        if ($user = Auth::user()) {
+            $cartTextbooks = CartTextbook::with('textbook')->where('user_id', $user->id)->get();
         }
 
         return array_merge(parent::share($request), [
@@ -55,8 +52,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'currentUserRole' => fn () => $request->user()
                 ? $request->user()->first()->roles->first() : null,
-            'cartProducts' => fn () => $items,
-            'cartTextbooks' => fn () => $textbooks
+            'cartProducts' => fn () => $cartItems,
+            'cartTextbooks' => fn () => $cartTextbooks
         ]);
     }
 }

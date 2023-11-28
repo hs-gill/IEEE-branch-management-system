@@ -44,7 +44,6 @@ class OrderController extends Controller
      */
     public function store(Request $request): void
     {
-//        dd($request);
         $newOrder = null;
         if ($user_id = Auth::user()->id) {
             $newOrder = new Order();

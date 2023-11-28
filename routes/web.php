@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\CartTextbookController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\InquiryController;
@@ -63,10 +65,10 @@ Route::middleware([
     Route::put('/permission-role', [AdminController::class, 'updatePermission'])->name('permission-role.update');
 
     // Cart
-    Route::put('/add-item-to-cart', [CartController::class, 'addItemToCart'])->name('cart.add-item-to-cart');
-    Route::put('/remove-item-from-cart', [CartController::class, 'removeItemFromCart'])->name('cart.remove-item-from-cart');
-    Route::put('/add-textbook-to-cart', [CartController::class, 'addTextbookToCart'])->name('cart.add-textbook-to-cart');
-    Route::put('/remove-textbook-from-cart', [CartController::class, 'removeTextbookFromCart'])->name('cart.remove-textbook-from-cart');
+//    Route::put('/add-item-to-cart', [CartController::class, 'addItemToCart'])->name('cart.add-item-to-cart');
+//    Route::put('/remove-item-from-cart', [CartController::class, 'removeItemFromCart'])->name('cart.remove-item-from-cart');
+//    Route::put('/add-textbook-to-cart', [CartController::class, 'addTextbookToCart'])->name('cart.add-textbook-to-cart');
+//    Route::put('/remove-textbook-from-cart', [CartController::class, 'removeTextbookFromCart'])->name('cart.remove-textbook-from-cart');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     // Orders
@@ -78,6 +80,8 @@ Route::middleware([
      * Generate a route for all the methods inside the Controllers for Resource Models.
      */
     Route::resources([
+        'cartItems' => CartItemController::class,
+        'cartTextbooks' => CartTextbookController::class,
         'events' => EventController::class,
         'feedbacks' => FeedbackController::class,
         'inquiries' => InquiryController::class,

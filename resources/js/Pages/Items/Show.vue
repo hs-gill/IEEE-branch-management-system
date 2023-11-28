@@ -23,7 +23,7 @@ const isAvailable = computed(() => {
 })
 
 const addToCart = () => {
-  addItemForm.put(route('cart.add-item-to-cart'), {
+  addItemForm.post(route('cartItems.store'), {
         errorBag: 'addToCart',
         preserveScroll: true,
         onSuccess: () => openCart(),

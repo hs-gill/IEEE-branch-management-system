@@ -17,7 +17,7 @@ class TextbookController extends Controller
      */
     public function index(): Response
     {
-        $textbooks = Textbook::with('textbookState')->get();
+        $textbooks = Textbook::with('textbookState', 'cartTextbooks')->get();
         return Inertia::render('Textbooks/Main', [
             'textbooks' => new TextbookCollection($textbooks)
         ]);
@@ -48,7 +48,7 @@ class TextbookController extends Controller
      */
     public function show(Textbook $textbook): Response
     {
-        $textbook = Textbook::with('textbookState', 'users')->find($textbook->id);
+        $textbook = Textbook::with('textbookState', 'cartTextbooks')->find($textbook->id);
         return Inertia::render('Textbooks/Show', [
             'textbook' => new TextbookResource($textbook)
         ]);

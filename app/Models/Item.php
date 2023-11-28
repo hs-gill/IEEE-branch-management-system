@@ -25,6 +25,13 @@ class Item extends Model
     ];
 
     /**
+     * Get the cart where the item has been added.
+     */
+    public function cartItems(): HasMany {
+        return $this->hasMany(CartItem::class);
+    }
+
+    /**
      * Get the category that correspond to the item.
      */
     public function itemCategory(): BelongsTo {
