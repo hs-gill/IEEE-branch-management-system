@@ -51,7 +51,7 @@ class FeedbackController extends Controller
             $newFeedback->save();
         }
 
-        Mail::to($request->user())->send(new NewInquiry($newFeedback));
+        // Mail::to($request->user())->send(new NewInquiry($newFeedback));
 
         session()->flash('flash.banner', __('Thank you, :user! Your feedback have been successfully received for our team.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
