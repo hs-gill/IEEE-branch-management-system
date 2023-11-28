@@ -40,7 +40,7 @@ class InquiryController extends Controller
         $newInquiry->message = $request->message;
         $newInquiry->save();
 
-        Mail::to($request->user())->send(new NewInquiry($newInquiry));
+        // Mail::to($request->user())->send(new NewInquiry($newInquiry));
 
         session()->flash('flash.banner', __('Thank you, :user! Our team have successfully received your inquiry.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');

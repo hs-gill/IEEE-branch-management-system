@@ -63,7 +63,7 @@ class OrderController extends Controller
             $newOrder->textbooks()->attach($book);
         }
 
-        Mail::to($request->user())->send(new NewOrder($newOrder));
+        // Mail::to($request->user())->send(new NewOrder($newOrder));
     }
 
     /**
