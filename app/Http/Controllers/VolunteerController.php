@@ -43,7 +43,7 @@ class VolunteerController extends Controller
             $volunteer->save();
         }
 
-        session()->flash('flash.banner', __('Thank you, :user! Your have been successfully registered as volunteer. Une of our tem members will contact you soon.', ['user' => Auth::user()->name]));
+        session()->flash('flash.banner', __('Thank you, :user! Your have been successfully registered as volunteer. One of our tem members will contact you soon.', ['user' => Auth::user()->name]));
         session()->flash('flash.bannerStyle', 'success');
 
         return redirect()->back();
