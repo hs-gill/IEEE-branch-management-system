@@ -12,15 +12,21 @@ onMounted(() => {
     // console.log(props.items.data)
 })
 
+const selectedTab = ref(1)
+
 let input = ref("");
 
 function filteredList() {
-    return props.items.data.filter((item) =>
-        item.name.toLowerCase().includes(input.value.toLowerCase()) ||
-        item.item_category.name.toLowerCase().includes(input.value.toLowerCase()) ||
-        item.item_state.name.toLowerCase().includes(input.value.toLowerCase()) ||
-        item.item_type.name.toLowerCase().includes(input.value.toLowerCase())
-    );
+    const filtered = props.items.data.filter((item) =>
+            item.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                    item.item_category.name.toLowerCase().includes(input.value.toLowerCase()) ||
+                    item.item_state.name.toLowerCase().includes(input.value.toLowerCase()));
+
+    if (selectedTab.value === 1) {
+        return filtered.filter((item) => item.item_type_id === 1);
+    } else {
+        return filtered.filter((item) => item.item_type_id === 2);
+    }
 }
 </script>
 
@@ -38,6 +44,33 @@ function filteredList() {
                 <div class="mt-5 lg:mt-7 md:grid-cols-2 gap-6 lg:gap-8">
                     <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex focus:outline focus:outline-2 focus:outline-red-500">
                         <div>
+
+                            <div class="mx-auto max-w-3xl">
+                                <div>
+                                    <div class="sm:hidden"><label for="tabs" class="sr-only">Select a tab</label>
+                                        <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 bml bnq">
+                                            <option selected="">My Account</option>
+                                            <option>Company</option>
+                                            <option>Team Members</option>
+                                            <option>Billing</option>
+                                        </select>
+                                    </div>
+                                    <div class="hidden sm:block">
+                                        <nav class="isolate flex divide-x divide-x-border-gray-200 rounded-lg sm:shadow" aria-label="Tabs">
+                                            <a @click="selectedTab = 1" href="#" class="text-gray-900 rounded-l-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium" aria-current="page">
+                                                <span>RENT</span>
+                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab == 1 ? 'bg-indigo-500' : 'bg-transparent'"></span>
+                                            </a>
+                                            <a @click="selectedTab = 2" href="#" class="text-gray-500 rounded-r-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium">
+                                                <span>BUY</span>
+                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab == 2 ? 'bg-indigo-500' : 'bg-transparent'"></span>
+                                            </a>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="p-2">
                                 <SearchBar
                                     id="name"
