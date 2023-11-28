@@ -15,7 +15,7 @@ class TextbookSeeder extends Seeder
     {
 //        \App\Models\Textbook::factory(100)->create();
 
-        $csvFile = database_path('seeders/seeds').'/textbooks.csv';
+        $csvFile = database_path('seeders/seeds').'/textbooks.tsv';
 
         if (($file = fopen($csvFile, "r")) !== FALSE) {
             while (!feof($file)) {
