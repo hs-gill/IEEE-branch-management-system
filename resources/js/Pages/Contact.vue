@@ -36,7 +36,7 @@ const createInquiry = () => {
             </h2>
         </template>
 
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto lg:mt-8">
             <div class="">
                 <div class="bg-white dark:bg-gray-900 px-6 py-24 sm:py-32">
             <div class="mx-auto max-w-2xl text-center">
