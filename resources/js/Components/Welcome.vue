@@ -7,12 +7,12 @@ import HeroLogo from "@/Components/HeroLogo.vue";
         <div class="py-6 px-4 mx-auto justify-center max-w-screen-xl text-center lg:py-16 lg:px-12">
             <div class="text-center pt-8">
                 <!-- Heading for larger screens like laptops -->
-                <h1 class="typing-container hidden sm:block mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
+                <h1 class=" hidden sm:block mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white typing-effect ">
                     Welcome back to our Club!
                 </h1>
 
                 <!-- Heading for smaller screens like mobile devices -->
-                <h1 class="block sm:hidden mb-5 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-6xl lg:text-7xl dark:text-white typing-effect">
+                <h1 class="justify-center block sm:hidden mb-5 text-5xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-7xl dark:text-white typing-effect">
                     Welcome back!
                 </h1>
                 <p class="mb-10 pt-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
@@ -46,10 +46,8 @@ import HeroLogo from "@/Components/HeroLogo.vue";
 
 </template>
 
+
 <style scoped>
-.typing-container {
-  display: inline-block; /* Or inline-flex */
-}
 
 @keyframes typing {
     from { width: 0; }
@@ -58,17 +56,20 @@ import HeroLogo from "@/Components/HeroLogo.vue";
 
 .typing-effect {
     overflow: hidden;
-    border-right: .15em solid white; /* The typewriter cursor */
+    border-right: .15em solid transparent; /* The typewriter cursor */
     white-space: nowrap;
-    letter-spacing: .08em;
+    margin: 0 auto;
+    letter-spacing: .09em;
     animation:
-        typing 3.5s steps(45, end) forwards,
-        blink-caret 1s 3.5s forwards; /* Increased total duration for a smoother fade-out */
+        typing 3.0s steps(500, end) ,
+        blink-caret 1s 3.0s step-end infinite; /* Increased total duration for a smoother fade-out */
 }
 
-@keyframes blink-caret {
-    0%, 50% { border-color: transparent; }
-    50.1%, 80% { border-color: white; } /* Cursor visible for a longer period */
-    100% { border-color: transparent; } /* Gradual fade-out towards the end */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
 }
+
+
 </style>
+
