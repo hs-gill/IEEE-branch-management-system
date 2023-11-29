@@ -5,6 +5,7 @@ import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import {ref} from "vue";
 import InputError from "@/Components/InputError.vue";
+import {Link} from "@inertiajs/vue3";
 
 const nameInput = ref(null);
 const emailInput = ref(null);
@@ -35,11 +36,13 @@ const createInquiry = () => {
             </h2>
         </template>
 
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class="max-w-7xl mx-auto lg:mt-8">
             <div class="">
-                <div class="bg-white dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
+                <div class="bg-white dark:bg-gray-900 px-6 py-24 sm:py-32">
             <div class="mx-auto max-w-2xl text-center">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">Contact Us</h2>
+                <p class="mt-2 text-2xl leading-8 text-gray-600 dark:text-gray-400">We're Here to Listen. Enter Your Information and Speak to Us</p>
+
             </div>
             <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
                 <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -88,28 +91,14 @@ const createInquiry = () => {
                             <InputError :message="form.errors.message" class="mt-2" />
                         </div>
                     </div>
-<!--                    <div class="flex gap-x-4 sm:col-span-2">-->
-<!--                        <div class="flex h-6 items-center">-->
-<!--                            &lt;!&ndash; Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" &ndash;&gt;-->
-<!--                            <button type="button"-->
-<!--                                    class="bg-gray-200 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"-->
-<!--                                    :class="agree ? 'bg-indigo-600' : 'bg-gray-200'"-->
-<!--                                    role="switch"-->
-<!--                                    aria-checked="false"-->
-<!--                                    aria-labelledby="switch-1-label">-->
-<!--                                <span class="sr-only">Agree to policies</span>-->
-<!--                                &lt;!&ndash; Enabled: "translate-x-3.5", Not Enabled: "translate-x-0" &ndash;&gt;-->
-<!--                                <span aria-hidden="true"-->
-<!--                                      class="translate-x-0 h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out"-->
-<!--                                      :class="agree ? 'translate-x-3.5' : 'translate-x-0'"-->
-<!--                                ></span>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <label class="text-sm leading-6 text-gray-600 dark:text-gray-400" id="switch-1-label">-->
-<!--                            By selecting this, you agree to our-->
-<!--                            <a href="#" class="font-semibold text-indigo-600">privacy&nbsp;policy</a>.-->
-<!--                        </label>-->
-<!--                    </div>-->
+                </div>
+
+                <div class="flex gap-x-4 sm:col-span-2">
+                    <label class="text-sm leading-6 text-gray-600 dark:text-gray-400" id="switch-1-label">
+                        By clicking <em> Let's talk</em>, you agree to our
+
+                        <Link :href="route('privacy-policy')" class="font-semibold text-indigo-600"> Privacy Policy</Link>
+                    </label>
                 </div>
                 <div class="mt-10">
                     <button class="block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
