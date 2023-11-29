@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref, watch} from 'vue';
+import {ref, watch} from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -109,21 +109,6 @@ const logout = () => {
 
                                     <template #content>
                                         <div class="w-60">
-                                            <!-- Team Management -->
-<!--                                            <div class="block px-4 py-2 text-xs text-gray-400">-->
-<!--                                                Manage Team-->
-<!--                                            </div>-->
-
-<!--                                            &lt;!&ndash; Team Settings &ndash;&gt;-->
-<!--                                            <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">-->
-<!--                                                Team Settings-->
-<!--                                            </DropdownLink>-->
-
-<!--                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">-->
-<!--                                                Create New Team-->
-<!--                                            </DropdownLink>-->
-
-<!--                                            <div class="border-t border-gray-200 dark:border-gray-600" />-->
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
                                                 Manage Users and Roles
@@ -147,22 +132,14 @@ const logout = () => {
                                                 Items Inventory
                                             </DropdownLink>
 
-<!--                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">-->
-<!--                                                Roles Settings-->
-<!--                                            </DropdownLink>-->
-
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Orders and Transactions
+                                                Orders
                                             </div>
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.index')">
                                                 View Orders
-                                            </DropdownLink>
-
-                                            <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('transactions.index')">
-                                                View Transactions
                                             </DropdownLink>
 
                                             <div class="border-t border-gray-200 dark:border-gray-600" />
@@ -175,30 +152,6 @@ const logout = () => {
                                                 Review Feedbacks
                                             </DropdownLink>
 
-
-
-                                            <!-- Team Switcher -->
-<!--                                            <template v-if="$page.props.auth.user.all_teams.length > 1">-->
-<!--                                                <div class="border-t border-gray-200 dark:border-gray-600" />-->
-
-<!--                                                <div class="block px-4 py-2 text-xs text-gray-400">-->
-<!--                                                    Switch Teams-->
-<!--                                                </div>-->
-
-<!--                                                <template v-for="team in $page.props.auth.user.all_teams" :key="team.id">-->
-<!--                                                    <form @submit.prevent="switchToTeam(team)">-->
-<!--                                                        <DropdownLink as="button">-->
-<!--                                                            <div class="flex items-center">-->
-<!--                                                                <svg v-if="team.id === $page.props.auth.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">-->
-<!--                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />-->
-<!--                                                                </svg>-->
-
-<!--                                                                <div>{{ team.name }}</div>-->
-<!--                                                            </div>-->
-<!--                                                        </DropdownLink>-->
-<!--                                                    </form>-->
-<!--                                                </template>-->
-<!--                                            </template>-->
                                         </div>
                                     </template>
                                 </Dropdown>
@@ -340,39 +293,47 @@ const logout = () => {
                                 <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    Manage Team
+                                    Manage Users and Roles
                                 </div>
 
-                                <!-- Team Settings -->
-                                <ResponsiveNavLink :href="route('teams.show', $page.props.auth.user.current_team)" :active="route().current('teams.show')">
-                                    Team Settings
+                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('users.index')">
+                                    Users Settings
                                 </ResponsiveNavLink>
 
-                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')" :active="route().current('teams.create')">
-                                    Create New Team
+                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('roles.index')">
+                                    Roles Settings
                                 </ResponsiveNavLink>
 
-                                <!-- Team Switcher -->
-                                <template v-if="$page.props.auth.user.all_teams.length > 1">
-                                    <div class="border-t border-gray-200 dark:border-gray-600" />
+                                <div class="border-t border-gray-200 dark:border-gray-600" />
 
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Switch Teams
-                                    </div>
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Inventory
+                                </div>
 
-                                    <template v-for="team in $page.props.auth.user.all_teams" :key="team.id">
-                                        <form @submit.prevent="switchToTeam(team)">
-                                            <ResponsiveNavLink as="button">
-                                                <div class="flex items-center">
-                                                    <svg v-if="team.id === $page.props.auth.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
-                                                    <div>{{ team.name }}</div>
-                                                </div>
-                                            </ResponsiveNavLink>
-                                        </form>
-                                    </template>
-                                </template>
+                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams && $page.props.currentUserRole.id === 1" :href="route('items.inventory')">
+                                    Items Inventory
+                                </ResponsiveNavLink>
+
+                                <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Orders
+                                </div>
+
+                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('orders.index')">
+                                    View Orders
+                                </ResponsiveNavLink>
+
+                                <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Feedbacks
+                                </div>
+
+                                <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('feedbacks.index')">
+                                    Review Feedbacks
+                                </ResponsiveNavLink>
+
                             </template>
                         </div>
                     </div>
