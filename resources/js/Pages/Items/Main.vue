@@ -1,16 +1,12 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SearchBar from "@/Components/SearchBar.vue";
-import {computed, onMounted, ref} from "vue";
+import {ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
     items: Object,
 });
-
-onMounted(() => {
-    console.log(rentItems)
-})
 
 const selectedTab = ref(1)
 
@@ -64,11 +60,11 @@ function filteredList() {
                                         <nav class="isolate flex divide-x divide-x-border-gray-200 rounded-lg sm:shadow" aria-label="Tabs">
                                             <a @click="selectedTab = 1" href="#" class="text-gray-900 rounded-l-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium" aria-current="page">
                                                 <span>RENT</span>
-                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab == 1 ? 'bg-indigo-500' : 'bg-transparent'"></span>
+                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab === 1 ? 'bg-indigo-500' : 'bg-transparent'"></span>
                                             </a>
                                             <a @click="selectedTab = 2" href="#" class="text-gray-500 rounded-r-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium">
                                                 <span>BUY</span>
-                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab == 2 ? 'bg-indigo-500' : 'bg-transparent'"></span>
+                                                <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab === 2 ? 'bg-indigo-500' : 'bg-transparent'"></span>
                                             </a>
                                         </nav>
                                     </div>
@@ -117,6 +113,7 @@ function filteredList() {
             </div>
         </div>
 
+        <!-- This code is only for load the colours at the badges. If this code is not here, the colours at the top doesn't work.-->
         <div class="hidden">
             <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset dark:bg-gray-400/10 dark:text-gray-400 ring-gray-500/10 dark:ring-gray-400/20">Badge</span>
             <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset dark:bg-red-400/10 dark:text-red-400 ring-red-600/10 dark:ring-red-400/20">Badge</span>

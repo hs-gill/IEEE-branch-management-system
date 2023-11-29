@@ -1,7 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {Link, useForm} from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 import {computed, ref} from "vue";
 
 const props = defineProps({
@@ -63,68 +62,15 @@ const addToCart = () => {
                         <span class="mt-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" :class="product.item_state.badge_color">
                             {{ product.item_state.name }}
                         </span>
-                        <!-- Reviews -->
-<!--                        <div class="mt-6">-->
-<!--                            <h3 class="sr-only">Reviews</h3>-->
-<!--                            <div class="flex items-center">-->
-<!--                                <div class="flex items-center">-->
-<!--                                    <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating" :class="[reviews.average > rating ? 'text-amber-400' : 'text-gray-200', 'h-5 w-5 flex-shrink-0']" aria-hidden="true" />-->
-<!--                                </div>-->
-<!--                                <p class="sr-only">{{ reviews.average }} out of 5 stars</p>-->
-<!--                                <a :href="reviews.href" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{ reviews.totalCount }} reviews</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
 
                         <div class="mt-10">
-<!--                            &lt;!&ndash; Colors &ndash;&gt;-->
-<!--                            <div>-->
-<!--                                <h3 class="text-sm font-medium text-gray-900">Color</h3>-->
-
-<!--                                <RadioGroup v-model="selectedColor" class="mt-4">-->
-<!--                                    <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>-->
-<!--                                    <div class="flex items-center space-x-3">-->
-<!--                                        <RadioGroupOption as="template" v-for="color in product.colors" :key="color.name" :value="color" v-slot="{ active, checked }">-->
-<!--                                            <div :class="[color.selectedClass, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">-->
-<!--                                                <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>-->
-<!--                                                <span aria-hidden="true" :class="[color.class, 'h-8 w-8 rounded-full border border-black border-opacity-10']" />-->
-<!--                                            </div>-->
-<!--                                        </RadioGroupOption>-->
-<!--                                    </div>-->
-<!--                                </RadioGroup>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash; Sizes &ndash;&gt;-->
-<!--                            <div class="mt-10">-->
-<!--                                <div class="flex items-center justify-between">-->
-<!--                                    <h3 class="text-sm font-medium text-gray-900 dark:text-gray-200">Size</h3>-->
-<!--                                    <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size guide</a>-->
-<!--                                </div>-->
-
-<!--                                <RadioGroup v-model="selectedSize" class="mt-4">-->
-<!--                                    <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>-->
-<!--                                    <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">-->
-<!--                                        <RadioGroupOption as="template" v-for="size in product.sizes" :key="size.name" :value="size" :disabled="!size.inStock" v-slot="{ active, checked }">-->
-<!--                                            <div :class="[size.inStock ? 'cursor-pointer bg-white text-gray-900 shadow-sm' : 'cursor-not-allowed bg-gray-50 text-gray-200', active ? 'ring-2 ring-indigo-500' : '', 'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6']">-->
-<!--                                                <RadioGroupLabel as="span">{{ size.name }}</RadioGroupLabel>-->
-<!--                                                <span v-if="size.inStock" :class="[active ? 'border' : 'border-2', checked ? 'border-indigo-500' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-md']" aria-hidden="true" />-->
-<!--                                                <span v-else aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">-->
-<!--                                                    <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">-->
-<!--                                                        <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />-->
-<!--                                                    </svg>-->
-<!--                                                </span>-->
-<!--                                            </div>-->
-<!--                                        </RadioGroupOption>-->
-<!--                                    </div>-->
-<!--                                </RadioGroup>-->
-<!--                            </div>-->
-
-                                <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-100 dark:text-gray-500 bg-indigo-600/30'"
-                                        type="button"
-                                        @click="addToCart"
-                                        :disabled="isDisabled">
-                                    Add to bag
-                                </button>
+                            <button class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent px-8 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    :class="!isDisabled ? 'text-white bg-indigo-600 hover:bg-indigo-700' : 'text-gray-100 dark:text-gray-500 bg-indigo-600/30'"
+                                    type="button"
+                                    @click="addToCart"
+                                    :disabled="isDisabled">
+                                Add to bag
+                            </button>
                         </div>
                     </div>
 
@@ -137,39 +83,17 @@ const addToCart = () => {
                                 <p class="text-base text-gray-900 dark:text-gray-300">{{ product.description }}</p>
                             </div>
                         </div>
-
-<!--                        <div class="mt-10">-->
-<!--                            <h3 class="text-sm font-medium text-gray-900 dark:text-gray-200">Highlights</h3>-->
-
-<!--                            <div class="mt-4">-->
-<!--                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">-->
-<!--                                    <li v-for="highlight in product.highlights" :key="highlight" class="text-gray-400 dark:text-gray-300">-->
-<!--                                        <span class="text-gray-600 dark:text-gray-400">{{ highlight }}</span>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="mt-10">-->
-<!--                            <h2 class="text-sm font-medium text-gray-900 dark:text-gray-200">Details</h2>-->
-
-<!--                            <div class="mt-4 space-y-6">-->
-<!--                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ product.detail }}</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
 
-
-
-                    <div v-if="props.item.can.update" class="items-center mt-4">
-                        <div class="flex justify-start">
-                            <Link :href="`${product.id}/edit` " class="">
-                                <PrimaryButton class="ml-4">
-                                    Edit Product
-                                </PrimaryButton>
-                            </Link>
-                        </div>
-                    </div>
+<!--                    <div v-if="props.item.can.update" class="items-center mt-4">-->
+<!--                        <div class="flex justify-start">-->
+<!--                            <Link :href="`${product.id}/edit` " class="">-->
+<!--                                <PrimaryButton class="ml-4">-->
+<!--                                    Edit Product-->
+<!--                                </PrimaryButton>-->
+<!--                            </Link>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
