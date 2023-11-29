@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -76,8 +78,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user): void
+    public function destroy(User $user): RedirectResponse
     {
         $user->delete();
+
+        session()->flash('flash.banner', __(':user has been deleted successfully.', ['user' => $user->name]));
+        session()->flash('flash.bannerStyle', 'success');
+
+        return redirect('users');
     }
 }
