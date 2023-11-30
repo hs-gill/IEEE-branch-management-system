@@ -11,10 +11,6 @@ const props = defineProps({
 
 const event = props.event.data;
 
-onMounted(() => {
-    console.log(props.event)
-})
-
 const form = useForm({
     event: props.event.data,
 });

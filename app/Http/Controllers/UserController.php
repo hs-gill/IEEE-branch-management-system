@@ -87,4 +87,17 @@ class UserController extends Controller
 
         return redirect('users');
     }
+
+    public function subscribe(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->update([
+            'subscribed' => 1
+        ]);
+
+        session()->flash('flash.banner', __('Great :user!You have been successfully subscribed to our newsletter.', ['user' => $user->name]));
+        session()->flash('flash.bannerStyle', 'success');
+
+        return redirect()->back();
+    }
 }
