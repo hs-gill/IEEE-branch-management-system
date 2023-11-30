@@ -48,21 +48,13 @@ function filteredList() {
 
                             <div class="mx-auto max-w-3xl">
                                 <div>
-                                    <div class="sm:hidden"><label for="tabs" class="sr-only">Select a tab</label>
-                                        <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 bml bnq">
-                                            <option selected="">My Account</option>
-                                            <option>Company</option>
-                                            <option>Team Members</option>
-                                            <option>Billing</option>
-                                        </select>
-                                    </div>
-                                    <div class="hidden sm:block">
+                                    <div class="block">
                                         <nav class="isolate flex divide-x divide-x-border-gray-200 rounded-lg sm:shadow" aria-label="Tabs">
-                                            <a @click="selectedTab = 1" href="#" class="text-gray-900 rounded-l-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium" aria-current="page">
+                                            <a @click="selectedTab = 1" href="#" class="text-gray-900 rounded-l-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-semibold" :class="selectedTab === 1 ? 'dark:text-white dark:bg-indigo-500' : 'dark:text-white dark:bg-gray-700'" aria-current="page">
                                                 <span>RENT</span>
                                                 <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab === 1 ? 'bg-indigo-500' : 'bg-transparent'"></span>
                                             </a>
-                                            <a @click="selectedTab = 2" href="#" class="text-gray-500 rounded-r-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium">
+                                            <a @click="selectedTab = 2" href="#" class="text-gray-500 rounded-r-lg relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-semibold" :class="selectedTab === 2 ? 'dark:text-white dark:bg-indigo-500' : 'dark:text-white dark:bg-gray-700'" aria-current="page">
                                                 <span>BUY</span>
                                                 <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5" :class="selectedTab === 2 ? 'bg-indigo-500' : 'bg-transparent'"></span>
                                             </a>
