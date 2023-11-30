@@ -74,7 +74,9 @@ Route::middleware([
     // Orders
     Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
     Route::get('/items/inventory', [ItemController::class, 'inventory'])->name('items.inventory');
-    Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
+
+
+    Route::put('/users/subscribe', [UserController::class, 'subscribe'])->name('users.subscribe');
 
     /*
      * Generate a route for all the methods inside the Controllers for Resource Models.
