@@ -14,6 +14,7 @@ const form = useForm({
     password: '',
     password_confirmation: '',
     terms: false,
+    role_id: 3
 });
 
 const submit = () => {
