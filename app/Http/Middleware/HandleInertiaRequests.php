@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\CartItem;
 use App\Models\CartTextbook;
 use App\Models\Item;
+use App\Models\Role;
 use App\Models\Textbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,14 +36,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = Auth::user();
         $cartItems = null;
-        if ($user = Auth::user()) {
-            $cartItems = CartItem::with('item.price')->where('user_id', $user->id)->get();
-        }
-
         $cartTextbooks = null;
-        if ($user = Auth::user()) {
-            $cartTextbooks = CartTextbook::with('textbook')->where('user_id', $user->id)->get();
+        if ($user_id = $user->id) {
+            $cartItems = CartItem::with('item.price')->where('user_id', $user_id)->get();
+            $cartTextbooks = CartTextbook::with('textbook')->where('user_id', $user_id)->get();
         }
 
         return array_merge(parent::share($request), [
@@ -50,8 +49,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'currentUserRole' => fn () => $request->user()
-                ? $request->user()->first()->roles->first() : null,
+            'currentUserRole' => fn () => count($user->roles) > 0 ? $user->roles[0] : Role::find(3),
             'cartProducts' => fn () => $cartItems,
             'cartTextbooks' => fn () => $cartTextbooks
         ]);
