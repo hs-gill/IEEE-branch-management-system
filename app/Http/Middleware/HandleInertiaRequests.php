@@ -39,19 +39,22 @@ class HandleInertiaRequests extends Middleware
         $user = Auth::user();
         $cartItems = null;
         $cartTextbooks = null;
-        if ($user_id = $user->id) {
-            $cartItems = CartItem::with('item.price')->where('user_id', $user_id)->get();
-            $cartTextbooks = CartTextbook::with('textbook')->where('user_id', $user_id)->get();
-        }
+        if ($user != null) {
+            if ($user_id = $user->id) {
+                $cartItems = CartItem::with('item.price')->where('user_id', $user_id)->get();
+                $cartTextbooks = CartTextbook::with('textbook')->where('user_id', $user_id)->get();
+            }
 
-        return array_merge(parent::share($request), [
-            'ziggy' => fn () => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
-            ],
-            'currentUserRole' => fn () => count($user->roles) > 0 ? $user->roles[0] : Role::find(3),
-            'cartProducts' => fn () => $cartItems,
-            'cartTextbooks' => fn () => $cartTextbooks
-        ]);
+            return array_merge(parent::share($request), [
+                'ziggy' => fn() => [
+                    ...(new Ziggy)->toArray(),
+                    'location' => $request->url(),
+                ],
+                'currentUserRole' => fn() => count($user->roles) > 0 ? $user->roles[0] : Role::find(3),
+                'cartProducts' => fn() => $cartItems,
+                'cartTextbooks' => fn() => $cartTextbooks
+            ]);
+        }
+        return [];
     }
 }
