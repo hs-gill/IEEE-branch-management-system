@@ -50,7 +50,7 @@ const submit = () => {
                     </svg>
                     <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                         <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Do you want to volunteer?<br>Be part of our team!</h2>
-                        <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.</p>
+                        <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Join us as a volunteer and be the spark that blends tech innovation with unforgettable social fun.</p>
                         <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                             <form @submit.prevent="submit">
                                 <PrimaryButton class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
