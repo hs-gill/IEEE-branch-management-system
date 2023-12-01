@@ -8,11 +8,12 @@ To make it easy for you to get started with IEEE-app, here's a list of recommend
 
 In order to run the project, you need to install the following tools in your environment
 
-- [ ] [PHP v8.2]() or superior
-- [ ] [Composer]()
-- [ ] [NodeJS v20]() or superior
-- [ ] [MySQL v8]()
-- [ ] [Docker]() (Recomendable since you dont need MySQL already insatlled in your system.)
+- [x] [PHP v8.2]() or superior
+    - Note that the PHP configuration file on your system may need to be modified depending on your OS. Only one member encountered this problem though.
+- [x] [Composer]()
+- [x] [NodeJS v20]() or superior
+- [x] [MySQL v8]()
+- [x] [Docker]() (Recomendable since you dont need MySQL already insatlled in your system.)
 
 ## First Steps
 
