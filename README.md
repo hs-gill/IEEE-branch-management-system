@@ -4,6 +4,11 @@
 
 To make it easy for you to get started with IEEE-app, here's a list of recommended next steps.
 
+## Website (Hosted using AWS Lightsail)
+
+### http://3.82.58.74/
+
+
 ## Prerequisites 
 
 In order to run the project, you need to install the following tools in your environment
