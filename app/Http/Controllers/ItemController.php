@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InventoryExport;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
@@ -9,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ItemController extends Controller
 {
@@ -99,5 +102,13 @@ class ItemController extends Controller
         return Inertia::render('Inventory/Items/Main', [
             'items' => $items
         ]);
+    }
+
+    /**
+     * Export all orders.
+     */
+    public function export(): BinaryFileResponse
+    {
+        return Excel::download(new InventoryExport, 'inventory.xlsx');
     }
 }

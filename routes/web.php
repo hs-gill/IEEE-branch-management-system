@@ -75,6 +75,9 @@ Route::middleware([
     Route::get('/user-orders', [OrderController::class, 'userOrders'])->name('orders.user-orders');
     Route::get('/items/inventory', [ItemController::class, 'inventory'])->name('items.inventory');
 
+    Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
+    Route::get('/inventory/export', [ItemController::class, 'export'])->name('inventory.export');
+
 
     Route::put('/users/subscribe', [UserController::class, 'subscribe'])->name('users.subscribe');
 
