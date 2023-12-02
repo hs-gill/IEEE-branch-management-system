@@ -67,7 +67,7 @@ After the installation you have to run
 This will create and populate the database. The run:
 ```
 npm run dev
-
+```
 
 ## Integrate with your tools
 
