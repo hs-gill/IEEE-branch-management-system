@@ -9,8 +9,9 @@ To make it easy for you to get started with IEEE-app, here's a list of recommend
 ### http://3.82.58.74/
 
 ## Generic Admin Account
-Username: `admin@example.com`
-Password: `password`
+### Username: `admin@example.com`
+
+### Password: `password`
 
 
 ## Prerequisites 
